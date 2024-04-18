@@ -1,0 +1,10 @@
+<h1>Meu perfil</h1>
+
+<% if user_signed_in? %>
+  @<%= current_user.username %>
+  <%= current_user.full_name %>
+  <%= current_user.contact_number %>
+  <%= current_user.email %>
+<% else %>
+<p>Você não está autenticado!</p>
+<% end %>

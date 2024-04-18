@@ -1,0 +1,9 @@
+<h1>Visualizando o usuário @<%= @user.username %></h1>
+
+<p>Nome: <%= @user.full_name %></p>
+<!-- Falta formatar a data -->
+<p>Registrado desde: <%= @user.created_at %>
+
+<!-- IF @user.role = dono_de_buffet + buffet cadastrado, mostrar informações-->
+<h3>Informações do buffet:</h3>
+<h3>Eventos disponíveis</h3>
