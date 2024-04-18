@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CadeBuffet</title>
+    <title>Cadê Buffet?</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,6 +10,18 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>Cadê Buffet?</h1>
+      <nav>
+        <%= link_to 'Home', root_path %>
+      </nav>
+    </header>
+    <main>
+      <div id="alert">
+        <p><%= alert %></p>
+        <p><%= notice %></p>
+      </div>
+      <%= yield %>
+    </main>
   </body>
 </html>

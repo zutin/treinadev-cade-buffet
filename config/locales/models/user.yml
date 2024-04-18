@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    #models:
+      #role: 'Cargo'
+      #user: 'Usuário'
+    attributes:
+      user:
+        full_name: 'Nome completo'
+        contact_number: 'Telefone para contato'
+        username: 'Usuário'
+        email: 'E-mail'
+        password: 'Senha'
+        #Diferenciar Dono - Cliente
+        #role_id: 'Tipo de conta'
+      #role:
+        #name: 'Nome do cargo'
+        #description: 'Descrição'
