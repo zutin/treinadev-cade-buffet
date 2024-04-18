@@ -54,7 +54,5 @@ RSpec.describe User, type: :model do
         expect(user.valid?).to eq false
       end
     end
-
-    #Context pra email não valido
   end
 end

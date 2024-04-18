@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one :buffet
+
   validates :full_name, :username, :contact_number, presence: true
   # Futuramente diferenciar Cliente - Dono
   #validates :role_id, presence: true
