@@ -1,6 +1,27 @@
 require 'rails_helper'
 
 describe 'User signs up' do
+  it 'should be redirected to new buffet page after signing up' do
+    #Arrange
+    #Act
+    visit root_path
+    within('nav#navbar') do
+      click_on 'Login'
+    end
+    click_on 'Cadastrar-se'
+
+    fill_in 'Usuário', with: 'lucca'
+    fill_in 'Nome completo', with: 'Gian Lucca'
+    fill_in 'Telefone para contato', with: '(12) 98765-4321'
+    fill_in 'E-mail', with: 'gian@lucca.com'
+    fill_in 'Senha', with: 'password'
+    fill_in 'Confirme sua senha', with: 'password'
+    click_on 'Cadastrar'
+
+    #Assert
+    expect(current_path).to eq new_buffet_path
+  end
+
   it 'can sign up successfully' do
     #Arrange
     #Act

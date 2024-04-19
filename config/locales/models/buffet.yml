@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      buffet: 'Buffet'
+    attributes:
+      buffet:
+        trading_name: 'Nome fantasia'
+        company_name: 'Razão social'
+        registration_number: 'CNPJ'
+        contact_number: 'Telefone para contato'
+        email: 'E-mail da empresa'
+        address: 'Endereço da empresa'
+        district: 'Bairro'
+        city: 'Cidade'
+        state: 'Estado'
+        zipcode: 'CEP'
+        payment_methods: 'Métodos de pagamento'
+        description: 'Descrição do buffet'

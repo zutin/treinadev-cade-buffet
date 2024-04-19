@@ -1,0 +1,22 @@
+<h1>Meu Buffet</h1>
+
+<% if user_signed_in? && current_user.buffet %>
+  <div>
+    <p><%= current_user.buffet.trading_name %></p>
+    <p><%= current_user.buffet.company_name %></p>
+    <p><%= current_user.buffet.registration_number %></p>
+    <p><%= current_user.buffet.contact_number %></p>
+    <p><%= current_user.buffet.email %></p>
+    <p><%= current_user.buffet.address %></p>
+    <p><%= current_user.buffet.district %></p>
+    <p><%= current_user.buffet.city %></p>
+    <p><%= current_user.buffet.state %></p>
+    <p><%= current_user.buffet.zipcode %></p>
+    <p><%= current_user.buffet.payment_methods %></p>
+    <p><%= current_user.buffet.description %></p>
+  </div>
+<% else %>
+  <div>
+    <p>Você não tem um buffet cadastrado! Você será redirecionado em breve...</p>
+  </div>
+<% end %>

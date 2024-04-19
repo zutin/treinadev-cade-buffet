@@ -30,6 +30,8 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  # Devise
+  config.include Warden::Test::Helpers
   # Rake
   config.before(type: :system) do
     driven_by(:rack_test)
