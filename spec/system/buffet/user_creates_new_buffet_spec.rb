@@ -44,4 +44,20 @@ describe 'User creates a new buffet' do
     expect(page).to have_content('83.757.309/0001-58')
     expect(page).to have_content('Aqui no Fantasias & CIA realizamos festas juninas, quermesses e festas rave.')
   end
+
+  it 'shouldnt be able to create a buffet with missing information' do
+    #Arrange
+    user = User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
+    
+    #Act
+    login_as(user)
+    visit root_path
+
+    fill_in 'Nome fantasia', with: 'Fantasias & CIA'
+    fill_in 'Razão social', with: 'Sem razão alguma'
+    fill_in 'CNPJ', with: ''
+
+    #Assert
+    expect{click_on 'Salvar'}.to raise_error(ActiveRecord::RecordInvalid)
+  end
 end

@@ -44,7 +44,7 @@ describe 'User signs up' do
     expect(page).to have_content('Gian Lucca')
   end
 
-  it 'cannot sign up with an already in use parameter' do
+  it 'shouldnt be able to sign up with an already in use parameter' do
     #Arrange
     user = User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
 
@@ -68,7 +68,7 @@ describe 'User signs up' do
     expect(page).to have_content('já está em uso')
   end
 
-  it 'cannot sign up with a missing parameter' do
+  it 'shouldnt be able to sign up with a missing parameter' do
     #Arrange
     #Act
     visit root_path

@@ -21,4 +21,32 @@ class BuffetsController < ApplicationController
       render 'new'
     end
   end
+
+  def edit
+    @buffet = Buffet.find(params[:id])
+
+    if current_user.id != @buffet.user_id
+      redirect_to buffets_path, notice: 'Você não pode editar o buffet de outro usuário.'
+    end
+  end
+
+  def update
+    @buffet = Buffet.find(params[:id])
+    if current_user.id != @buffet.user_id
+      redirect_to buffets_path, notice: 'Você não pode editar o buffet de outro usuário.'
+    end
+
+    b_params = params.require(:buffet).permit(:trading_name, :company_name, :registration_number, :contact_number, :email,
+                                              :address, :district, :city, :state, :zipcode, :description, :payment_methods)
+
+    @buffet.user = current_user
+
+    if @buffet.update!(b_params)
+      redirect_to buffets_path, notice: 'Você editou seu buffet com sucesso.'
+    else
+      flash.now[:notice] = 'Erro ao editar seu buffet.'
+      render 'edit'
+    end
+
+  end
 end

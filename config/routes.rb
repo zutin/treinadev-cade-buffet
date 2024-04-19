@@ -4,6 +4,6 @@ Rails.application.routes.draw do
 
   authenticate :user do
     resources :user, only: [:index, :show]
-    resources :buffets, only: [:index, :show, :new, :create]
+    resources :buffets, only: [:index, :show, :new, :create, :edit, :update]
   end
 end
