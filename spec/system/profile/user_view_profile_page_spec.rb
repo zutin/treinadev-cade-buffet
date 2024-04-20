@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'User access a profile page' do
-  it 'can go to the profile page from the navigation bar' do
+  it 'can access the the profile page from the navigation bar' do
     #Arrange
     user = User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
 
@@ -21,7 +21,7 @@ describe 'User access a profile page' do
     expect(current_path).to eq user_index_path
   end
 
-  it 'can see its own account information correctly' do
+  it 'can see their own account information correctly' do
     #Arrange
     user = User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
 

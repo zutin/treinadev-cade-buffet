@@ -91,6 +91,13 @@ RSpec.describe Buffet, type: :model do
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: '', user: @user)
         expect(buffet.valid?).to eq false
       end
+
+      it 'false when user association is missing' do
+        buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
+                            email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
+                            zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix')
+        expect(buffet.valid?).to eq false
+      end
     end
 
     context 'uniqueness' do

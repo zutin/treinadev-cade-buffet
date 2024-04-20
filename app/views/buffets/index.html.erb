@@ -2,6 +2,8 @@
 
 <% if user_signed_in? && current_user.buffet %>
   <h3><%= link_to 'Editar informações', edit_buffet_path(current_user.buffet) %>
+  <h3><%= link_to 'Eventos do buffet', events_path %>
+  <h3><%= link_to 'Criar novo evento', new_event_path %>
   <div>
     <p><%= current_user.buffet.trading_name %></p>
     <p><%= current_user.buffet.company_name %></p>

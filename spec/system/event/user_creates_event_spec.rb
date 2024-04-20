@@ -1,49 +1,54 @@
 require 'rails_helper'
 
-describe 'User views buffet information' do
-  it 'can access the buffet information page from the navigation bar' do
+describe 'User creates a new event for their buffet' do
+  it 'can access the new event form from the buffet information page' do
     #Arrange
     user = User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
-
     Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                   email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                   zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
-
+    
     #Act
     login_as(user)
     visit root_path
 
-    within('nav') do
-      click_on 'Meu Buffet'
+    within('nav#navbar') do
+    click_on 'Meu Buffet'
     end
 
+    click_on 'Criar novo evento'
+
     #Assert
-    expect(current_path).to eq buffets_path
+    expect(current_path).to eq new_event_path
   end
 
-  it 'can see their buffet information correctly' do
+  it 'can create a new event successfully' do
     #Arrange
     user = User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
-
     Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                   email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                   zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
-
+    
     #Act
     login_as(user)
-    visit root_path
+    visit new_event_path
 
-    within('nav') do
-      click_on 'Meu Buffet'
-    end
+    fill_in 'Nome do evento', with: 'Festa de 21 anos'
+    fill_in 'Descrição do evento', with: 'Esse evento cobre som, iluminação e bebidas'
+    fill_in 'Mínimo de participantes', with: 10
+    fill_in 'Máximo de participantes', with: 20
+    fill_in 'Duração padrão', with: 120
+    fill_in 'Cardápio', with: 'Casquinha de siri, casquinha de sorvete e casquinha de bala'
+    check 'Bebidas alcoólicas'
+    check 'Decorações'
+    check 'Serviço de estacionamento'
+    check 'Localização única'
+
+    click_on 'Salvar'
 
     #Assert
-    expect(page).to have_content('Fantasias & CIA')
-    expect(page).to have_content('Sem razão alguma')
-    expect(page).to have_content('83.757.309/0001-58')
-  end
-
-  it 'can see another user buffet information correctly' do
-    puts 'the test below is empty!'
+    expect(page).to have_content('Evento cadastrado com sucesso!')
+    expect(page).to have_content('Festa de 21 anos')
+    expect(page).to have_content('Descrição do evento: Esse evento cobre som, iluminação e bebidas')
   end
 end
