@@ -8,7 +8,8 @@ describe 'User signs in using email and password' do
     #Act
     visit root_path
     
-    within('nav#navbar') do
+    within('div#user_dropdown') do
+      click_on 'Conta'
       click_on 'Login'
     end
 
@@ -17,9 +18,10 @@ describe 'User signs in using email and password' do
     click_on 'Entrar'
 
     #Assert
-    # expect(page).to have_content('Login efetuado com sucesso.')
-    expect(page).to have_content('Gian Lucca')
-    expect(page).to have_button('Logout')
+    within('div#user_dropdown') do
+      expect(page).to have_content('Gian Lucca')
+      expect(page).to have_button('Sair')
+    end
   end
 
   it 'can sign out successfully' do
@@ -30,13 +32,15 @@ describe 'User signs in using email and password' do
     login_as(user)
     visit root_path
 
-    within('nav#navbar') do
-      click_on 'Logout'
+    within('div#user_dropdown') do
+      click_on 'Sair'
     end
 
     #Assert
-    # expect(page).to have_content('Logout efetuado com sucesso.')
-    expect(page).to have_content('Convidado')
-    expect(page).not_to have_button('Logout')
+    expect(page).to have_content('Logout efetuado com sucesso.')
+    within('div#user_dropdown') do
+      expect(page).to have_content('Convidado')
+      expect(page).to have_content('Login')
+    end
   end
 end

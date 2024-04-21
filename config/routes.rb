@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   authenticate :user do
     resources :user, only: [:index, :show]
-    resources :buffets, only: [:index, :show, :new, :create, :edit, :update]
+    resources :buffets, path: 'buffet', only: [:index, :show, :new, :create, :edit, :update]
     resources :events, only: [:index, :show, :new, :create] do
       resources :event_prices, path: 'prices', only: [:edit, :update, :new, :create], shallow: true
     end

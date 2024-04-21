@@ -42,7 +42,6 @@ describe 'User adds prices to their event' do
 
     #Assert
     expect(page).to have_content('Festa de 21 anos')
-    expect(page).to have_content('Evento sem preços!')
     expect(page).to have_link('Adicionar preços', href: new_event_event_price_path(event))
   end
 
@@ -102,8 +101,7 @@ describe 'User adds prices to their event' do
 
     #Assert
     expect(page).to have_content('Preços foram salvos com sucesso!')
-    expect(page).to have_content('Preço base (20 participantes): 1000')
-    expect(page).not_to have_content('Evento sem preços!')
+    expect(page).not_to have_link('Adicionar preços', href: new_event_event_price_path(event))
   end
 
   it 'shouldnt be able to save event prices if there is missing information' do

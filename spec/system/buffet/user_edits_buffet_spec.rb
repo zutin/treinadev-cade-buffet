@@ -35,7 +35,7 @@ describe 'User edits their buffet' do
     login_as(user)
     visit root_path
 
-    within('nav') do
+    within('div#user_dropdown') do
       click_on 'Meu Buffet'
     end
 
@@ -60,7 +60,7 @@ describe 'User edits their buffet' do
     login_as(user)
     visit root_path
 
-    within('nav') do
+    within('div#user_dropdown') do
       click_on 'Meu Buffet'
     end
 
@@ -91,7 +91,7 @@ describe 'User edits their buffet' do
     login_as(user)
     visit root_path
 
-    within('nav') do
+    within('div#user_dropdown') do
       click_on 'Meu Buffet'
     end
 

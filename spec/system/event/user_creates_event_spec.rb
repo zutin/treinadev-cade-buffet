@@ -12,8 +12,8 @@ describe 'User creates a new event for their buffet' do
     login_as(user)
     visit root_path
 
-    within('nav#navbar') do
-    click_on 'Meu Buffet'
+    within('div#user_dropdown') do
+      click_on 'Meu Buffet'
     end
 
     click_on 'Criar novo evento'

@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+  .dropdown:focus-within .dropdown-menu {
+    opacity:1;
+    transform: translate(0) scale(1);
+    visibility: visible;
+  }

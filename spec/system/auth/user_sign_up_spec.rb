@@ -4,11 +4,7 @@ describe 'User signs up' do
   it 'should be redirected to new buffet page after signing up' do
     #Arrange
     #Act
-    visit root_path
-    within('nav#navbar') do
-      click_on 'Login'
-    end
-    click_on 'Cadastrar-se'
+    visit new_user_registration_path
 
     fill_in 'Usuário', with: 'lucca'
     fill_in 'Nome completo', with: 'Gian Lucca'
@@ -26,7 +22,8 @@ describe 'User signs up' do
     #Arrange
     #Act
     visit root_path
-    within('nav#navbar') do
+    within('div#user_dropdown') do
+      click_on 'Conta'
       click_on 'Login'
     end
     click_on 'Cadastrar-se'
@@ -41,7 +38,9 @@ describe 'User signs up' do
 
     #Assert
     expect(page).to have_content('Você realizou seu registro com sucesso.')
-    expect(page).to have_content('Gian Lucca')
+    within('div#user_dropdown') do
+      expect(page).to have_content('Gian Lucca')
+    end
   end
 
   it 'shouldnt be able to sign up with an already in use parameter' do
@@ -49,11 +48,7 @@ describe 'User signs up' do
     user = User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
 
     #Act
-    visit root_path
-    within('nav#navbar') do
-      click_on 'Login'
-    end
-    click_on 'Cadastrar-se'
+    visit new_user_registration_path
 
     fill_in 'Usuário', with: 'lucca'
     fill_in 'Nome completo', with: 'Wladimir Souza'
@@ -71,11 +66,7 @@ describe 'User signs up' do
   it 'shouldnt be able to sign up with a missing parameter' do
     #Arrange
     #Act
-    visit root_path
-    within('nav#navbar') do
-      click_on 'Login'
-    end
-    click_on 'Cadastrar-se'
+    visit new_user_registration_path
 
     fill_in 'Usuário', with: 'lucca'
     fill_in 'Nome completo', with: ''

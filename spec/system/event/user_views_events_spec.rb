@@ -12,8 +12,8 @@ describe 'User views their buffet events' do
     login_as(user)
     visit root_path
 
-    within('nav#navbar') do
-    click_on 'Meu Buffet'
+    within('div#user_dropdown') do
+      click_on 'Meu Buffet'
     end
 
     click_on 'Eventos do buffet'
@@ -45,14 +45,14 @@ describe 'User views their buffet events' do
     #Assert
     expect(page).to have_content('Festa de 21 anos')
     expect(page).to have_content('Super eventinho')
-    expect(page).to have_content('Participantes: Min. 10 - Max. 20')
-    expect(page).to have_content('120 min.')
+    expect(page).to have_content('De 10 a 20 pessoas')
+    expect(page).to have_content('120 minutos')
     expect(page).to have_link('Ver mais', href: event_path(event1))
 
     expect(page).to have_content('Quermesse')
     expect(page).to have_content('Pra todos os publicos')
-    expect(page).to have_content('Participantes: Min. 200 - Max. 400')
-    expect(page).to have_content('300 min.')
+    expect(page).to have_content('De 200 a 400 pessoas')
+    expect(page).to have_content('300 minutos')
     expect(page).to have_link('Ver mais', href: event_path(event2))
   end
 

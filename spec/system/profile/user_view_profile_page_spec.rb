@@ -13,8 +13,8 @@ describe 'User access a profile page' do
     login_as(user)
     visit root_path
 
-    within('nav#navbar') do
-      click_on user.full_name
+    within('div#user_dropdown') do
+      click_on 'Perfil'
     end
 
     #Assert

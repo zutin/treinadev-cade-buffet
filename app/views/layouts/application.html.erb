@@ -5,30 +5,37 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application" %>
   </head>
 
-  <body>
-    <header>
-      <h1>Cadê Buffet?</h1>
-      <nav id="navbar">
-        <%= link_to 'Home', root_path %>
-        <% if user_signed_in? %>
-          <%= link_to 'Meu Buffet', buffets_path %>
-          <%= link_to "#{current_user.full_name}", user_index_path %>
-          <%= button_to 'Logout', destroy_user_session_path, method: :delete %>
-        <% else %>
-          <span>Convidado</span>
-          <%= link_to 'Login', new_user_session_path %>
-        <% end %>
+  <body class="bg-[#F1F1F1] p-8">
+    <header class="flex w-full flex-col gap-y-10">
+      <div id="search" class="flex justify-around w-full">
+        <%= link_to 'Cadê Buffet', root_path, :class => "text-xl font-semibold mt-2" %>
+        <input type="text" placeholder="Procurar buffet" class="rounded-xl w-96"></input>
+        <div id="user" class="flex flex-row gap-4">
+          <%= render 'user_dropdown' %>
+        </div>
+      </div>
+      <div id="hotbar" class="flex w-full justify-center gap-12">
+        <%= link_to 'Início', root_path %>
+        <%= link_to 'Buffets', root_path %>
+        <%= link_to 'Sobre nós', root_path %>
+        <%= link_to 'Contato', root_path %>
       </nav>
     </header>
-    <main>
-      <div id="alert">
-        <p><%= alert %></p>
-        <p><%= notice %></p>
-      </div>
+    <main class="flex flex-col p-4 w-full">
+      <% if alert || notice %>
+        <div class="w-full text-center py-8 lg:px-8">
+          <div class="p-2 bg-blue-400 items-center text-white leading-none lg:rounded-full flex lg:inline-flex">
+            <span class="px-1 py-1"><svg class="fill-current h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></span>
+            <span class="font-semibold mr-2 text-left flex-auto"><%= alert %></span>
+            <span class="font-semibold mr-2 text-left flex-auto"><%= notice %></span>
+          </div>
+        </div>
+      <% end %>
       <%= yield %>
     </main>
   </body>
