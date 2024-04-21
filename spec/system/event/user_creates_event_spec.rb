@@ -51,4 +51,22 @@ describe 'User creates a new event for their buffet' do
     expect(page).to have_content('Festa de 21 anos')
     expect(page).to have_content('Descrição do evento: Esse evento cobre som, iluminação e bebidas')
   end
+
+  it 'shouldnt be able to create an event with missing information' do
+    #Arrange
+    user = User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
+    Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
+                  email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
+                  zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+    
+    #Act
+    login_as(user)
+    visit new_event_path
+
+    fill_in 'Nome do evento', with: 'Festa de 21 anos'
+    fill_in 'Descrição do evento', with: ''
+
+    #Assert
+    expect{click_on 'Salvar'}.to raise_error(ActiveRecord::RecordInvalid)
+  end
 end

@@ -1,11 +1,29 @@
 <h1>Eventos do meu buffet</h1>
 
-<% @events.each do |event| %>
-  <div>
-    <p><%= event.name %></p>
-    <p><%= event.description %></p>
-    <p>Participantes: Min. <%= event.minimum_participants %> - Max. <%= event.maximum_participants %></p>
-    <p><%= event.default_duration %> min.</p>
-    <%= link_to('Ver mais', event_path(event)) %>
-  </div>
+<% if @events.empty? %>
+<h3>Seu buffet ainda não possui nenhum evento.</h3>
+<% else %>
+  <% @events.each do |event| %>
+    <div>
+      <p><%= event.name %></p>
+      <p><%= event.description %></p>
+      <p>Participantes: Min. <%= event.minimum_participants %> - Max. <%= event.maximum_participants %></p>
+      <p><%= event.default_duration %> min.</p>
+      <%= link_to('Ver mais', event_path(event)) %>
+      
+      <% if event.event_price %>
+      <div>
+        <p>Preço base (<%= event.maximum_participants %> participantes): <%= event.event_price.base_price %></p>
+        <p>Pessoa adicional: <%= event.event_price.additional_person_price %></p>
+        <p>Hora adicional: <%= event.event_price.additional_hour_price %></p>
+        <%= link_to('Editar preços', edit_event_price_path(event)) %>
+      </div>
+      <% else %>
+      <div>
+        <p>Evento sem preços!</p>
+        <%= link_to('Adicionar preços', new_event_event_price_path(event)) %>
+      </div>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
