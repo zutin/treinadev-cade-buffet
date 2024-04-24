@@ -9,8 +9,6 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_user_if_no_buffet
-    if user_signed_in? && !current_user.buffet.present?
-      redirect_to new_user_buffet_path(current_user), notice: 'Você precisa registrar um buffet antes de continuar.'
-    end
+    redirect_to new_user_buffet_path(current_user), notice: 'Você precisa registrar um buffet antes de continuar.' if user_signed_in? && !current_user.buffet.present?
   end
 end
