@@ -2,6 +2,6 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def after_sign_up_path_for(resource)
-    new_buffet_path
+    new_user_buffet_path(current_user)
   end
 end

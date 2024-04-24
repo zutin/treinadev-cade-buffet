@@ -10,7 +10,7 @@ describe 'User creates a new buffet' do
     visit root_path
 
     #Assert
-    expect(current_path).to eq new_buffet_path
+    expect(current_path).to eq new_user_buffet_path(user)
     expect(page).to have_content('Você precisa registrar um buffet antes de continuar.')
   end
   

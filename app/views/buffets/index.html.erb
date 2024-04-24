@@ -1,7 +1,7 @@
 <h1>Meu Buffet</h1>
 
 <% if user_signed_in? && current_user.buffet %>
-  <h3><%= link_to 'Editar informações', edit_buffet_path(current_user.buffet) %>
+  <h3><%= link_to 'Editar informações', edit_user_buffet_path(current_user, current_user.buffet) %>
   <h3><%= link_to 'Eventos do buffet', events_path %>
   <h3><%= link_to 'Criar novo evento', new_event_path %>
   <div>

@@ -4,32 +4,7 @@
 <% else %>
   <div id="events" class="flex flex-wrap gap-x-16">
     <% @events.each do |event| %>
-      <div class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
-        <%= image_tag("card-top.jpg") %>
-
-        <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2"><%= event.name %></div>
-          <p class="text-gray-700 text-base"><%= event.description.truncate(150) %></p>
-        </div>
-
-        <div class="px-6 pb-2">
-          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            De <%= event.minimum_participants %> a <%= event.maximum_participants %> pessoas
-          </span>
-          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            <%= event.default_duration %> minutos
-          </span>
-        </div>
-
-        <div class="px-6 pb-4 justify-center flex">
-          <%= link_to('Ver mais', event_path(event), :class => "inline-block bg-blue-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2") %>
-          <% if event.event_price %>
-          <%= link_to('Editar preços', edit_event_price_path(event), :class => "inline-block bg-green-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2") %>
-          <% else %>
-          <%= link_to('Adicionar preços', new_event_event_price_path(event), :class => "inline-block bg-green-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2") %>
-          <% end %>
-        </div>
-      </div>
+      <%= render 'card', event: event %>
     <% end %>
   </div>
 <% end %>

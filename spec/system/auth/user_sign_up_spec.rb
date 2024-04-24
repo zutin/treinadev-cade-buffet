@@ -15,7 +15,7 @@ describe 'User signs up' do
     click_on 'Cadastrar'
 
     #Assert
-    expect(current_path).to eq new_buffet_path
+    expect(current_path).to eq new_user_buffet_path(User.first)
   end
 
   it 'can sign up successfully' do

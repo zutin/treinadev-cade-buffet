@@ -5,7 +5,7 @@
       <div class="flex justify-center flex-col p-3 text-center">
         <span class="text-xl font-semibold capitalize tracking-wide block mt-2"><%= current_user.full_name %></span>
         <span class="font-semibold text-gray-500 lowercase tracking-wide block mb-4">@<%= current_user.username %></span>
-        <span class="text-xl font-bold block uppercase tracking-wide text-blue-500"><%= current_user.buffet.events.count %></span>
+        <span class="text-xl font-bold block uppercase tracking-wide text-blue-400"><%= current_user.buffet.events.count %></span>
         <span class="text-sm">Eventos</span>
         <span class="text-sm mt-8">Membro desde: <%= I18n.l(current_user.created_at, format: :long) %></span>
       </div>
@@ -22,8 +22,8 @@
         <input disabled id="user_email" type="text" placeholder="E-mail" class="rounded-xl w-72 disabled:bg-gray-200" value="<%= current_user.email %>">
       </div>
       <div class="flex flex-row">
-        <label for="user_contact_number" class="font-semibold mr-2 content-center whitespace-nowrap">Telefone para contato:</label>
-        <input disabled id="user_contact_number" type="text" placeholder="E-mail" class="rounded-xl w-72 disabled:bg-gray-200" value="<%= current_user.contact_number %>">
+        <label for="user_contact_number" class="font-semibold mr-2 content-center whitespace-nowrap">Número para contato:</label>
+        <input disabled id="user_contact_number" type="text" placeholder="Contato" class="rounded-xl w-72 disabled:bg-gray-200" value="<%= current_user.contact_number %>">
       </div>
     </div>
   </div>

@@ -1,3 +1,5 @@
 class HomeController < ApplicationController
-  def index; end
+  def index
+    @buffets = Buffet.order(:trading_name)
+  end
 end

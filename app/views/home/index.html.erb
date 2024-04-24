@@ -1,3 +1,23 @@
-<h1 class="text-xl text-red-500">
-Boas vindas ao Cadê Buffet!
-</h1>
+<div id="carousel" class="w-full h-full p-4 flex items-center justify-center">
+  <div class="max-w-5xl flex h-full m-6 shadow rounded-xl">
+    <div class="w-1/3">
+      <%= image_tag("buffet-home2.jpg", :class => "h-full rounded-l-xl") %>
+    </div>
+    <div class="w-3/4 bg-blue-200 rounded-r-xl flex ">
+      <div class="my-auto">
+        <h3 class="text-5xl font-semibold uppercase font-mono leading-snug px-10 text-blue-500">Cadê Buffet</h3>
+        <h3 class="text-xl text-gray-500 font-mono px-10 mt-4">
+          Você sonha com um buffet para seu evento, com uma decoração deslumbrante,
+          mas busca também flexibilidade na localização e variedade de preços?
+          Apresentamos o <b>Cadê Buffet</b>, seu parceiro em eventos únicos e memoráveis!
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="buffet_list" class="flex flex-wrap gap-x-16 p-8 my-4 mx-auto">
+  <% @buffets.each do |buffet| %>
+    <%= render 'card', buffet: buffet %>
+  <% end %>
+</div>

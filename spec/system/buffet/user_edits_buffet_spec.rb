@@ -16,10 +16,10 @@ describe 'User edits their buffet' do
 
     #Act
     login_as(user)
-    visit edit_buffet_path(buffet2)
+    visit edit_user_buffet_path(second_user, buffet2)
 
     #Assert
-    expect(current_path).to eq buffets_path
+    expect(current_path).to eq user_buffets_path(user)
     expect(page).to have_content('Você não pode editar o buffet de outro usuário.')
   end
 
@@ -42,7 +42,7 @@ describe 'User edits their buffet' do
     click_on 'Editar informações'
 
     #Assert
-    expect(current_path).to eq edit_buffet_path(user.buffet)
+    expect(current_path).to eq edit_user_buffet_path(user, user.buffet)
     expect(page).to have_field('Nome fantasia', with: 'Fantasias & CIA')
     expect(page).to have_field('Razão social', with: 'Sem razão alguma')
     expect(page).to have_field('CNPJ', with: '83.757.309/0001-58')

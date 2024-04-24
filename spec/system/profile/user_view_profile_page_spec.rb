@@ -36,8 +36,8 @@ describe 'User access a profile page' do
     #Assert
     expect(page).to have_content('Gian Lucca')
     expect(page).to have_content('@lucca')
-    expect(page).to have_content('(12) 98686-8686')
-    expect(page).to have_content('gian@lucca.com')
+    expect(page).to have_field('Número para contato:', with: '(12) 98686-8686', disabled: true)
+    expect(page).to have_field('E-mail:', with: 'gian@lucca.com', disabled: true)
   end
 
   it 'can access another user profile page' do
@@ -54,7 +54,7 @@ describe 'User access a profile page' do
     visit user_path(second_user)
 
     #Assert
-    expect(page).to have_content('Visualizando o usuário @wladimir')
-    expect(page).to have_content('Nome: Wladimir Souza')
+    expect(page).to have_content('Wladimir Souza')
+    expect(page).to have_content('@wladimir')
   end
 end
