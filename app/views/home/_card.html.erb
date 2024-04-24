@@ -1,5 +1,9 @@
 <div class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
-  <%= image_tag("card-top.jpg") %>
+  <% if buffet.buffet_logo.attached? %>
+    <%= image_tag(buffet.buffet_logo) %>
+  <% else %>
+    <%= image_tag("default-buffet.jpg") %>
+  <% end %>
   <div class="px-6 py-4">
     <%= link_to("#{buffet.trading_name}", buffet_path(buffet), :class => "font-bold text-xl mb-2") %>
     <p class="text-gray-700 text-base"><%= buffet.description.truncate(150) %></p>

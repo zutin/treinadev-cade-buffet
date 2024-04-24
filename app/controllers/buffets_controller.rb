@@ -11,7 +11,7 @@ class BuffetsController < ApplicationController
 
   def create
     b_params = params.require(:buffet).permit(:trading_name, :company_name, :registration_number, :contact_number, :email,
-                                              :address, :district, :city, :state, :zipcode, :description, :payment_methods)
+                                              :address, :district, :city, :state, :zipcode, :description, :payment_methods, :buffet_logo)
 
     @buffet = Buffet.new(b_params)
     @buffet.user = current_user
@@ -28,7 +28,7 @@ class BuffetsController < ApplicationController
 
   def update
     b_params = params.require(:buffet).permit(:trading_name, :company_name, :registration_number, :contact_number, :email,
-                                              :address, :district, :city, :state, :zipcode, :description, :payment_methods)
+                                              :address, :district, :city, :state, :zipcode, :description, :payment_methods, :buffet_logo)
 
     @buffet.user = current_user
 

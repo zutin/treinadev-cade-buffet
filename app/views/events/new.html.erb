@@ -42,6 +42,10 @@
     <%= f.check_box :can_change_location %>
   </div>
   <div>
+    <%= f.label :event_logo %>
+    <%= f.file_field :event_logo %>
+  </div>
+  <div>
     <%= f.submit 'Salvar' %>
   </div>
 <% end %>

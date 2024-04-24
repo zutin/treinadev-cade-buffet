@@ -10,6 +10,7 @@ Things you may want to cover:
 * System dependencies
 
 * Configuration
+You need to run `rails tailwindcss:install` after `bundle install` to generate TailwindCSS config files
 
 * Database creation
 

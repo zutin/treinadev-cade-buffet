@@ -12,6 +12,11 @@
 
 <% if @buffet.events.present? %>
   <% @buffet.events.each do |event| %>
+    <% if event.event_logo.attached? %>
+      <%= image_tag(event.event_logo) %>
+    <% else %>
+      <%= image_tag("default-event.jpg") %>
+    <% end %>
     <p><%= event.name %></p>
     <p><%= event.description %></p>
     <p><%= event.minimum_participants %></p>

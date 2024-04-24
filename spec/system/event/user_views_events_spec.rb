@@ -33,6 +33,7 @@ describe 'User views their buffet events' do
     event1 = Event.create!(name: 'Festa de 21 anos', description: 'Super eventinho', minimum_participants: 10, maximum_participants: 20,
     default_duration: 120, menu: 'Arroz, feijão, batata', alcoholic_drinks: false, decorations: true,
     can_change_location: false, valet_service: true, buffet: user.buffet)
+    event1.event_logo.attach(File.open(Rails.root.join("db/images/event-rspec.jpg")))
 
     event2 = Event.create!(name: 'Quermesse', description: 'Pra todos os publicos', minimum_participants: 200, maximum_participants: 400,
     default_duration: 300, menu: 'Milho, pipoca, hotdog', alcoholic_drinks: false, decorations: true,
@@ -43,12 +44,14 @@ describe 'User views their buffet events' do
     visit events_path
 
     #Assert
+    expect(page).to have_css('img[src*="event-rspec.jpg"]')
     expect(page).to have_content('Festa de 21 anos')
     expect(page).to have_content('Super eventinho')
     expect(page).to have_content('De 10 a 20 pessoas')
     expect(page).to have_content('120 minutos')
     expect(page).to have_link('Ver mais', href: event_path(event1))
 
+    expect(page).to have_css('img[src*="default-event"]')
     expect(page).to have_content('Quermesse')
     expect(page).to have_content('Pra todos os publicos')
     expect(page).to have_content('De 200 a 400 pessoas')

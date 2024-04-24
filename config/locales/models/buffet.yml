@@ -16,3 +16,4 @@ pt-BR:
         zipcode: 'CEP'
         payment_methods: 'Métodos de pagamento'
         description: 'Descrição do buffet'
+        buffet_logo: 'Logo do buffet'

@@ -54,6 +54,7 @@ describe 'User views buffet information' do
     Event.create!(name: 'Festa de 21 anos', description: 'Super evento', minimum_participants: 10, maximum_participants: 20,
                   default_duration: 120, menu: 'Arroz, feijão, batata', alcoholic_drinks: false, decorations: true,
                   can_change_location: true, valet_service: true, buffet: Buffet.first)
+    Event.first.event_logo.attach(File.open(Rails.root.join("db/images/event-rspec.jpg")))
 
     EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
                   weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, 
@@ -66,6 +67,7 @@ describe 'User views buffet information' do
     #Assert
     expect(current_path).to eq buffet_path(Buffet.first)
     expect(page).not_to have_content('Sem razão alguma')
+    expect(page).to have_css('img[src*="event-rspec.jpg"]')
     expect(page).to have_content('Fantasias & CIA')
     expect(page).to have_content('83.757.309/0001-58')
     expect(page).to have_content('buffet@contato.com')

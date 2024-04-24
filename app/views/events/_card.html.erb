@@ -1,6 +1,9 @@
 <div class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
-  <%= image_tag("card-top.jpg") %>
-
+  <% if event.event_logo.attached? %>
+    <%= image_tag(event.event_logo) %>
+  <% else %>
+    <%= image_tag("default-event.jpg") %>
+  <% end %>
   <div class="px-6 py-4">
     <div class="font-bold text-xl mb-2"><%= event.name %></div>
     <p class="text-gray-700 text-base"><%= event.description.truncate(150) %></p>

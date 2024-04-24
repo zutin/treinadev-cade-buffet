@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe 'User creates a new buffet' do
+  it 'shouldnt be able to access new buffet page if user already has a buffet' do
+  end
+
   it 'should be redirected if signed in and user has no buffet registered' do
     #Arrange
     user = User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')

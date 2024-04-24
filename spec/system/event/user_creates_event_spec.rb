@@ -7,7 +7,7 @@ describe 'User creates a new event for their buffet' do
     Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                   email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                   zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
-    
+
     #Act
     login_as(user)
     visit root_path
@@ -43,6 +43,7 @@ describe 'User creates a new event for their buffet' do
     check 'Decorações'
     check 'Serviço de estacionamento'
     check 'Localização única'
+    attach_file 'Logo do evento', Rails.root.join('db/images/event-rspec.jpg')
 
     click_on 'Salvar'
 
