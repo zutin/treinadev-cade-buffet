@@ -1,9 +1,12 @@
 class BuffetsController < ApplicationController
   skip_before_action :redirect_user_if_no_buffet, only: [:new, :create]
   before_action :set_buffet, only: [:show, :edit, :update]
-  before_action :verify_user, only: [:edit, :update]
+  before_action :verify_user_editing, only: [:edit, :update]
+  before_action :verify_user_creating, only: [:new, :create]
 
-  def index; end
+  def index
+    @buffet = current_user.buffet
+  end
 
   def new
     @buffet = Buffet.new
@@ -44,7 +47,11 @@ class BuffetsController < ApplicationController
 
   private
 
-  def verify_user    
+  def verify_user_creating
+    redirect_to user_buffets_path(current_user), notice: 'Você já tem um buffet registrado.' if current_user.buffet.present?
+  end
+
+  def verify_user_editing
     redirect_to user_buffets_path(current_user), notice: 'Você não pode editar o buffet de outro usuário.' if current_user.id != @buffet.user_id
   end
 

@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 describe 'User creates a new event for their buffet' do
+  it 'should be redirected if not signed in' do
+    #Arrange
+    #Act
+    visit(new_event_path)
+    #Assert
+    expect(page).to have_content('Para continuar, faça login ou registre-se.')
+  end
+
   it 'can access the new event form from the buffet information page' do
     #Arrange
     user = User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')

@@ -45,7 +45,7 @@ describe 'User signs up' do
 
   it 'shouldnt be able to sign up with an already in use parameter' do
     #Arrange
-    user = User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
+    User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
 
     #Act
     visit new_user_registration_path

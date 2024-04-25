@@ -1,14 +1,6 @@
 require 'rails_helper'
 
 describe 'User views the home page' do
-  it 'should be redirected to login page if not signed in and trying to navigate' do
-    #Arrange
-    #Act
-    visit(user_index_path)
-    #Assert
-    expect(page).to have_content('Para continuar, faça login ou registre-se.')
-  end
-
   it 'can see the home page content and navigation bar' do
     #Arrange
     #Act
@@ -49,5 +41,23 @@ describe 'User views the home page' do
     expect(page).to have_link('Fantasias & CIA', href: buffet_path(buffet1))
     expect(page).to have_link('Alegria para o mundo', href: buffet_path(buffet2))
     expect(page).to have_link('Vegas Buffet', href: buffet_path(buffet3))
+  end
+
+  it 'can go to an buffets page through home page buffet list' do
+    #Arrange
+    User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
+
+    Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
+                  email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
+                  zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: User.first)
+
+    #Act
+    visit root_path
+    click_on 'Fantasias & CIA'
+
+    #Assert
+    expect(current_path).to eq buffet_path(Buffet.first)
+    expect(page).to have_content('Fantasias & CIA')
+    expect(page).to have_content('83.757.309/0001-58')
   end
 end

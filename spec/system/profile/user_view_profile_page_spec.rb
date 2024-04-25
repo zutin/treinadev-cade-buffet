@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 describe 'User access a profile page' do
+  it 'should be redirected if not signed in' do
+    #Arrange
+    #Act
+    visit(user_index_path)
+    #Assert
+    expect(page).to have_content('Para continuar, faça login ou registre-se.')
+  end
+
   it 'can access the the profile page from the navigation bar' do
     #Arrange
     user = User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')

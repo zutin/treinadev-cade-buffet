@@ -1,22 +1,27 @@
 <h1>Meu Buffet</h1>
 
-<% if user_signed_in? && current_user.buffet %>
+<% if user_signed_in? && @buffet %>
   <h3><%= link_to 'Editar informações', edit_user_buffet_path(current_user, current_user.buffet) %>
   <h3><%= link_to 'Eventos do buffet', events_path %>
   <h3><%= link_to 'Criar novo evento', new_event_path %>
   <div>
-    <p><%= current_user.buffet.trading_name %></p>
-    <p><%= current_user.buffet.company_name %></p>
-    <p><%= current_user.buffet.registration_number %></p>
-    <p><%= current_user.buffet.contact_number %></p>
-    <p><%= current_user.buffet.email %></p>
-    <p><%= current_user.buffet.address %></p>
-    <p><%= current_user.buffet.district %></p>
-    <p><%= current_user.buffet.city %></p>
-    <p><%= current_user.buffet.state %></p>
-    <p><%= current_user.buffet.zipcode %></p>
-    <p><%= current_user.buffet.payment_methods %></p>
-    <p><%= current_user.buffet.description %></p>
+    <% if @buffet.buffet_logo.attached? %>
+      <%= image_tag(@buffet.buffet_logo) %>
+    <% else %>
+      <%= image_tag("default-buffet.jpg") %>
+    <% end %>
+    <p><%= @buffet.trading_name %></p>
+    <p><%= @buffet.company_name %></p>
+    <p><%= @buffet.registration_number %></p>
+    <p><%= @buffet.contact_number %></p>
+    <p><%= @buffet.email %></p>
+    <p><%= @buffet.address %></p>
+    <p><%= @buffet.district %></p>
+    <p><%= @buffet.city %></p>
+    <p><%= @buffet.state %></p>
+    <p><%= @buffet.zipcode %></p>
+    <p><%= @buffet.payment_methods %></p>
+    <p><%= @buffet.description %></p>
   </div>
 <% else %>
   <div>
