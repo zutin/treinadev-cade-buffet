@@ -6,9 +6,10 @@ class User < ApplicationRecord
 
   has_one :buffet
 
-  validates :full_name, :username, :contact_number, presence: true
-  # Futuramente diferenciar Cliente - Dono
-  #validates :role_id, presence: true
-  validates :username, :email, uniqueness: true
+  validates :full_name, :username, :contact_number, :role, :social_security_number, presence: true
+  validates :username, :email, :social_security_number, uniqueness: true
   validates :username, length: { in: 5..20 }
+  validates :social_security_number, social_security_number: { message: 'é inválido.' }
+
+  enum role: { customer: 0, owner: 10 }
 end

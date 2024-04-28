@@ -1,40 +1,9 @@
-<p><%= @buffet.trading_name %></p>
-<p><%= @buffet.registration_number %></p>
-<p><%= @buffet.contact_number %></p>
-<p><%= @buffet.email %></p>
-<p><%= @buffet.address %></p>
-<p><%= @buffet.district %></p>
-<p><%= @buffet.city %></p>
-<p><%= @buffet.state %></p>
-<p><%= @buffet.zipcode %></p>
-<p><%= @buffet.payment_methods %></p>
-<p><%= @buffet.description %></p>
+<%= render('buffet') %>
 
 <% if @buffet.events.present? %>
   <% @buffet.events.each do |event| %>
-    <% if event.event_logo.attached? %>
-      <%= image_tag(event.event_logo) %>
-    <% else %>
-      <%= image_tag("default-event.jpg") %>
-    <% end %>
-    <p><%= event.name %></p>
-    <p><%= event.description %></p>
-    <p><%= event.minimum_participants %></p>
-    <p><%= event.maximum_participants %></p>
-    <p><%= event.default_duration %></p>
-    <p><%= event.menu %></p>
-    <p><%= event.alcoholic_drinks %></p>
-    <p><%= event.decorations %></p>
-    <p><%= event.valet_service %></p>
-    <p><%= event.can_change_location %></p>
-
-    <% if event.event_price.present? %>
-      <p>Preço base: <%= event.event_price.base_price %></p>
-      <p><%= event.event_price.additional_hour_price %></p>
-      <p><%= event.event_price.additional_person_price %></p>
-      <p>Preço fim de semana: <%= event.event_price.weekend_base_price %></p>
-      <p><%= event.event_price.weekend_additional_hour_price %></p>
-      <p><%= event.event_price.weekend_additional_person_price %></p>
-    <% end %>
+    <%= render 'event', event: event %>
   <% end %>
+<% else %>
+  <p>Esse buffet não tem eventos registrados.</p>
 <% end %>

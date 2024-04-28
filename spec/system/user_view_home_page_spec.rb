@@ -18,9 +18,9 @@ describe 'User views the home page' do
 
   it 'can see buffet list in home page without signing in' do
     #Arrange
-    user = User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
-    user2 = User.create!(username: 'wladimir', full_name: 'Wladimir Souza', contact_number: '(12) 97676-7676', email: 'wladimir@souza.com', password: 'password')
-    user3 = User.create!(username: 'lucas', full_name: 'Lucas Felipe', contact_number: '(12) 94545-4545', email: 'lucas@felipe.com', password: 'password')
+    user = User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: "01234567890", contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
+    user2 = User.create!(username: 'wladimir', full_name: 'Wladimir Souza', social_security_number: "14355855007", contact_number: '(12) 97676-7676', email: 'wladimir@souza.com', password: 'password', role: 'owner')
+    user3 = User.create!(username: 'lucas', full_name: 'Lucas Felipe', social_security_number: "74488238092", contact_number: '(12) 94545-4545', email: 'lucas@felipe.com', password: 'password', role: 'owner')
 
     buffet1 = Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                   email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
@@ -45,7 +45,7 @@ describe 'User views the home page' do
 
   it 'can go to an buffets page through home page buffet list' do
     #Arrange
-    User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
+    User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: "01234567890", contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
 
     Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                   email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',

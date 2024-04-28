@@ -9,5 +9,5 @@ pt-BR:
         username: 'Usuário'
         email: 'E-mail'
         password: 'Senha'
-        #Diferenciar Dono - Cliente
-        #role_id: 'Tipo de conta'
+        role: 'Tipo de conta'
+        social_security_number: 'CPF'

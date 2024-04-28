@@ -9,7 +9,7 @@
 #   end
 
 3.times do |i|
-  user = User.create!(username: "user_#{i}", full_name: "User #{i}", contact_number: "(11) 91111-000#{i}", email: "user#{i}@test.com", password: 'password')
+  user = User.create!(username: "user_#{i}", full_name: "User #{i}", contact_number: "(11) 91111-000#{i}", email: "user#{i}@test.com", social_security_number: "#{i}234567890", password: 'password', role: 'owner')
 
   buffet = Buffet.create!(trading_name: "Buffet Nº #{i}", company_name: "Razão social do buffet #{i}", registration_number: "11.222.333/0000-0#{i}", contact_number: "(11) 9#{i}000-0000",
                 email: "buffet#{i}@contato.com", address: "Rua dos Bobos, 0#{i}", district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
@@ -21,3 +21,8 @@
                 can_change_location: false, valet_service: true, buffet: buffet)
   event.event_logo.attach(File.open(Rails.root.join("db/images/event#{i}.jpg")))
 end
+
+  User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 99205-1022', email: 'gian@lucca.com', social_security_number: "66677788890", password: 'password', role: 'owner')
+  Buffet.create!(trading_name: "Fantasias & CIA", company_name: "Fantasy LTDA", registration_number: "66.777.888/0001-99", contact_number: "(11) 99345-6789",
+                email: "buffet@lucca.com", address: "Rua das Palmeiras, 42", district: 'Centro', city: 'São Paulo', state: 'SP',
+                zipcode: "11675012", description: "Nosso buffet com maior área KIDS da cidade! Realizamos sua festa com buffet completo!", payment_methods: 'Pix, Cartão de Débito', user: User.last)

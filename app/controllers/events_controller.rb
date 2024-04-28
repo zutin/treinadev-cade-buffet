@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  skip_before_action :redirect_customer_from_buffet_management, only: [:show]
+
   def index
     @events = current_user.buffet.events
   end

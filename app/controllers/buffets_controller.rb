@@ -1,5 +1,6 @@
 class BuffetsController < ApplicationController
   skip_before_action :redirect_user_if_no_buffet, only: [:new, :create]
+  skip_before_action :redirect_customer_from_buffet_management, only: [:show]
   before_action :set_buffet, only: [:show, :edit, :update]
   before_action :verify_user_editing, only: [:edit, :update]
   before_action :verify_user_creating, only: [:new, :create]

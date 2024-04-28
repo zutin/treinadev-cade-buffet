@@ -5,7 +5,7 @@
       <div class="flex justify-center flex-col p-3 text-center">
         <span class="text-xl font-semibold capitalize tracking-wide block mt-2"><%= current_user.full_name %></span>
         <span class="font-semibold text-gray-500 lowercase tracking-wide block mb-4">@<%= current_user.username %></span>
-        <span class="text-xl font-bold block uppercase tracking-wide text-blue-400"><%= current_user.buffet.events.count %></span>
+        <span class="text-xl font-bold block uppercase tracking-wide text-blue-400"><%= current_user.buffet.present? ? current_user.buffet.events.count : '0' %></span>
         <span class="text-sm">Eventos</span>
         <span class="text-sm mt-8">Membro desde: <%= I18n.l(current_user.created_at, format: :long) %></span>
       </div>

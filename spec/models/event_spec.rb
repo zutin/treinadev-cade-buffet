@@ -4,7 +4,7 @@ RSpec.describe Event, type: :model do
   describe '#valid?' do
     context 'presence' do
       it 'false when event name is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password')
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
         buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
@@ -17,7 +17,7 @@ RSpec.describe Event, type: :model do
       end
 
       it 'false when event description is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password')
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
         buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
@@ -30,7 +30,7 @@ RSpec.describe Event, type: :model do
       end
 
       it 'false when minimum participants is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password')
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
         buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
@@ -43,7 +43,7 @@ RSpec.describe Event, type: :model do
       end
 
       it 'false when maximum participants is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password')
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
         buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
@@ -56,7 +56,7 @@ RSpec.describe Event, type: :model do
       end
 
       it 'false when event duration is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password')
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
         buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
@@ -69,7 +69,7 @@ RSpec.describe Event, type: :model do
       end
 
       it 'false when food menu is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password')
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
         buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
@@ -82,7 +82,7 @@ RSpec.describe Event, type: :model do
       end
 
       it 'false when alcoholic drinks is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password')
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
         buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
@@ -95,7 +95,7 @@ RSpec.describe Event, type: :model do
       end
 
       it 'false when decorations is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password')
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
         buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
@@ -108,7 +108,7 @@ RSpec.describe Event, type: :model do
       end
 
       it 'false when valet service is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password')
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
         buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
@@ -121,7 +121,7 @@ RSpec.describe Event, type: :model do
       end
 
       it 'false when information about event location is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password')
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
         buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)

@@ -32,8 +32,11 @@
       <div class="py-1">
       <% if user_signed_in? %>
         <%= link_to 'Perfil', user_index_path, :class => "text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:underline hover:bg-gray-100 transition" %>
-        <%= link_to 'Meu Buffet', user_buffets_path(current_user), :class => "text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:underline hover:bg-gray-100 transition" %>
-        <%# <span role="menuitem" tabindex="-1" class="flex justify-between w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 cursor-not-allowed opacity-50" aria-disabled="true">New feature (soon)</span> %>
+        <% if current_user.owner? %>
+          <%= link_to 'Meu Buffet', user_buffets_path(current_user), :class => "text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:underline hover:bg-gray-100 transition" %>
+        <% else %>
+          <%= link_to 'Meu Buffet', root_path, :class => "text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 cursor-not-allowed opacity-50 transition" %>
+        <% end %>
       </div>
       <div class="py-1">
         <%= button_to 'Sair', destroy_user_session_path, :class => "text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:underline hover:bg-gray-100 transition", method: :delete %>

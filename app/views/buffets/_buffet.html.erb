@@ -1,0 +1,22 @@
+<div>
+  <% if @buffet.buffet_logo.attached? %>
+    <%= image_tag(@buffet.buffet_logo) %>
+  <% else %>
+    <%= image_tag("default-buffet.jpg") %>
+  <% end %>
+  <p><%= @buffet.trading_name %></p>
+  <% if @buffet.user == current_user %>
+    <p><%= @buffet.company_name %></p>
+    <p>(Essa informação só está disponível para você)</p>
+  <% end %>
+  <p><%= @buffet.registration_number %></p>
+  <p><%= @buffet.contact_number %></p>
+  <p><%= @buffet.email %></p>
+  <p><%= @buffet.address %></p>
+  <p><%= @buffet.district %></p>
+  <p><%= @buffet.city %></p>
+  <p><%= @buffet.state %></p>
+  <p><%= @buffet.zipcode %></p>
+  <p><%= @buffet.payment_methods %></p>
+  <p><%= @buffet.description %></p>
+</div>

@@ -4,6 +4,13 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
+    <%= f.radio_button :role, "customer" %>
+    <%= f.label :role_customer, "Sou cliente" %>
+    <%= f.radio_button :role, "owner" %>
+    <%= f.label :role_owner, "Sou dono de buffet" %>
+  </div>
+
+  <div class="field">
     <%= f.label :username %><br />
     <%= f.text_field :username, autocomplete: "username" %>
   </div>
@@ -11,6 +18,11 @@
   <div class="field">
     <%= f.label :full_name %><br />
     <%= f.text_field :full_name, autocomplete: "full_name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :social_security_number %><br />
+    <%= f.text_field :social_security_number, autocomplete: "social_security_number" %>
   </div>
 
   <div class="field">
