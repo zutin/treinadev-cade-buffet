@@ -1,6 +1,6 @@
 class BuffetsController < ApplicationController
   skip_before_action :redirect_user_if_no_buffet, only: [:new, :create]
-  skip_before_action :redirect_customer_from_buffet_management, only: [:show]
+  skip_before_action :redirect_customer_from_buffet_management, only: [:show, :search]
   before_action :set_buffet, only: [:show, :edit, :update]
   before_action :verify_user_editing, only: [:edit, :update]
   before_action :verify_user_creating, only: [:new, :create]
@@ -45,6 +45,11 @@ class BuffetsController < ApplicationController
   end
 
   def show; end
+
+  def search
+    @search = params['query']
+    @buffets = Buffet.where("trading_name LIKE ? OR city LIKE ? OR id IN (SELECT buffet_id FROM events WHERE name LIKE ?)", "%#{@search}%", "%#{@search}%", "%#{@search}%")
+  end
 
   private
 

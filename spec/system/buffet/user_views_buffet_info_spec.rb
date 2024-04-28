@@ -71,8 +71,6 @@ describe 'User views buffet information' do
     expect(page).not_to have_content('Sem razão alguma')
     expect(page).to have_css('img[src*="event-rspec.jpg"]')
     expect(page).to have_content('Fantasias & CIA')
-    expect(page).to have_content('83.757.309/0001-58')
-    expect(page).to have_content('buffet@contato.com')
     expect(page).to have_content('Festa de 21 anos')
     expect(page).to have_content('Preço base: 100')
     expect(page).to have_content('Preço fim de semana: 200')

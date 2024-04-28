@@ -1,0 +1,10 @@
+<h1>Resultados da busca '<%= @search %>'</h1>
+
+<% if @buffets.present? %>
+  <p><%= @buffets.count %> <%= Buffet.model_name.human(count: @buffets.count).downcase %> <%= t(:found, count: @buffets.count) %></p>
+  <% @buffets.each do |b| %>
+    <%= render 'shared/buffet-card', buffet: b %>
+  <% end %>
+<% else %>
+  <p>Nenhum resultado encontrado</p>
+<% end %>

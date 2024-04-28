@@ -2,7 +2,7 @@
 
 <% if @buffet.events.present? %>
   <% @buffet.events.each do |event| %>
-    <%= render 'event', event: event %>
+    <%= render 'shared/event-card', event: event %>
   <% end %>
 <% else %>
   <p>Esse buffet não tem eventos registrados.</p>

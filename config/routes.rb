@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations", sessions: "sessions" }
   root to: 'home#index'
 
-  resources :buffets, path: 'buffet', only: [:show]
+  resources :buffets, path: 'buffet', only: [:show] do
+    get 'search', on: :collection
+  end
   resources :events, path: 'event', only: [:show]
 
   authenticate :user do
