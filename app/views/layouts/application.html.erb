@@ -23,7 +23,14 @@
       </div>
       <div id="hotbar" class="flex w-full justify-center gap-12">
         <%= link_to 'Início', root_path %>
-        <%= link_to 'Buffets', root_path %>
+        <% if user_signed_in? %>
+          <% if current_user.customer? %>
+            <%= link_to 'Meus Pedidos', root_path %>
+          <% else %>
+            <%= link_to 'Meu Buffet', root_path %>
+            <%= link_to 'Pedidos', root_path %>
+          <% end %>
+        <% end %>
         <%= link_to 'Sobre nós', root_path %>
         <%= link_to 'Contato', root_path %>
       </nav>

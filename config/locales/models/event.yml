@@ -1,7 +1,9 @@
 pt-BR:
   activerecord:
     models:
-      event: 'Evento'
+      event:
+        one: 'Evento'
+        other: 'Eventos'
     attributes:
       event:
         name: 'Nome do evento'

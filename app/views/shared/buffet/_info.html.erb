@@ -1,0 +1,12 @@
+<div id="buffet_info" class="w-1/3 mx-auto rounded-xl">
+  <div class="flex flex-row">
+    <p class="text-sm leading-normal font-bold uppercase mt-2">Informações do buffet</p>
+    <%= link_to('Ver buffet', buffet_path(buffet), :class => "bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white w-auto hover:underline flex ml-auto") %>
+  </div>
+  <div class="mt-4 bg-white">
+    <%= render('shared/profile/information_box', title: 'Nome', attribute: buffet.trading_name) %>
+    <%= render('shared/profile/information_box', title: 'Razão social', attribute: buffet.company_name) if user_signed_in? && buffet.user == current_user %>
+    <%= render('shared/profile/information_box', title: 'Número de contato', attribute: buffet.contact_number) %>
+    <%= render('shared/profile/information_box', title: 'E-mail do buffet', attribute: buffet.email) %>
+  </div>
+</div>

@@ -1,51 +1,18 @@
-  <div>
-    <%= f.label :trading_name %>
-    <%= f.text_field :trading_name %>
-  </div>
-  <div>
-    <%= f.label :company_name %>
-    <%= f.text_field :company_name %>
-  </div>
-  <div>
-    <%= f.label :registration_number %>
-    <%= f.text_field :registration_number %>
-  </div>
-  <div>
-    <%= f.label :contact_number %>
-    <%= f.text_field :contact_number %>
-  </div>
+  <%= render 'shared/form/text_field', form: f, required: true, attribute: :trading_name, placeholder: 'Nome fantasia' %>
+  <%= render 'shared/form/text_field', form: f, required: true, attribute: :company_name, placeholder: 'Razão social' %>
+  <%= render 'shared/form/text_field', form: f, required: true, attribute: :registration_number, placeholder: 'CNPJ' %>
+  <%= render 'shared/form/text_field', form: f, required: true, attribute: :contact_number, placeholder: 'Telefone para contato' %>
   <div>
     <%= f.label :email %>
     <%= f.email_field :email %>
   </div>
-  <div>
-    <%= f.label :address %>
-    <%= f.text_field :address %>
-  </div>
-  <div>
-    <%= f.label :district %>
-    <%= f.text_field :district %>
-  </div>
-  <div>
-    <%= f.label :state %>
-    <%= f.text_field :state %>
-  </div>
-  <div>
-    <%= f.label :city %>
-    <%= f.text_field :city %>
-  </div>
-  <div>
-    <%= f.label :zipcode %>
-    <%= f.text_field :zipcode %>
-  </div>
-  <div>
-    <%= f.label :payment_methods %>
-    <%= f.text_field :payment_methods %>
-  </div>
-  <div>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
+  <%= render 'shared/form/text_field', form: f, required: true, attribute: :address, placeholder: 'Endereço da empresa' %>
+  <%= render 'shared/form/text_field', form: f, required: true, attribute: :district, placeholder: 'Bairro' %>
+  <%= render 'shared/form/text_field', form: f, required: true, attribute: :city, placeholder: 'Cidade' %>
+  <%= render 'shared/form/text_field', form: f, required: true, attribute: :state, placeholder: 'Estado' %>
+  <%= render 'shared/form/text_field', form: f, required: true, attribute: :zipcode, placeholder: 'CEP' %>
+  <%= render 'shared/form/text_field', form: f, required: true, attribute: :payment_methods, placeholder: 'Métodos de pagamento' %>
+  <%= render 'shared/form/text_area', form: f, required: true, attribute: :description, placeholder: 'Descrição' %>
   <div>
     <%= f.label :buffet_logo %>
     <%= f.file_field :buffet_logo %>

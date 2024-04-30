@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      order:
+        one: 'Pedido'
+        other: 'Pedidos'
+    attributes:
+      order:
+        desired_date: 'Data desejada'
+        desired_address: 'Endereço do evento'
+        estimated_invitees: 'Estimativa de convidados'
+        status: 'Status do pedido'

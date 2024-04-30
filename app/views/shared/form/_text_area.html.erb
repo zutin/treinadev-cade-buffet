@@ -1,0 +1,4 @@
+<div class="flex-auto w-full mb-1 text-xs space-y-2">
+  <%= form.label attribute, :class => 'font-semibold text-gray-600 py-2' %> <% if required %><abbr class="text-red-500" title="Campo obrigatório">*</abbr><% end %>
+  <%= form.text_area attribute, :class => 'w-full min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg py-4 px-4', :placeholder => placeholder %>
+</div>

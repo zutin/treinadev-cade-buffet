@@ -3,33 +3,15 @@
 <%= form_with(model: @event_price, url: event_event_prices_path(@event)) do |f| %>
   <div id="prices">
     <h3>Preços convencionais</h3>
-    <div>
-      <%= f.label :base_price %>
-      <%= f.number_field :base_price %>
-    </div>
-    <div>
-      <%= f.label :additional_hour_price %>
-      <%= f.number_field :additional_hour_price %>
-    </div>
-    <div>
-      <%= f.label :additional_person_price %>
-      <%= f.number_field :additional_person_price %>
-    </div>
+    <%= render 'shared/form/number_field', form: f, required: true, attribute: :base_price, placeholder: 'Preço base' %>
+    <%= render 'shared/form/number_field', form: f, required: true, attribute: :additional_hour_price, placeholder: 'Hora adicional' %>
+    <%= render 'shared/form/number_field', form: f, required: true, attribute: :additional_person_price, placeholder: 'Pessoa adicional' %>
   </div>
   <div id="weekend_prices">
     <h3>Preços para finais de semana</h3>
-    <div>
-      <%= f.label :weekend_base_price %>
-      <%= f.number_field :weekend_base_price %>
-    </div>
-    <div>
-      <%= f.label :weekend_additional_hour_price %>
-      <%= f.number_field :weekend_additional_hour_price %>
-    </div>
-    <div>
-      <%= f.label :weekend_additional_person_price %>
-      <%= f.number_field :weekend_additional_person_price %>
-    </div>
+    <%= render 'shared/form/number_field', form: f, required: true, attribute: :weekend_base_price, placeholder: 'Preço base' %>
+    <%= render 'shared/form/number_field', form: f, required: true, attribute: :weekend_additional_hour_price, placeholder: 'Hora adicional' %>
+    <%= render 'shared/form/number_field', form: f, required: true, attribute: :weekend_additional_person_price, placeholder: 'Pessoa adicional' %>
   </div>
   <div>
     <%= f.submit 'Salvar' %>

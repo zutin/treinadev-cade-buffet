@@ -1,46 +1,16 @@
 <h1>Novo evento</h1>
 
 <%= form_with(model: @event) do |f| %>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-  <div>
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-  </div>
-  <div>
-    <%= f.label :minimum_participants %>
-    <%= f.number_field :minimum_participants %>
-  </div>
-  <div>
-    <%= f.label :maximum_participants %>
-    <%= f.number_field :maximum_participants %>
-  </div>
-  <div>
-    <%= f.label :default_duration %>
-    <%= f.number_field :default_duration %>
-  </div>
-  <div>
-    <%= f.label :menu %>
-    <%= f.text_area :menu %>
-  </div>
-  <div>
-    <%= f.label :alcoholic_drinks %>
-    <%= f.check_box :alcoholic_drinks %>
-  </div>
-  <div>
-    <%= f.label :decorations %>
-    <%= f.check_box :decorations %>
-  </div>
-  <div>
-    <%= f.label :valet_service %>
-    <%= f.check_box :valet_service %>
-  </div>
-  <div>
-    <%= f.label :can_change_location %>
-    <%= f.check_box :can_change_location %>
-  </div>
+  <%= render 'shared/form/text_field', form: f, required: true, attribute: :name, placeholder: 'Nome do evento' %>
+  <%= render 'shared/form/text_field', form: f, required: true, attribute: :description, placeholder: 'Descrição do evento' %>
+  <%= render 'shared/form/number_field', form: f, required: true, attribute: :minimum_participants, placeholder: 'Mínimo de participantes' %>
+  <%= render 'shared/form/number_field', form: f, required: true, attribute: :maximum_participants, placeholder: 'Máximo de participantes' %>
+  <%= render 'shared/form/number_field', form: f, required: true, attribute: :default_duration, placeholder: 'Duração padrão' %>
+  <%= render 'shared/form/text_area', form: f, required: true, attribute: :menu, placeholder: 'Cardápio' %>
+  <%= render 'shared/form/check_box', form: f, attribute: :alcoholic_drinks %>
+  <%= render 'shared/form/check_box', form: f, attribute: :decorations %>
+  <%= render 'shared/form/check_box', form: f, attribute: :valet_service %>
+  <%= render 'shared/form/check_box', form: f, attribute: :can_change_location %>
   <div>
     <%= f.label :event_logo %>
     <%= f.file_field :event_logo %>

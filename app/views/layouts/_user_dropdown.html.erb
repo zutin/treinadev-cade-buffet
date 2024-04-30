@@ -32,17 +32,18 @@
       <div class="py-1">
       <% if user_signed_in? %>
         <%= link_to 'Perfil', user_index_path, :class => "text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:underline hover:bg-gray-100 transition" %>
-        <% if current_user.owner? %>
-          <%= link_to 'Meu Buffet', user_buffets_path(current_user), :class => "text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:underline hover:bg-gray-100 transition" %>
-        <% else %>
-          <%= link_to 'Meu Buffet', root_path, :class => "text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 cursor-not-allowed opacity-50 transition" %>
-        <% end %>
+          <% if current_user.owner? %>
+            <%= link_to 'Meu Buffet', user_buffets_path(current_user), :class => "text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:underline hover:bg-gray-100 transition" %>
+            <%= link_to 'Pedidos', root_path, :class => "text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:underline hover:bg-gray-100 transition" %>
+          <% else %>
+            <%= link_to 'Meus Pedidos', root_path, :class => "text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:underline hover:bg-gray-100 transition" %>
+          <% end %>
       </div>
       <div class="py-1">
         <%= button_to 'Sair', destroy_user_session_path, :class => "text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:underline hover:bg-gray-100 transition", method: :delete %>
-        <% else %>
+      <% else %>
         <%= link_to 'Login', new_user_session_path, :class => "text-gray-700 flex justify-between w-full px-4 py-2 text-sm leading-5 text-left hover:underline hover:bg-gray-100 transition" %>
-        <% end %>
+      <% end %>
       </div>
 
     </div>
