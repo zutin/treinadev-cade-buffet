@@ -3,6 +3,8 @@ require 'rails_helper'
 describe 'User signs up' do
   it 'should be redirected to new buffet page after signing up' do
     #Arrange
+    cpf = CPF.generate
+
     #Act
     visit new_user_registration_path
 
@@ -11,7 +13,7 @@ describe 'User signs up' do
     fill_in 'Nome completo', with: 'Gian Lucca'
     fill_in 'Telefone para contato', with: '(12) 98765-4321'
     fill_in 'E-mail', with: 'gian@lucca.com'
-    fill_in 'CPF', with: '01234567890'
+    fill_in 'CPF', with: cpf
     fill_in 'Senha', with: 'password'
     fill_in 'Confirme sua senha', with: 'password'
     click_on 'Cadastrar'
@@ -23,6 +25,8 @@ describe 'User signs up' do
 
   it 'can sign up as a customer successfully' do
     #Arrange
+    cpf = CPF.generate
+
     #Act
     visit root_path
     within('div#user_dropdown') do
@@ -34,7 +38,7 @@ describe 'User signs up' do
     choose(option: 'customer')
     fill_in 'Usuário', with: 'lucca'
     fill_in 'Nome completo', with: 'Gian Lucca'
-    fill_in 'CPF', with: '01234567890'
+    fill_in 'CPF', with: cpf
     fill_in 'Telefone para contato', with: '(12) 98765-4321'
     fill_in 'E-mail', with: 'gian@lucca.com'
     fill_in 'Senha', with: 'password'
@@ -50,6 +54,8 @@ describe 'User signs up' do
 
   it 'can sign up as a buffet owner successfully' do
     #Arrange
+    cpf = CPF.generate
+
     #Act
     visit root_path
     within('div#user_dropdown') do
@@ -61,7 +67,7 @@ describe 'User signs up' do
     choose(option: 'owner')
     fill_in 'Usuário', with: 'lucca'
     fill_in 'Nome completo', with: 'Gian Lucca'
-    fill_in 'CPF', with: '01234567890'
+    fill_in 'CPF', with: cpf
     fill_in 'Telefone para contato', with: '(12) 98765-4321'
     fill_in 'E-mail', with: 'gian@lucca.com'
     fill_in 'Senha', with: 'password'
@@ -77,7 +83,7 @@ describe 'User signs up' do
 
   it 'shouldnt be able to sign up with an already in use parameter' do
     #Arrange
-    User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: "01234567890", contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
+    User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: CPF.generate, contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
 
     #Act
     visit new_user_registration_path

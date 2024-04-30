@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'User signs in using email and password' do
   it 'should see errors when login information is wrong' do
     #Arrange
-    User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: "01234567890", contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
+    User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: CPF.generate, contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
 
     #Act
     visit root_path
@@ -26,7 +26,7 @@ describe 'User signs in using email and password' do
 
   it 'should be redirected after signing in if there is no buffet registered' do
     #Arrange
-    user = User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: "01234567890", contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
+    user = User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: CPF.generate, contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
 
     #Act
     login_as(user)
@@ -39,7 +39,7 @@ describe 'User signs in using email and password' do
 
   it 'can sign in successfully' do
     #Arrange
-    User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: "01234567890", contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
+    User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: CPF.generate, contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password')
 
     #Act
     visit root_path
@@ -64,7 +64,7 @@ describe 'User signs in using email and password' do
 
   it 'can sign out successfully' do
     #Arrange
-    user = User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: "01234567890", contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
+    user = User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: CPF.generate, contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
 
     #Act
     login_as(user)

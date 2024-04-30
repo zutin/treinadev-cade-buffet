@@ -9,6 +9,7 @@
       </div>
       <div class="flex flex-col mt-4 bg-white">
         <%= render('shared/profile/information_box', title: 'E-mail', attribute: current_user.email) %>
+        <%= render('shared/profile/information_box', title: 'CPF', attribute: CPF.new(current_user.social_security_number).formatted) %>
         <%= render('shared/profile/information_box', title: 'Número de contato', attribute: current_user.contact_number) %>
       </div>
     </div>

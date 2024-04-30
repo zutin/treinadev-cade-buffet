@@ -13,7 +13,15 @@ class User < ApplicationRecord
   validates :full_name, length: { minimum: 3 }
   validates :contact_number, length: { in: 14..15 }
   validates :social_security_number, length: { is: 11 }
-  validates :social_security_number, social_security_number: {}
+  validate :is_social_security_number_valid?
 
   enum role: { customer: 0, owner: 10 }
+
+  private
+
+  def is_social_security_number_valid?
+    if !CPF.valid?(social_security_number, strict: true)
+      errors.add(:social_security_number, "não é válido.")
+    end
+  end
 end

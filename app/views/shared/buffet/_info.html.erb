@@ -6,6 +6,7 @@
   <div class="mt-4 bg-white">
     <%= render('shared/profile/information_box', title: 'Nome', attribute: buffet.trading_name) %>
     <%= render('shared/profile/information_box', title: 'Razão social', attribute: buffet.company_name) if user_signed_in? && buffet.user == current_user %>
+      <%= render('shared/profile/information_box', title: 'CNPJ', attribute: CNPJ.new(buffet.registration_number).formatted) %>
     <%= render('shared/profile/information_box', title: 'Número de contato', attribute: buffet.contact_number) %>
     <%= render('shared/profile/information_box', title: 'E-mail do buffet', attribute: buffet.email) %>
   </div>

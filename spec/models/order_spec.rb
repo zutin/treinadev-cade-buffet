@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe Order, type: :model do
   describe 'generates a random order code' do
     it 'when creating a new order' do
-      user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432',
+      user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432',
                             email: 'user@test.com', password: 'password', role: 'owner')
-      user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: "14355855007", contact_number: '(12) 99205-1023',
+      user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: CPF.generate, contact_number: '(12) 99205-1023',
                           email: 'user2@customer.com', password: 'password', role: 'customer')
-      buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
+      buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                           email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                           zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
       event = Event.create!(name: 'Drift na praça', description: 'Super evento', minimum_participants: 10, maximum_participants: 20,
@@ -22,11 +22,11 @@ RSpec.describe Order, type: :model do
     end
 
     it 'generates an unique code' do
-      user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432',
+      user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432',
                             email: 'user@test.com', password: 'password', role: 'owner')
-      user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: "14355855007", contact_number: '(12) 99205-1023',
+      user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: CPF.generate, contact_number: '(12) 99205-1023',
                           email: 'user2@customer.com', password: 'password', role: 'customer')
-      buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
+      buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                           email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                           zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
       event = Event.create!(name: 'Drift na praça', description: 'Super evento', minimum_participants: 10, maximum_participants: 20,
@@ -44,11 +44,11 @@ RSpec.describe Order, type: :model do
   describe '#valid?' do
     context 'presence' do
       it 'false when desired date is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432',
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432',
                             email: 'user@test.com', password: 'password', role: 'owner')
-        user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: "14355855007", contact_number: '(12) 99205-1023',
+        user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: CPF.generate, contact_number: '(12) 99205-1023',
                             email: 'user2@customer.com', password: 'password', role: 'customer')
-        buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
+        buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
         event = Event.create!(name: 'Drift na praça', description: 'Super evento', minimum_participants: 10, maximum_participants: 20,
@@ -62,11 +62,11 @@ RSpec.describe Order, type: :model do
       end
 
       it 'false when estimated invitees is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432',
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432',
                             email: 'user@test.com', password: 'password', role: 'owner')
-        user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: "14355855007", contact_number: '(12) 99205-1023',
+        user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: CPF.generate, contact_number: '(12) 99205-1023',
                             email: 'user2@customer.com', password: 'password', role: 'customer')
-        buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
+        buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
         event = Event.create!(name: 'Drift na praça', description: 'Super evento', minimum_participants: 10, maximum_participants: 20,
@@ -80,11 +80,11 @@ RSpec.describe Order, type: :model do
       end
 
       it 'false when desired address is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432',
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432',
                             email: 'user@test.com', password: 'password', role: 'owner')
-        user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: "14355855007", contact_number: '(12) 99205-1023',
+        user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: CPF.generate, contact_number: '(12) 99205-1023',
                             email: 'user2@customer.com', password: 'password', role: 'customer')
-        buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
+        buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
         event = Event.create!(name: 'Drift na praça', description: 'Super evento', minimum_participants: 10, maximum_participants: 20,
@@ -98,11 +98,11 @@ RSpec.describe Order, type: :model do
       end
 
       it 'false when buffet association is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432',
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432',
                             email: 'user@test.com', password: 'password', role: 'owner')
-        user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: "14355855007", contact_number: '(12) 99205-1023',
+        user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: CPF.generate, contact_number: '(12) 99205-1023',
                             email: 'user2@customer.com', password: 'password', role: 'customer')
-        buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
+        buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
         event = Event.create!(name: 'Drift na praça', description: 'Super evento', minimum_participants: 10, maximum_participants: 20,
@@ -116,11 +116,11 @@ RSpec.describe Order, type: :model do
       end
 
       it 'false when event association is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432',
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432',
                             email: 'user@test.com', password: 'password', role: 'owner')
-        user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: "14355855007", contact_number: '(12) 99205-1023',
+        user2 = User.create!(username: 'customer', full_name: 'Test 2', social_security_number: CPF.generate, contact_number: '(12) 99205-1023',
                             email: 'user2@customer.com', password: 'password', role: 'customer')
-        buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
+        buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
 
@@ -131,9 +131,9 @@ RSpec.describe Order, type: :model do
       end
 
       it 'false when user association is missing' do
-        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: "01234567890", contact_number: '(11) 99876-5432',
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432',
                             email: 'user@test.com', password: 'password', role: 'owner')
-        buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '83.757.309/0001-58', contact_number: '(11) 99876-5432',
+        buffet = Buffet.create!(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
         event = Event.create!(name: 'Drift na praça', description: 'Super evento', minimum_participants: 10, maximum_participants: 20,
