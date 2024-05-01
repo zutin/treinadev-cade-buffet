@@ -2,25 +2,13 @@ class Order < ApplicationRecord
   belongs_to :buffet
   belongs_to :event
   belongs_to :user
-
+  
   validates :desired_date, :desired_address, :estimated_invitees, :status, presence: true
   validate :desired_date_cannot_be_in_the_past
-
+  
   enum status: { awaiting_evaluation: 0, accepted_by_owner: 10, confirmed: 20, canceled: 30 }
-
+  
   before_create :generate_order_code
-
-  private
-
-  def generate_order_code
-    self.code = SecureRandom.alphanumeric(8).upcase
-  end
-
-  def desired_date_cannot_be_in_the_past
-    if desired_date.present? && desired_date < Date.today
-      errors.add(:desired_date, "não pode ser no passado.")
-    end
-  end
 
   def status_message
     case self.status
@@ -34,6 +22,18 @@ class Order < ApplicationRecord
       'Pedido cancelado'
     else
       'Status desconhecido'
+    end
+  end
+
+  private
+
+  def generate_order_code
+    self.code = SecureRandom.alphanumeric(8).upcase
+  end
+
+  def desired_date_cannot_be_in_the_past
+    if desired_date.present? && desired_date < Date.today
+      errors.add(:desired_date, "não pode ser no passado.")
     end
   end
 

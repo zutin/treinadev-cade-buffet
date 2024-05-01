@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :full_name, :contact_number, :social_security_number, :role])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :full_name, :contact_number, :social_security_number, :role, :profile_picture])
   end
 
   def redirect_user_if_no_buffet
-    redirect_to new_user_buffet_path(current_user), notice: 'Você precisa registrar um buffet antes de continuar.' if user_signed_in? && !current_user.buffet.present? && current_user.owner?
+    redirect_to new_buffet_path, notice: 'Você precisa registrar um buffet antes de continuar.' if user_signed_in? && !current_user.buffet.present? && current_user.owner?
   end
 
   def redirect_customer_from_buffet_management

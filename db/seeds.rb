@@ -8,25 +8,25 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-3.times do |i|
-  User.create!(username: "user_#{i}", full_name: "User #{i}", contact_number: "(11) 91111-000#{i}",
-              email: "user#{i}@test.com", social_security_number: CPF.generate, password: 'password', role: 'owner')
+  3.times do |i|
+    User.create!(username: "user_#{i}", full_name: "User #{i}", contact_number: "(11) 91111-000#{i}",
+                email: "user#{i}@test.com", social_security_number: CPF.generate, password: 'password', role: 'owner')
 
-  Buffet.create!(trading_name: "Buffet Nº #{i}", company_name: "Razão social do buffet #{i}",
-                          registration_number: CNPJ.generate, contact_number: "(11) 9#{i}000-0000",
-                          email: "buffet#{i}@contato.com", address: "Rua dos Bobos, 0#{i}", district: 'Bairro da Igrejinha',
-                          city: 'São Paulo', state: 'SP', zipcode: "0928008#{i}", description: "Buffet ##{i} para testes e amigos",
-                          payment_methods: 'Pix, Cartão de Débito', user: User.last)
+    Buffet.create!(trading_name: "Buffet Nº #{i}", company_name: "Razão social do buffet #{i}",
+                            registration_number: CNPJ.generate, contact_number: "(11) 9#{i}000-0000",
+                            email: "buffet#{i}@contato.com", address: "Rua dos Bobos, 0#{i}", district: 'Bairro da Igrejinha',
+                            city: 'São Paulo', state: 'SP', zipcode: "0928008#{i}", description: "Buffet ##{i} para testes e amigos",
+                            payment_methods: 'Pix, Cartão de Débito', user: User.last)
 
-  Buffet.last.buffet_logo.attach(File.open(Rails.root.join("db/images/buffet#{i}.jpg")))
+    Buffet.last.buffet_logo.attach(File.open(Rails.root.join("db/images/buffet#{i}.jpg")))
 
-  Event.create!(name: "Festa de 2#{i} anos", description: "Super evento do buffet #{i}",
-                minimum_participants: i+1 * 10, maximum_participants: i+1 * 20, default_duration: i+1 * 60,
-                menu: 'Arroz, feijão, batata', alcoholic_drinks: true, decorations: false,
-                can_change_location: false, valet_service: true, buffet: Buffet.last)
+    Event.create!(name: "Festa de 2#{i} anos", description: "Super evento do buffet #{i}",
+                  minimum_participants: (i + 1) * 10, maximum_participants: (i + 1) * 20, default_duration: (i + 1) * 60,
+                  menu: 'Arroz, feijão, batata', alcoholic_drinks: true, decorations: false,
+                  can_change_location: false, valet_service: true, buffet: Buffet.last)
 
-  Event.last.event_logo.attach(File.open(Rails.root.join("db/images/event#{i}.jpg")))
-end
+    Event.last.event_logo.attach(File.open(Rails.root.join("db/images/event#{i}.jpg")))
+  end
 
   User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 99205-1022',
               email: 'gian@lucca.com', social_security_number: CPF.generate, password: 'password', role: 'owner')

@@ -25,10 +25,10 @@
         <%= link_to 'Início', root_path %>
         <% if user_signed_in? %>
           <% if current_user.customer? %>
-            <%= link_to 'Meus Pedidos', root_path %>
+            <%= link_to 'Meus Pedidos', orders_path %>
           <% else %>
-            <%= link_to 'Meu Buffet', root_path %>
-            <%= link_to 'Pedidos', root_path %>
+            <%= link_to 'Meu Buffet', buffets_path %>
+            <%= link_to 'Pedidos', orders_path %>
           <% end %>
         <% end %>
         <%= link_to 'Sobre nós', root_path %>

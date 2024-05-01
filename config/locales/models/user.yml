@@ -11,3 +11,4 @@ pt-BR:
         password: 'Senha'
         role: 'Tipo de conta'
         social_security_number: 'CPF'
+        profile_picture: 'Foto de perfil'

@@ -1,0 +1,9 @@
+<h1>Vendo pedido código <%= @order.code %></h1>
+<p><%= @order.desired_date %></p>
+<p><%= @order.desired_address %></p>
+<p>Estimativa de convidados: <%= @order.estimated_invitees %></p>
+<p><%= @order.buffet.trading_name %></p>
+<p><%= @order.event.name %></p>
+<% if current_user.owner? %>
+<p>Pedido efetuado por: <%= @order.user.full_name %></p>
+<% end %>

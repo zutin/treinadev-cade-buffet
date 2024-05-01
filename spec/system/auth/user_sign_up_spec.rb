@@ -1,83 +1,87 @@
 require 'rails_helper'
 
 describe 'User signs up' do
-  it 'should be redirected to new buffet page after signing up' do
-    #Arrange
-    cpf = CPF.generate
+  context 'as a buffet owner' do
+    it 'should be redirected to new buffet page after signing up' do
+      #Arrange
+      cpf = CPF.generate
+  
+      #Act
+      visit new_user_registration_path
+  
+      choose(option: 'owner')
+      fill_in 'Usuário', with: 'lucca'
+      fill_in 'Nome completo', with: 'Gian Lucca'
+      fill_in 'Telefone para contato', with: '(12) 98765-4321'
+      fill_in 'E-mail', with: 'gian@lucca.com'
+      fill_in 'CPF', with: cpf
+      fill_in 'Senha', with: 'password'
+      fill_in 'Confirme sua senha', with: 'password'
+      click_on 'Cadastrar'
+  
+      #Assert
+      expect(page).to have_content('Você precisa registrar um buffet antes de continuar.')
+      expect(current_path).to eq new_buffet_path
+    end
 
-    #Act
-    visit new_user_registration_path
-
-    choose(option: 'owner')
-    fill_in 'Usuário', with: 'lucca'
-    fill_in 'Nome completo', with: 'Gian Lucca'
-    fill_in 'Telefone para contato', with: '(12) 98765-4321'
-    fill_in 'E-mail', with: 'gian@lucca.com'
-    fill_in 'CPF', with: cpf
-    fill_in 'Senha', with: 'password'
-    fill_in 'Confirme sua senha', with: 'password'
-    click_on 'Cadastrar'
-
-    #Assert
-    expect(page).to have_content('Você precisa registrar um buffet antes de continuar.')
-    expect(current_path).to eq new_user_buffet_path(User.first)
+    it 'can sign up as a buffet owner successfully' do
+      #Arrange
+      cpf = CPF.generate
+  
+      #Act
+      visit root_path
+      within('div#user_dropdown') do
+        click_on 'Conta'
+        click_on 'Login'
+      end
+      click_on 'Cadastrar-se'
+  
+      choose(option: 'owner')
+      fill_in 'Usuário', with: 'lucca'
+      fill_in 'Nome completo', with: 'Gian Lucca'
+      fill_in 'CPF', with: cpf
+      fill_in 'Telefone para contato', with: '(12) 98765-4321'
+      fill_in 'E-mail', with: 'gian@lucca.com'
+      fill_in 'Senha', with: 'password'
+      fill_in 'Confirme sua senha', with: 'password'
+      click_on 'Cadastrar'
+  
+      #Assert
+      expect(page).to have_content('Você precisa registrar um buffet antes de continuar.')
+      within('div#user_dropdown') do
+        expect(page).to have_content('Gian Lucca')
+      end
+    end
   end
 
-  it 'can sign up as a customer successfully' do
-    #Arrange
-    cpf = CPF.generate
-
-    #Act
-    visit root_path
-    within('div#user_dropdown') do
-      click_on 'Conta'
-      click_on 'Login'
-    end
-    click_on 'Cadastrar-se'
-
-    choose(option: 'customer')
-    fill_in 'Usuário', with: 'lucca'
-    fill_in 'Nome completo', with: 'Gian Lucca'
-    fill_in 'CPF', with: cpf
-    fill_in 'Telefone para contato', with: '(12) 98765-4321'
-    fill_in 'E-mail', with: 'gian@lucca.com'
-    fill_in 'Senha', with: 'password'
-    fill_in 'Confirme sua senha', with: 'password'
-    click_on 'Cadastrar'
-
-    #Assert
-    expect(page).to have_content('Você realizou seu registro com sucesso.')
-    within('div#user_dropdown') do
-      expect(page).to have_content('Gian Lucca')
-    end
-  end
-
-  it 'can sign up as a buffet owner successfully' do
-    #Arrange
-    cpf = CPF.generate
-
-    #Act
-    visit root_path
-    within('div#user_dropdown') do
-      click_on 'Conta'
-      click_on 'Login'
-    end
-    click_on 'Cadastrar-se'
-
-    choose(option: 'owner')
-    fill_in 'Usuário', with: 'lucca'
-    fill_in 'Nome completo', with: 'Gian Lucca'
-    fill_in 'CPF', with: cpf
-    fill_in 'Telefone para contato', with: '(12) 98765-4321'
-    fill_in 'E-mail', with: 'gian@lucca.com'
-    fill_in 'Senha', with: 'password'
-    fill_in 'Confirme sua senha', with: 'password'
-    click_on 'Cadastrar'
-
-    #Assert
-    expect(page).to have_content('Você precisa registrar um buffet antes de continuar.')
-    within('div#user_dropdown') do
-      expect(page).to have_content('Gian Lucca')
+  context 'as a customer' do
+    it 'can sign up as a customer successfully' do
+      #Arrange
+      cpf = CPF.generate
+  
+      #Act
+      visit root_path
+      within('div#user_dropdown') do
+        click_on 'Conta'
+        click_on 'Login'
+      end
+      click_on 'Cadastrar-se'
+  
+      choose(option: 'customer')
+      fill_in 'Usuário', with: 'lucca'
+      fill_in 'Nome completo', with: 'Gian Lucca'
+      fill_in 'CPF', with: cpf
+      fill_in 'Telefone para contato', with: '(12) 98765-4321'
+      fill_in 'E-mail', with: 'gian@lucca.com'
+      fill_in 'Senha', with: 'password'
+      fill_in 'Confirme sua senha', with: 'password'
+      click_on 'Cadastrar'
+  
+      #Assert
+      expect(page).to have_content('Você realizou seu registro com sucesso.')
+      within('div#user_dropdown') do
+        expect(page).to have_content('Gian Lucca')
+      end
     end
   end
 

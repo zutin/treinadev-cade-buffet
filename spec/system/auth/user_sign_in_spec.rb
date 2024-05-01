@@ -1,6 +1,21 @@
 require 'rails_helper'
 
 describe 'User signs in using email and password' do
+  context 'as a buffet owner' do
+    it 'should be redirected after signing in if there is no buffet registered' do
+      #Arrange
+      user = User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: CPF.generate, contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
+  
+      #Act
+      login_as(user)
+      visit root_path
+  
+      #Assert
+      expect(current_path).to eq new_buffet_path
+      expect(page).to have_content('Você precisa registrar um buffet antes de continuar.')
+    end  
+  end
+
   it 'should see errors when login information is wrong' do
     #Arrange
     User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: CPF.generate, contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
@@ -22,19 +37,6 @@ describe 'User signs in using email and password' do
     within('div#user_dropdown') do
       expect(page).not_to have_content('Gian Lucca')
     end
-  end
-
-  it 'should be redirected after signing in if there is no buffet registered' do
-    #Arrange
-    user = User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: CPF.generate, contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
-
-    #Act
-    login_as(user)
-    visit root_path
-
-    #Assert
-    expect(current_path).to eq new_user_buffet_path(user)
-    expect(page).to have_content('Você precisa registrar um buffet antes de continuar.')
   end
 
   it 'can sign in successfully' do

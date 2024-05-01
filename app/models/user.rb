@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_one :buffet
   has_many :orders
+  has_one_attached :profile_picture
 
   validates :full_name, :username, :contact_number, :role, :social_security_number, presence: true
   validates :username, :email, :social_security_number, uniqueness: true

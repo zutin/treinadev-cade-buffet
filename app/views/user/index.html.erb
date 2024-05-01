@@ -14,8 +14,12 @@
       </div>
     </div>
 
-    <p class="h-auto border border-gray-300"></p>
+    <% if current_user.owner? %>
 
-    <%= render('shared/buffet/info', buffet: current_user.buffet)%>
+      <p class="h-auto border border-gray-300"></p>
+
+      <%= render('shared/buffet/info', buffet: current_user.buffet)%>
+
+    <% end %>
   </div>
 </div>

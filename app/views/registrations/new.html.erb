@@ -48,6 +48,11 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <div>
+    <%= f.label :profile_picture %>
+    <%= f.file_field :profile_picture %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Cadastrar" %>
   </div>

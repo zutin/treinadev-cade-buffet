@@ -21,7 +21,7 @@ class BuffetsController < ApplicationController
     @buffet.user = current_user
 
     if @buffet.save!()
-      redirect_to user_buffets_path(current_user), notice: 'Buffet registrado com sucesso.'
+      redirect_to buffets_path, notice: 'Buffet registrado com sucesso.'
     else
       flash.now[:notice] = 'Erro ao cadastrar buffet.'
       render 'new'
@@ -37,7 +37,7 @@ class BuffetsController < ApplicationController
     @buffet.user = current_user
 
     if @buffet.update!(b_params)
-      redirect_to user_buffets_path(current_user), notice: 'Você editou seu buffet com sucesso.'
+      redirect_to buffets_path, notice: 'Você editou seu buffet com sucesso.'
     else
       flash.now[:notice] = 'Erro ao editar seu buffet.'
       render 'edit'
@@ -54,11 +54,11 @@ class BuffetsController < ApplicationController
   private
 
   def verify_user_creating
-    redirect_to user_buffets_path(current_user), notice: 'Você já tem um buffet registrado.' if current_user.buffet.present?
+    redirect_to buffets_path, notice: 'Você já tem um buffet registrado.' if current_user.buffet.present?
   end
 
   def verify_user_editing
-    redirect_to user_buffets_path(current_user), notice: 'Você não pode editar o buffet de outro usuário.' if current_user.id != @buffet.user_id
+    redirect_to buffets_path, notice: 'Você não pode editar o buffet de outro usuário.' if current_user.id != @buffet.user_id
   end
 
   def set_buffet
