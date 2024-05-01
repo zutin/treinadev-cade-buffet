@@ -114,7 +114,7 @@ describe 'User edits their buffet' do
       expect(page).to have_content('Você editou seu buffet com sucesso.')
       expect(page).to have_content('Fantasioso super nome')
       expect(page).to have_content('Socialmente temos razão')
-      expect(page).to have_content(new_cnpj)
+      expect(page).to have_content(CNPJ.new(new_cnpj).formatted)
       expect(page).not_to have_content('Fantasias & CIA')
       expect(page).not_to have_content(cnpj)
     end

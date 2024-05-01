@@ -2,9 +2,11 @@
 
 <% if @orders.present? %>
   <% @orders.each do |order| %>
-    <%= link_to(order.code, order_path(order)) %>
-    <%= order.desired_date %>
-    <%= order.status_message %>
+    <div id="order_<%=order.id%>">
+      <%= link_to(order.code, order_path(order)) %>
+      <%= order.desired_date %>
+      <%= order.status_message %>
+    </div>
   <% end %>
 <% else %>
 <p>Você não tem nenhum pedido registrado.</p>

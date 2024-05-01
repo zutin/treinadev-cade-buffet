@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :buffets, path: 'buffet', only: [:index, :new, :create, :edit, :update]
     resources :events, only: [:index, :new, :create] do
       resources :event_prices, path: 'prices', only: [:edit, :update, :new, :create]
+      resources :orders, path: 'order', only: [:new, :create]
     end
     resources :orders, only: [:index, :show]
   end

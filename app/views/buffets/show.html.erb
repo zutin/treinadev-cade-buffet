@@ -1,8 +1,12 @@
-<%= render('buffet') %>
+<div class="flex flex-row justify-between gap-8 mt-8">
+  <%= render 'buffet_about', buffet: @buffet %>
+  <%= render 'shared/buffet/info', buffet: @buffet %>
+</div>
 
 <% if @buffet.events.present? %>
   <% @buffet.events.each do |event| %>
     <%= render 'shared/event/info', event: event %>
+    <%= link_to 'Contratar evento', new_event_order_path(event) %>
   <% end %>
 <% else %>
   <p>Esse buffet não tem eventos registrados.</p>

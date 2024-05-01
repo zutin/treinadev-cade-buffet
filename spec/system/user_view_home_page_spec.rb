@@ -58,6 +58,6 @@ describe 'User views the home page' do
     #Assert
     expect(current_path).to eq buffet_path(Buffet.first)
     expect(page).to have_content('Fantasias & CIA')
-    expect(page).to have_content(Buffet.first.registration_number)
+    expect(page).to have_content(CNPJ.new(Buffet.first.registration_number).formatted)
   end
 end

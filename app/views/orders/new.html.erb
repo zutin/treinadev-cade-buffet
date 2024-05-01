@@ -1,0 +1,13 @@
+<h1>Fazendo novo pedido</h1>
+
+<%= form_with(model: @order, url: event_orders_path(@event)) do |f| %>
+  <div>
+    <%= f.label :desired_date %>
+    <%= f.date_field :desired_date %>
+  </div>
+  <%= render 'shared/form/text_field', form: f, required: true, attribute: :desired_address, placeholder: 'Endereço do evento' %>
+  <%= render 'shared/form/number_field', form: f, required: true, attribute: :estimated_invitees, placeholder: 'Estimativa de convidados' %>
+  <div>
+    <%= f.submit 'Salvar' %>
+  </div>
+<% end %>

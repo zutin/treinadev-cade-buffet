@@ -48,6 +48,7 @@ class BuffetsController < ApplicationController
 
   def search
     @search = params['query']
+    redirect_to root_path, notice: 'A busca é inválida ou está vazia' if @search.empty?
     @buffets = Buffet.where("trading_name LIKE ? OR city LIKE ? OR id IN (SELECT buffet_id FROM events WHERE name LIKE ?)", "%#{@search}%", "%#{@search}%", "%#{@search}%")
   end
 

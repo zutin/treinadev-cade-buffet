@@ -1,25 +1,12 @@
-<div class="p-8 gap-y-8 flex flex-col">
+<div class="flex flex-row justify-between mt-8">
+  <div class="mx-auto">
   <%= render('user-about', user: current_user) %>
-
-  <div class="flex flex-row">
-    <div id="user_info" class="w-1/3 mx-auto rounded-xl">
-      <div class="flex flex-row">
-        <p class="text-sm leading-normal font-bold uppercase mt-2">Informações da conta</p>
-        <%= link_to('Alterar', root_path, :class => "bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white w-auto hover:underline flex ml-auto") %>
-      </div>
-      <div class="flex flex-col mt-4 bg-white">
-        <%= render('shared/profile/information_box', title: 'E-mail', attribute: current_user.email) %>
-        <%= render('shared/profile/information_box', title: 'CPF', attribute: CPF.new(current_user.social_security_number).formatted) %>
-        <%= render('shared/profile/information_box', title: 'Número de contato', attribute: current_user.contact_number) %>
-      </div>
-    </div>
-
-    <% if current_user.owner? %>
-
-      <p class="h-auto border border-gray-300"></p>
-
+  </div>
+  <div class="flex flex-col w-1/2 items-center gap-y-8">
+    <%= render('user-info', user: current_user) %>
+    <% if current_user.buffet.present? %>
+      <p class="w-1/2 border border-gray-300"></p>
       <%= render('shared/buffet/info', buffet: current_user.buffet)%>
-
     <% end %>
   </div>
 </div>

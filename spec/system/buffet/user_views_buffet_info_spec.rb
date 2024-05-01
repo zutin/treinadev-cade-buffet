@@ -63,7 +63,7 @@ describe 'User views buffet information' do
       expect(page).to have_css('img[src*="buffet-rspec.jpg"]')
       expect(page).to have_content('Fantasias & CIA')
       expect(page).to have_content('Sem razão alguma')
-      expect(page).to have_content(Buffet.first.registration_number)
+      expect(page).to have_content(CNPJ.new(Buffet.first.registration_number).formatted)
     end
   end
 

@@ -9,7 +9,7 @@ pt-BR:
         trading_name: 'Nome fantasia'
         company_name: 'Razão social'
         registration_number: 'CNPJ'
-        contact_number: 'Telefone para contato'
+        contact_number: 'Número de contato'
         email: 'E-mail da empresa'
         address: 'Endereço da empresa'
         district: 'Bairro'

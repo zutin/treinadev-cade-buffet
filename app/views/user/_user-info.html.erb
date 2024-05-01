@@ -1,0 +1,11 @@
+<div id="user_info" class="flex flex-col w-1/2">
+  <div class="flex flex-row">
+    <p class="text-sm leading-normal font-bold uppercase mt-2">Informações da conta</p>
+    <%= link_to('Alterar', root_path, :class => "bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white w-auto hover:underline flex ml-auto") %>
+  </div>
+  <div class="flex flex-col mt-4 bg-white w-full">
+    <%= render('shared/profile/information_box', title: 'E-mail', attribute: user.email) %>
+    <%= render('shared/profile/information_box', title: 'CPF', attribute: CPF.new(user.social_security_number).formatted) %>
+    <%= render('shared/profile/information_box', title: 'Número de contato', attribute: user.contact_number) %>
+  </div>
+</div>

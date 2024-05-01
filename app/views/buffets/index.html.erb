@@ -1,13 +1,9 @@
-<h1>Meu Buffet</h1>
-
-<% if @buffet %>
-  <h3><%= link_to 'Editar informações', edit_buffet_path(current_user.buffet) %>
-  <h3><%= link_to 'Eventos do buffet', events_path %>
-  <h3><%= link_to 'Criar novo evento', new_event_path %>
-  <div>
-    <%= render 'buffet' %>
-<% else %>
-  <div>
-    <p>Você não tem um buffet cadastrado! Você será redirecionado em breve...</p>
-  </div>
-<% end %>
+<div class="flex flex-row justify-between gap-8 mt-8">
+  <%= render 'buffet_about', buffet: @buffet %>
+  <%= render 'shared/buffet/info', buffet: @buffet %>
+</div>
+<div class="flex flex-row gap-x-8 w-1/2 mt-2">
+  <%= link_to 'Editar informações', edit_buffet_path(current_user.buffet), :class => "bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white w-auto hover:underline flex mx-auto" %>
+  <%= link_to 'Eventos do buffet', events_path, :class => "bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white w-auto hover:underline flex mx-auto" %>
+  <%= link_to 'Criar novo evento', new_event_path, :class => "bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white w-auto hover:underline flex mx-auto" %>
+</div>
