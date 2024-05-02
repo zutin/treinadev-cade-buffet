@@ -154,5 +154,13 @@ describe 'User orders an event' do
       #Assert
       expect(page).to have_content('Você não tem acesso à essa página.')
     end
+
+    # it 'can approve an event order successfully' do
+
+    # end
+    
+    # it 'can refuse an event order successfully' do
+      
+    # end
   end
 end

@@ -25,6 +25,11 @@ class Order < ApplicationRecord
     end
   end
 
+  def has_multiple_orders_for_desired_date?
+    same_date_orders = Order.where(buffet_id: self.buffet, event_id: self.event, desired_date: self.desired_date).where.not(status: 'canceled')
+    same_date_orders.count > 1
+  end
+
   private
 
   def generate_order_code

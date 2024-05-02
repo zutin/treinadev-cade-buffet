@@ -6,7 +6,9 @@
 <% if @buffet.events.present? %>
   <% @buffet.events.each do |event| %>
     <%= render 'shared/event/info', event: event %>
-    <%= link_to 'Contratar evento', new_event_order_path(event) %>
+    <% if user_signed_in? && current_user.customer? %>
+      <%= link_to 'Contratar evento', new_event_order_path(event) %>
+    <% end %>
   <% end %>
 <% else %>
   <p>Esse buffet não tem eventos registrados.</p>

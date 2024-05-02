@@ -1,7 +1,6 @@
 class BuffetsController < ApplicationController
   skip_before_action :redirect_user_if_no_buffet, only: [:new, :create]
   skip_before_action :redirect_customer_from_buffet_management, only: [:show, :search]
-  before_action :set_buffet, only: [:show, :edit, :update]
   before_action :verify_user_editing, only: [:edit, :update]
   before_action :verify_user_creating, only: [:new, :create]
 
@@ -28,9 +27,13 @@ class BuffetsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @buffet = Buffet.find(params[:id])
+  end
 
   def update
+    @buffet = Buffet.find(params[:id])
+
     b_params = params.require(:buffet).permit(:trading_name, :company_name, :registration_number, :contact_number, :email,
                                               :address, :district, :city, :state, :zipcode, :description, :payment_methods, :buffet_logo)
 
@@ -44,7 +47,9 @@ class BuffetsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @buffet = Buffet.find(params[:id])
+  end
 
   def search
     @search = params['query']
@@ -59,10 +64,7 @@ class BuffetsController < ApplicationController
   end
 
   def verify_user_editing
-    redirect_to buffets_path, notice: 'Você não pode editar o buffet de outro usuário.' if current_user.id != @buffet.user_id
-  end
-
-  def set_buffet
-    @buffet = Buffet.find(params[:id])
+    buffet = Buffet.find(params[:id])
+    redirect_to buffets_path, notice: 'Você não pode editar o buffet de outro usuário.' if current_user.id != buffet.user_id
   end
 end

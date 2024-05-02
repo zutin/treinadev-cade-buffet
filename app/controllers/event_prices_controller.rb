@@ -1,12 +1,14 @@
 class EventPricesController < ApplicationController
-  before_action :set_event
-  before_action :verify_user
+  before_action :verify_user_editing
 
   def new
+    @event = Event.find(params[:event_id])
     @event_price = EventPrice.new
   end
 
   def create
+    @event = Event.find(params[:event_id])
+
     prices_params = params.require(:event_price).permit(:base_price, :additional_person_price, :additional_hour_price,
                                                         :weekend_base_price, :weekend_additional_person_price, :weekend_additional_hour_price)
 
@@ -23,11 +25,8 @@ class EventPricesController < ApplicationController
 
   private
 
-  def verify_user
-    redirect_to events_path, notice: 'Você não pode editar eventos de outro usuário' if @event.buffet != current_user.buffet
-  end
-
-  def set_event
-    @event = Event.find(params[:event_id])
+  def verify_user_editing
+    event = Event.find(params[:event_id])
+    redirect_to events_path, notice: 'Você não pode editar eventos de outro usuário' if event.buffet != current_user.buffet
   end
 end
