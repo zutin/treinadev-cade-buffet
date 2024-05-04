@@ -9,7 +9,9 @@ Rails.application.routes.draw do
       resources :event_prices, path: 'prices', only: [:edit, :update, :new, :create]
       resources :orders, path: 'order', only: [:new, :create]
     end
-    resources :orders, only: [:index, :show]
+    resources :orders, only: [:index, :show] do
+      resources :chat_messages, path: 'message', only: [:create]
+    end
   end
 
   resources :buffets, path: 'buffet', only: [:show] do

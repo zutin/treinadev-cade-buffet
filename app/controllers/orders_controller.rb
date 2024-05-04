@@ -10,6 +10,8 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    current_user.user_opens_chat_messages(@order)
+    @chat_messages = retrieve_order_chat_messages(@order)
   end
 
   def new
@@ -36,6 +38,10 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def retrieve_order_chat_messages(order)
+    ChatMessage.where(order_id: order).order(:created_at)
+  end
 
   def redirect_owner_from_ordering
     redirect_to root_path, notice: 'Você não tem acesso à essa página.' if user_signed_in? && current_user.owner?

@@ -26,6 +26,10 @@
                   can_change_location: false, valet_service: true, buffet: Buffet.last)
 
     Event.last.event_logo.attach(File.open(Rails.root.join("db/images/event#{i}.jpg")))
+
+    EventPrice.create!(base_price: (i + 1) * 100, additional_hour_price: (i + 1) * 100, additional_person_price: (i + 1) * 100,
+                      weekend_base_price: (i + 1) * 200, weekend_additional_hour_price: (i + 1) * 200, weekend_additional_person_price: (i + 1) * 200,
+                      event: Event.find(i+1))
   end
 
   User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 99205-1022',
@@ -36,3 +40,6 @@
                 email: "buffet@lucca.com", address: "Rua das Palmeiras, 42", district: 'Centro',
                 city: 'São Paulo', state: 'SP', zipcode: "11675012", description: "Nosso buffet com maior área KIDS da cidade! Realizamos sua festa com buffet completo!",
                 payment_methods: 'Pix, Cartão de Débito', user: User.last)
+
+  User.create!(username: 'caroline', full_name: 'Caroline', contact_number: '(12) 98683-1041',
+              email: 'caroline@lucca.com', social_security_number: CPF.generate, password: 'password', role: 'customer')

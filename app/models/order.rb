@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   belongs_to :buffet
   belongs_to :event
   belongs_to :user
+  has_many :chat_messages
   
   validates :desired_date, :desired_address, :estimated_invitees, :status, presence: true
   validate :desired_date_cannot_be_in_the_past

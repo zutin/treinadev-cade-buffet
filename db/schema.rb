@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_29_224725) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_03_010636) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -56,6 +56,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_224725) do
     t.integer "user_id", null: false
     t.string "payment_methods"
     t.index ["user_id"], name: "index_buffets_on_user_id"
+  end
+
+  create_table "chat_messages", force: :cascade do |t|
+    t.string "text"
+    t.integer "status", default: 0
+    t.integer "sender_id", null: false
+    t.integer "order_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_chat_messages_on_order_id"
+    t.index ["sender_id"], name: "index_chat_messages_on_sender_id"
   end
 
   create_table "event_prices", force: :cascade do |t|
@@ -125,6 +136,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_224725) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "buffets", "users"
+  add_foreign_key "chat_messages", "orders"
+  add_foreign_key "chat_messages", "users", column: "sender_id"
   add_foreign_key "event_prices", "events"
   add_foreign_key "events", "buffets"
   add_foreign_key "orders", "buffets"

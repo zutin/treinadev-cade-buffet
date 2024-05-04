@@ -4,9 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_one_attached :profile_picture
   has_one :buffet
   has_many :orders
-  has_one_attached :profile_picture
+  has_many :chat_messages
 
   validates :full_name, :username, :contact_number, :role, :social_security_number, presence: true
   validates :username, :email, :social_security_number, uniqueness: true
@@ -17,6 +18,13 @@ class User < ApplicationRecord
   validate :is_social_security_number_valid?
 
   enum role: { customer: 0, owner: 10 }
+
+  def user_opens_chat_messages(order)
+    unseen_messages = ChatMessage.where(order_id: order).where.not(sender_id: self.id).where(status: 'sent')
+    unseen_messages.each do |message|
+      message.seen!
+    end
+  end
 
   private
 

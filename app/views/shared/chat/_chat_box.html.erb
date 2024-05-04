@@ -1,0 +1,33 @@
+<div id="chat_box" class="bg-blue-500 w-full flex flex-col">
+  <% if messages.present? %>
+  <div id="chat_messages" class="flex flex-col">
+    <% messages.each do |message| %>
+      <% if message.sender == current_user %>
+        <div class="flex flex-col ml-auto bg-yellow-500">
+          <p><%= message.text %></p>
+          <p>@<%= message.sender.username %></p>
+          <p><%= l(message.created_at, :format => :long) %></p>
+          <p><%= message.has_seen_status %></p>
+        </div>
+      <% else %>
+        <div class="flex flex-col mr-auto bg-green-500">
+          <p><%= message.text %></p>
+          <p>@<%= message.sender.username %></p>
+          <p><%= l(message.created_at, :format => :long) %></p>
+          <p><%= message.has_seen_status %></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <% else %>
+    <p>Ainda não há mensagens. Inicie a conversa!</p>
+  <% end %>
+  <div class="flex flex-row">
+    <div class="mb-3 space-y-2 w-full text-xs">
+      <%= f.text_field :text, :class => 'appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4', :placeholder => 'Escreva uma mensagem' %>
+    </div>
+    <div>
+      <%= f.submit 'Enviar' %>
+    </div>
+  </div>
+</div>

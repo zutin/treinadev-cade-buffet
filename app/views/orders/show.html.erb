@@ -1,17 +1,27 @@
-<% if @order.has_multiple_orders_for_desired_date? %>
-<div id="alert-event-date">
-  <p>ATENÇÃO: Existem outros pedidos para esse mesmo dia!</p>
-</div>
-<% end %>
+<div class="flex flex-row">
+  <% if @order.has_multiple_orders_for_desired_date? && current_user.owner? %>
+  <div id="alert-event-date">
+    <p>ATENÇÃO: Existem outros pedidos para esse mesmo dia!</p>
+  </div>
+  <% end %>
 
-<h1>Vendo pedido código <%= @order.code %></h1>
-<p><%= @order.desired_date %></p>
-<p><%= @order.desired_address %></p>
-<p>Estimativa de convidados: <%= @order.estimated_invitees %></p>
-<p>Buffet: <%= @order.buffet.trading_name %></p>
-<p>Evento: <%= @order.event.name %></p>
-<% if current_user.owner? %>
-<p>Pedido efetuado por: <%= @order.user.full_name %></p>
-<%= link_to 'Aprovar pedido', root_path %>
-<%= link_to 'Recusar', root_path %>
-<% end %>
+  <div class="bg-red-500">
+    <h1>Vendo pedido código <%= @order.code %></h1>
+    <p><%= @order.desired_date %></p>
+    <p><%= @order.desired_address %></p>
+    <p>Estimativa de convidados: <%= @order.estimated_invitees %></p>
+    <p>Buffet: <%= @order.buffet.trading_name %></p>
+    <p>Evento: <%= @order.event.name %></p>
+    <% if current_user.owner? %>
+    <p>Pedido efetuado por: <%= @order.user.full_name %></p>
+    <%= link_to 'Aprovar pedido', root_path %>
+    <%= link_to 'Recusar', root_path %>
+    <% end %>
+  </div>
+
+  <div class="w-1/2">
+  <%= form_with(model: ChatMessage.new, url: order_chat_messages_path(@order), method: :post) do |f| %>
+    <%= render('shared/chat/chat_box', messages: @chat_messages, f: f) %>
+  <% end %>
+  </div>
+</div>
