@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      proposal:
+        one: 'Proposta'
+        other: 'Propostas'
+    attributes:
+      proposal:
+        total_value: 'Valor total'
+        expire_date: 'Data de validade'
+        description: 'Descrição'
+        discount: 'Desconto'
+        tax: 'Taxa extra'
+        payment_method: 'Método de pagamento'

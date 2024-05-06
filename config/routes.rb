@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     end
     resources :orders, only: [:index, :show] do
       resources :chat_messages, path: 'message', only: [:create]
+      resources :proposal, only: [:new, :create]
+      post 'refuse', to: 'proposal#refuse'
     end
   end
 

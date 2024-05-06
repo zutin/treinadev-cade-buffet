@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   belongs_to :buffet
   belongs_to :event
   belongs_to :user
+  has_one :proposal
   has_many :chat_messages
   
   validates :desired_date, :desired_address, :estimated_invitees, :status, presence: true
@@ -31,6 +32,21 @@ class Order < ApplicationRecord
     same_date_orders.count > 1
   end
 
+  def calculate_order_price_by_participants
+    participants = self.estimated_invitees
+    maximum_participants = self.event.maximum_participants
+
+    if self.desired_date.saturday? || self.desired_date.sunday?
+      price_per_additional_participant = self.event.event_price.weekend_additional_person_price
+      base_price = self.event.event_price.weekend_base_price
+    else
+      price_per_additional_participant = self.event.event_price.additional_person_price
+      base_price = self.event.event_price.base_price
+    end
+
+    participants > maximum_participants ? base_price + ((participants - maximum_participants) * price_per_additional_participant) : base_price
+  end
+
   private
 
   def generate_order_code
@@ -42,11 +58,4 @@ class Order < ApplicationRecord
       errors.add(:desired_date, "não pode ser no passado.")
     end
   end
-
-  # Tarefa - Dono de Buffet aprova pedido - Validando data de expiração da aprovação / confirmação do cliente
-  # def confirm_expire_date_cannot_be_in_the_past
-  #   if confirm_expire_date.present? && confirm_expire_date < Date.today
-  #     errors.add(:confirm_expire_date, "não pode ser no passado.")
-  #   end
-  # end
 end

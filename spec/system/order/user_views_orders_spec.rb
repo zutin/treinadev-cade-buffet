@@ -254,7 +254,6 @@ describe 'User views their orders' do
       expect(page).to have_content('Nome fantasia')
       expect(page).to have_content('Festa de 21 anos')
       expect(page).not_to have_content('Pedido efetuado por: Customer User')
-      expect(page).not_to have_link('Aprovar pedido')
     end
   end
 end

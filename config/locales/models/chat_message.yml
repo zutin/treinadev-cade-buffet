@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      chat_message:
+        one: 'Mensagem'
+        other: 'Mensagens'
+    attributes:
+      chat_message:
+        text: 'Texto'
+        status: 'Status da mensagem'

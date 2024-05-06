@@ -14,8 +14,21 @@
     <p>Evento: <%= @order.event.name %></p>
     <% if current_user.owner? %>
     <p>Pedido efetuado por: <%= @order.user.full_name %></p>
-    <%= link_to 'Aprovar pedido', root_path %>
-    <%= link_to 'Recusar', root_path %>
+    <%= link_to 'Aprovar pedido', new_order_proposal_path(@order) %>
+    <%= link_to 'Recusar', order_refuse_path(@order) %>
+    <% end %>
+
+    <% if @order.proposal %>
+      <h1>Proposta enviada pelo buffet</h1>
+      <p>Valor final proposto: <%= @order.proposal.total_value %></p>
+      <% if @order.proposal.discount %>
+      <p>Desconto oferecido: <%= @order.proposal.discount %></p>
+      <% end %>
+      <% if @order.proposal.tax %>
+      <p>Taxa extra: <%= @order.proposal.tax %></p>
+      <% end %>
+      <p>Descrição: <%= @order.proposal.description %></p>
+      <p>Forma de pagamento: <%= @order.proposal.payment_method %></p>
     <% end %>
   </div>
 

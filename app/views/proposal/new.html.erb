@@ -1,0 +1,16 @@
+<h1>Aceitando pedido <%= @order.code %></h1>
+
+<%= form_with(model: @proposal, url: order_proposal_index_path(@order)) do |f| %>
+<p>Valor total (baseado no número de convidados informado): <%= @order.calculate_order_price_by_participants %>
+<div>
+  <%= f.label :expire_date %>
+  <%= f.date_field :expire_date %>
+</div>
+<%= render 'shared/form/number_field', form: f, required: false, attribute: :discount, placeholder: 'Desconto' %>
+<%= render 'shared/form/number_field', form: f, required: false, attribute: :tax, placeholder: 'Taxa extra' %>
+<%= render 'shared/form/text_area', form: f, required: false, attribute: :description, placeholder: 'Descrição da oferta' %>
+<%= render 'shared/form/text_field', form: f, required: true, attribute: :payment_method, placeholder: 'Método de pagamento' %>
+<div>
+  <%= f.submit 'Salvar' %>
+</div>
+<% end %>
