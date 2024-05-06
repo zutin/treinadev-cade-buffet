@@ -1,5 +1,5 @@
 class ProposalController < ApplicationController
-  before_action :redirect_customer_from_managing_orders, only: [:new, :create]
+  skip_before_action :redirect_customer_from_buffet_management, only: [:accept]
   before_action :redirect_from_managing_other_user_orders
 
   def new
@@ -14,10 +14,21 @@ class ProposalController < ApplicationController
     @proposal.total_value = calculate_price_with_discount_and_taxes(@order, @proposal.discount, @proposal.tax)
 
     if @proposal.save!
+      @order.accepted_by_owner!
       redirect_to order_path(@order), notice: 'Você aprovou o pedido e enviou uma proposta para o usuário.'
     else
       flash.now[:notice] = 'Erro ao salvar proposta'
       render 'new'
+    end
+  end
+
+  def accept
+    if Date.today < @order.proposal.expire_date
+      @order.confirmed!
+      redirect_to order_path(@order), notice: 'Você aceitou a proposta com sucesso! Tenha um bom evento!'
+    else
+      @order.canceled!
+      redirect_to order_path(@order), notice: 'O tempo limite para aceitar essa proposta expirou.'
     end
   end
 
@@ -31,12 +42,9 @@ class ProposalController < ApplicationController
     ((price + tax) - discount)
   end
 
-  def redirect_customer_from_managing_orders
-    redirect_to root_path, notice: 'Você não tem acesso à essa página.' if user_signed_in? && current_user.customer?
-  end
-
   def redirect_from_managing_other_user_orders
     @order = Order.find(params[:order_id])
     redirect_to root_path, notice: 'Você não tem acesso à essa página.' if user_signed_in? && current_user.owner? && @order.buffet.user != current_user
+    redirect_to root_path, notice: 'Você não tem acesso à essa página.' if user_signed_in? && current_user.customer? && @order.user != current_user
   end
 end

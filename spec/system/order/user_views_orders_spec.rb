@@ -253,7 +253,6 @@ describe 'User views their orders' do
       expect(page).to have_content('Estimativa de convidados: 15')
       expect(page).to have_content('Nome fantasia')
       expect(page).to have_content('Festa de 21 anos')
-      expect(page).not_to have_content('Pedido efetuado por: Customer User')
     end
   end
 end

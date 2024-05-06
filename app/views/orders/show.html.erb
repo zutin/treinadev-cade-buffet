@@ -4,6 +4,11 @@
     <p>ATENÇÃO: Existem outros pedidos para esse mesmo dia!</p>
   </div>
   <% end %>
+  <% if @order.status == 'canceled' %>
+  <div id="alert-canceled-order">
+    <p>ATENÇÃO: Esse pedido foi cancelado!</p>
+  </div>
+  <% end %>
 
   <div class="bg-red-500">
     <h1>Vendo pedido código <%= @order.code %></h1>
@@ -12,10 +17,10 @@
     <p>Estimativa de convidados: <%= @order.estimated_invitees %></p>
     <p>Buffet: <%= @order.buffet.trading_name %></p>
     <p>Evento: <%= @order.event.name %></p>
-    <% if current_user.owner? %>
     <p>Pedido efetuado por: <%= @order.user.full_name %></p>
+    <% if current_user.owner? && @order.status == 'awaiting_evaluation' %>
     <%= link_to 'Aprovar pedido', new_order_proposal_path(@order) %>
-    <%= link_to 'Recusar', order_refuse_path(@order) %>
+    <%= button_to 'Recusar pedido', order_refuse_path(@order), method: :post %>
     <% end %>
 
     <% if @order.proposal %>
@@ -29,6 +34,11 @@
       <% end %>
       <p>Descrição: <%= @order.proposal.description %></p>
       <p>Forma de pagamento: <%= @order.proposal.payment_method %></p>
+      <p>Data limite para essa proposta: <%= l(@order.proposal.expire_date) %></p>
+      <% if current_user.customer? && @order.status == 'accepted_by_owner' %>
+        <%= button_to 'Aceitar proposta', order_accept_path(@order), method: :post %>
+        <%= button_to 'Recusar proposta', order_refuse_path(@order), method: :post %>
+      <% end %>
     <% end %>
   </div>
 
