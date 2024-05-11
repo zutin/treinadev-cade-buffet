@@ -21,4 +21,13 @@ Rails.application.routes.draw do
     get 'search', on: :collection
   end
   resources :events, path: 'event', only: [:show]
+
+  namespace :api do
+    namespace :v1 do
+      resources :buffets, only: [:index, :show] do
+        resources :events, only: [:index]
+      end
+      resources :events, only: [:show]
+    end
+  end
 end
