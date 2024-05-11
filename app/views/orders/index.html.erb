@@ -1,13 +1,32 @@
-<h1>Meus pedidos</h1>
-
+<h1 class="text-sm leading-normal font-bold uppercase mb-2 mt-8">Meus pedidos</h1>
 <% if @orders.present? %>
-  <% @orders.each do |order| %>
-    <div id="order_<%=order.id%>">
-      <%= link_to(order.code, order_path(order)) %>
-      <%= order.desired_date %>
-      <%= order.status_message %>
-    </div>
-  <% end %>
+  <div class="flex flex-wrap gap-x-16 gap-y-16">
+    <% @orders.each do |order| %>
+      <div id="order_<%=order.id%>" class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
+        <div class="px-6 py-4">
+          <%= link_to("Pedido ##{order.code}", order_path(order), :class => "font-bold text-xl mb-2 hover:underline") %>
+          <p class="text-gray-700 text-base"><%= order.status_message %></p>
+        </div>
+        <div class="px-6 pb-2">
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            Data do evento: <%= l(order.desired_date) %>
+          </span>
+          <% if order.accepted_by_owner? %>
+            <p class="w-full border border-gray-200 mb-2"></p>
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+              Valor proposto: R$ <%= order.proposal.total_value %>
+            </span>
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+              Método de pagamento: <%= order.proposal.payment_method %>
+            </span>
+            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+              Proposta expira em: <%= l(order.proposal.expire_date) %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% else %>
-<p>Você não tem nenhum pedido registrado.</p>
+  <p>Você não tem nenhum pedido registrado.</p>
 <% end %>

@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :username, :email, :social_security_number, uniqueness: true
   validates :username, length: { in: 5..20 }
   validates :full_name, length: { minimum: 3 }
-  validates :contact_number, length: { in: 14..15 }
+  validates :contact_number, length: { in: 10..15 }
   validates :social_security_number, length: { is: 11 }
   validate :is_social_security_number_valid?
 

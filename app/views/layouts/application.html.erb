@@ -15,24 +15,24 @@
         <%= link_to 'Cadê Buffet', root_path, :class => "text-xl font-semibold mt-2" %>
         <%= form_with(url: search_buffets_path, method: :get) do |f| %>
           <%= f.text_field :query, :class => "rounded-xl w-96", :placeholder => "Procurar um buffet" %>
-          <%= f.submit 'Buscar', :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline" %>
+          <%= f.submit 'Buscar', :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline active:bg-blue-500" %>
         <% end %>
         <div id="user" class="flex flex-row gap-4">
           <%= render 'layouts/user_dropdown' %>
         </div>
       </div>
       <div id="hotbar" class="flex w-full justify-center gap-12">
-        <%= link_to 'Início', root_path %>
+        <%= link_to 'Início', root_path, :class => "hover:underline active:text-blue-500" %>
         <% if user_signed_in? %>
           <% if current_user.customer? %>
-            <%= link_to 'Meus Pedidos', orders_path %>
+            <%= link_to 'Meus Pedidos', orders_path, :class => "hover:underline active:text-blue-500" %>
           <% else %>
-            <%= link_to 'Meu Buffet', buffets_path %>
-            <%= link_to 'Pedidos', orders_path %>
+            <%= link_to 'Meu Buffet', buffets_path, :class => "hover:underline active:text-blue-500" %>
+            <%= link_to 'Pedidos', orders_path, :class => "hover:underline active:text-blue-500" %>
           <% end %>
+        <% else %>
+        <%= link_to 'Login', new_user_session_path, :class => "hover:underline active:text-blue-500" %>
         <% end %>
-        <%= link_to 'Sobre nós', root_path %>
-        <%= link_to 'Contato', root_path %>
       </nav>
     </header>
     <main class="flex flex-col p-4 w-full">

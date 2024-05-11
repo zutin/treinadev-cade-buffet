@@ -14,14 +14,14 @@ describe 'User uses the order message chat to talk to another user' do
     EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
                         weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, 
                         event: event)
-    order = Order.create!(desired_date: '2024-05-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, event: event, buffet: buffet, user: customer)
+    order = Order.create!(desired_date: '2024-12-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, event: event, buffet: buffet, user: customer)
 
     #Act
     login_as(customer)
     visit order_path(order)
 
     #Assert
-    expect(page).to have_content('Ainda não há mensagens. Inicie a conversa!')
+    expect(page).to have_content('Você pode iniciar uma conversa enviando uma mensagem.')
     expect(page).to have_field(placeholder: 'Escreva uma mensagem')
   end
 
@@ -38,7 +38,7 @@ describe 'User uses the order message chat to talk to another user' do
     EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
                         weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, 
                         event: event)
-    order = Order.create!(desired_date: '2024-05-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, event: event, buffet: buffet, user: customer)
+    order = Order.create!(desired_date: '2024-12-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, event: event, buffet: buffet, user: customer)
 
     #Act
     login_as(customer)
@@ -48,7 +48,6 @@ describe 'User uses the order message chat to talk to another user' do
 
     #Assert
     expect(page).to have_content('Olá, tudo bem?')
-    expect(page).to have_content('@customer')
     expect(page).to have_content('Enviado')
   end
 
@@ -65,7 +64,7 @@ describe 'User uses the order message chat to talk to another user' do
     EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
                         weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, 
                         event: event)
-    order = Order.create!(desired_date: '2024-05-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, event: event, buffet: buffet, user: customer)
+    order = Order.create!(desired_date: '2024-12-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, event: event, buffet: buffet, user: customer)
     ChatMessage.create!(text: 'Olá cliente! Obrigado por nos contratar!', sender: owner, order: order)
 
     #Act
@@ -74,7 +73,6 @@ describe 'User uses the order message chat to talk to another user' do
 
     #Assert
     expect(page).to have_content('Olá cliente! Obrigado por nos contratar!')
-    expect(page).to have_content('@lucca')
     expect(page).to have_content('Visto')
   end
 
@@ -91,8 +89,8 @@ describe 'User uses the order message chat to talk to another user' do
     EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
                         weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, 
                         event: event)
-    first_order = Order.create!(desired_date: '2024-05-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, event: event, buffet: buffet, user: customer)
-    second_order = Order.create!(desired_date: '2024-05-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, event: event, buffet: buffet, user: customer)
+    first_order = Order.create!(desired_date: '2024-12-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, event: event, buffet: buffet, user: customer)
+    second_order = Order.create!(desired_date: '2024-12-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, event: event, buffet: buffet, user: customer)
     ChatMessage.create!(text: 'Olá cliente! Obrigado por nos contratar!', sender: owner, order: first_order, status: 'seen')
     ChatMessage.create!(text: 'Eu que agradeço!', sender: customer, order: first_order)
     ChatMessage.create!(text: 'Boa noite, estamos à disposição!', sender: owner, order: second_order)

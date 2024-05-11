@@ -1,33 +1,27 @@
-<div id="chat_box" class="bg-blue-500 w-full flex flex-col">
+<div id="chat_box" class="px-4 py-4 rounded-xl bg-gray-300 w-full flex flex-col">
   <% if messages.present? %>
-  <div id="chat_messages" class="flex flex-col">
+  <div id="chat_messages" class="flex flex-col overflow-y-scroll h-[500px] px-4">
     <% messages.each do |message| %>
       <% if message.sender == current_user %>
-        <div class="flex flex-col ml-auto bg-yellow-500">
-          <p><%= message.text %></p>
-          <p>@<%= message.sender.username %></p>
-          <p><%= l(message.created_at, :format => :long) %></p>
-          <p><%= message.has_seen_status %></p>
+        <div class="flex flex-col ml-auto bg-blue-100 p-4 mb-2 rounded-3xl max-w-80">
+          <p class="text-black break-words"><%= message.text %></p>
+          <p class="text-xs leading-normal text-gray-400"><%= l(message.created_at, :format => :long) %> - <%= message.has_seen_status %></p>
         </div>
       <% else %>
-        <div class="flex flex-col mr-auto bg-green-500">
-          <p><%= message.text %></p>
-          <p>@<%= message.sender.username %></p>
-          <p><%= l(message.created_at, :format => :long) %></p>
-          <p><%= message.has_seen_status %></p>
+        <div class="flex flex-col mr-auto bg-white p-4 mb-2 rounded-3xl max-w-80">
+          <p class="text-black break-words"><%= message.text %></p>
+          <p class="text-xs leading-normal text-gray-400"><%= l(message.created_at, :format => :long) %> - <%= message.has_seen_status %></p>
         </div>
       <% end %>
     <% end %>
   </div>
   <% else %>
-    <p>Ainda não há mensagens. Inicie a conversa!</p>
+    <p class="text-sm leading-normal font-bold mb-4">Você pode iniciar uma conversa enviando uma mensagem.</p>
   <% end %>
-  <div class="flex flex-row">
-    <div class="mb-3 space-y-2 w-full text-xs">
+  <div class="flex flex-row mt-3">
+    <div class="space-y-2 w-full text-xs">
       <%= f.text_field :text, :class => 'appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4', :placeholder => 'Escreva uma mensagem' %>
     </div>
-    <div>
-      <%= f.submit 'Enviar' %>
-    </div>
+    <%= render 'shared/form/submit', form: f, button_text: 'Enviar' %>
   </div>
 </div>

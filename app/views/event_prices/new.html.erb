@@ -1,19 +1,21 @@
-<h1>Adicionando preços ao evento <%= @event.name %></h1>
-
 <%= form_with(model: @event_price, url: event_event_prices_path(@event)) do |f| %>
-  <div id="prices">
-    <h3>Preços convencionais</h3>
-    <%= render 'shared/form/number_field', form: f, required: true, attribute: :base_price, placeholder: 'Preço base' %>
-    <%= render 'shared/form/number_field', form: f, required: true, attribute: :additional_hour_price, placeholder: 'Hora adicional' %>
-    <%= render 'shared/form/number_field', form: f, required: true, attribute: :additional_person_price, placeholder: 'Pessoa adicional' %>
-  </div>
-  <div id="weekend_prices">
-    <h3>Preços para finais de semana</h3>
-    <%= render 'shared/form/number_field', form: f, required: true, attribute: :weekend_base_price, placeholder: 'Preço base' %>
-    <%= render 'shared/form/number_field', form: f, required: true, attribute: :weekend_additional_hour_price, placeholder: 'Hora adicional' %>
-    <%= render 'shared/form/number_field', form: f, required: true, attribute: :weekend_additional_person_price, placeholder: 'Pessoa adicional' %>
-  </div>
-  <div>
-    <%= f.submit 'Salvar' %>
+  <div class="bg-white rounded-xl p-4 w-1/3 mx-auto mt-8">
+    <h1 class="text-sm leading-normal font-bold uppercase mb-2">Adicionando preços à <%= @event.name %></h1>
+    <div class="p-3">
+      <div id="prices">
+      <h3 class="text-sm leading-normal font-bold uppercase my-2">Preços convencionais</h3>
+      <%= render 'shared/form/number_field', form: f, required: true, attribute: :base_price, placeholder: 'Preço base' %>
+      <%= render 'shared/form/number_field', form: f, required: true, attribute: :additional_hour_price, placeholder: 'Hora adicional' %>
+      <%= render 'shared/form/number_field', form: f, required: true, attribute: :additional_person_price, placeholder: 'Pessoa adicional' %>
+    </div>
+    <span class="flex w-auto border my-6 border-gray-200"></span>
+    <div id="weekend_prices">
+      <h3 class="text-sm leading-normal font-bold uppercase my-2">Preços para finais de semana</h3>
+      <%= render 'shared/form/number_field', form: f, required: true, attribute: :weekend_base_price, placeholder: 'Preço base' %>
+      <%= render 'shared/form/number_field', form: f, required: true, attribute: :weekend_additional_hour_price, placeholder: 'Hora adicional' %>
+      <%= render 'shared/form/number_field', form: f, required: true, attribute: :weekend_additional_person_price, placeholder: 'Pessoa adicional' %>
+    </div>
+    <%= render 'shared/form/submit', form: f, button_text: 'Salvar' %>
+    </div>
   </div>
 <% end %>

@@ -1,8 +1,8 @@
 <div id="event_<%=event.id%>" class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
   <% if event.event_logo.attached? %>
-    <%= image_tag(event.event_logo) %>
+    <%= image_tag(event.event_logo, :class => 'h-[256px] w-[384px]') %>
   <% else %>
-    <%= image_tag("default-event.jpg") %>
+    <%= image_tag("default-event.jpg", :class => 'h-[256px] w-[384px]') %>
   <% end %>
   <div class="px-6 py-4">
     <div class="font-bold text-xl mb-2"><%= event.name %></div>
@@ -19,11 +19,11 @@
   </div>
 
   <div class="px-6 pb-4 justify-center flex">
-    <%= link_to('Ver mais', event_path(event), :class => "inline-block bg-blue-400 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2") %>
+    <%= link_to('Ver mais', event_path(event), :class => "inline-block bg-blue-400 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 hover:underline active:bg-blue-500") %>
     <% if event.event_price %>
-    <%= link_to('Editar preços', edit_event_event_price_path(event, event.event_price), :class => "inline-block bg-green-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2") %>
+    <%= link_to('Editar preços', edit_event_event_price_path(event, event.event_price), :class => "inline-block bg-green-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 hover:underline") %>
     <% else %>
-    <%= link_to('Adicionar preços', new_event_event_price_path(event), :class => "inline-block bg-green-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2") %>
+    <%= link_to('Adicionar preços', new_event_event_price_path(event), :class => "inline-block bg-green-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 hover:underline") %>
     <% end %>
   </div>
 </div>

@@ -1,11 +1,11 @@
 <div id="buffet_<%=buffet.id%>" class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
   <% if buffet.buffet_logo.attached? %>
-    <%= image_tag(buffet.buffet_logo) %>
+    <%= image_tag(buffet.buffet_logo, :class => 'h-[256px] w-[384px]') %>
   <% else %>
-    <%= image_tag("default-buffet.jpg") %>
+    <%= image_tag("default-buffet.jpg", :class => 'h-[256px] w-[384px]') %>
   <% end %>
   <div class="px-6 py-4">
-    <%= link_to("#{buffet.trading_name}", buffet_path(buffet), :class => "font-bold text-xl mb-2") %>
+    <%= link_to("#{buffet.trading_name}", buffet_path(buffet), :class => "font-bold text-xl mb-2 hover:underline") %>
     <p class="text-gray-700 text-base"><%= buffet.description.truncate(150) %></p>
   </div>
   <div class="px-6 pb-2">

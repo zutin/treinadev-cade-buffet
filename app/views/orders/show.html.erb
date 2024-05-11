@@ -1,50 +1,79 @@
-<div class="flex flex-row">
+<div class="flex flex-col mt-8">
   <% if @order.has_multiple_orders_for_desired_date? && current_user.owner? %>
-  <div id="alert-event-date">
-    <p>ATENÇÃO: Existem outros pedidos para esse mesmo dia!</p>
-  </div>
+    <div id="alert-event-date" class="w-full text-center px-8 mb-8">
+      <div class="p-2 bg-red-500 items-center text-white leading-none rounded-full inline-flex">
+        <span class="px-1 py-1"><svg class="fill-current h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></span>
+        <span class="font-semibold mr-2 text-left flex-auto">ATENÇÃO: Existem outros pedidos para esse mesmo dia!</span>
+      </div>
+    </div>
   <% end %>
   <% if @order.status == 'canceled' %>
-  <div id="alert-canceled-order">
-    <p>ATENÇÃO: Esse pedido foi cancelado!</p>
-  </div>
+    <div id="alert-event-date" class="w-full text-center px-8 mb-8">
+      <div class="p-2 bg-red-500 items-center text-white leading-none rounded-full inline-flex">
+        <span class="px-1 py-1"><svg class="fill-current h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></span>
+        <span class="font-semibold mr-2 text-left flex-auto">ATENÇÃO: Esse pedido foi cancelado!</span>
+      </div>
+    </div>
+  <% end %>
+  <% if @order.status == 'confirmed' %>
+    <div id="alert-event-date" class="w-full text-center px-8 mb-8">
+      <div class="p-2 bg-green-500 items-center text-white leading-none rounded-full inline-flex">
+        <span class="px-1 py-1"><svg class="fill-current h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></span>
+        <span class="font-semibold mr-2 text-left flex-auto">Esse evento foi confirmado por ambas as partes e será realizado no dia <%= l(@order.desired_date) %></span>
+      </div>
+    </div>
   <% end %>
 
-  <div class="bg-red-500">
-    <h1>Vendo pedido código <%= @order.code %></h1>
-    <p><%= @order.desired_date %></p>
-    <p><%= @order.desired_address %></p>
-    <p>Estimativa de convidados: <%= @order.estimated_invitees %></p>
-    <p>Buffet: <%= @order.buffet.trading_name %></p>
-    <p>Evento: <%= @order.event.name %></p>
-    <p>Pedido efetuado por: <%= @order.user.full_name %></p>
-    <% if current_user.owner? && @order.status == 'awaiting_evaluation' %>
-    <%= link_to 'Aprovar pedido', new_order_proposal_path(@order) %>
-    <%= button_to 'Recusar pedido', order_refuse_path(@order), method: :post %>
-    <% end %>
-
-    <% if @order.proposal %>
-      <h1>Proposta enviada pelo buffet</h1>
-      <p>Valor final proposto: <%= @order.proposal.total_value %></p>
-      <% if @order.proposal.discount %>
-      <p>Desconto oferecido: <%= @order.proposal.discount %></p>
+  <div class="flex flex-row justify-between gap-x-8">
+    <div class="flex flex-col w-1/2">
+      <div id="order_<%=@order.id%>_info" class="flex flex-col mt-2">
+        <p class="text-sm leading-normal font-bold uppercase">Informações do pedido #<%= @order.code %></p>
+        <div class="flex flex-col mt-2 bg-white w-full">
+          <%= render('shared/profile/information_box', title: 'Data do evento', attribute: "#{l(@order.desired_date)}") %>
+          <%= render('shared/profile/information_box', title: 'Endereço', attribute: @order.desired_address) %>
+          <%= render('shared/profile/information_box', title: 'Estimativa de convidados', attribute: "#{@order.estimated_invitees} pessoas") %>
+          <%= render('shared/profile/information_box', title: 'Buffet organizador', attribute: @order.buffet.trading_name) %>
+          <%= render('shared/profile/information_box', title: 'Evento', attribute: @order.event.name) %>
+          <%= render('shared/profile/information_box', title: 'Pedido efetuado por', attribute: @order.user.full_name) %>
+        </div>
+      </div>
+      <% if current_user.owner? && @order.status == 'awaiting_evaluation' %>
+        <div class="flex flex-row gap-x-8 mx-auto mt-2">
+          <%= link_to 'Aprovar pedido', new_order_proposal_path(@order), :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline active:bg-blue-500" %>
+          <%= button_to 'Recusar pedido', order_refuse_path(@order), method: :post, :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline active:bg-blue-500" %>
+        </div>
       <% end %>
-      <% if @order.proposal.tax %>
-      <p>Taxa extra: <%= @order.proposal.tax %></p>
+      <% if @order.proposal %>
+        <div id="order_<%=@order.id%>_proposal" class="flex flex-col mt-4">
+          <p class="text-sm leading-normal font-bold uppercase">Proposta do buffet</p>
+          <div class="flex flex-col mt-2 bg-white w-full">
+            <%= render('shared/profile/information_box', title: 'Valor final proposto', attribute: "R$ #{@order.proposal.total_value}") %>
+            <% if @order.proposal.discount %>
+              <%= render('shared/profile/information_box', title: 'Desconto oferecido', attribute: "R$ #{@order.proposal.discount}") %>
+            <% end %>
+            <% if @order.proposal.tax %>
+              <%= render('shared/profile/information_box', title: 'Taxa extra', attribute: "R$ #{@order.proposal.tax}") %>
+            <% end %>
+            <%= render('shared/profile/information_box', title: 'Descrição', attribute: @order.proposal.description) %>
+            <%= render('shared/profile/information_box', title: 'Forma de pagamento', attribute: @order.proposal.payment_method) %>
+            <%= render('shared/profile/information_box', title: 'Data de expiração da proposta', attribute: "#{l(@order.proposal.expire_date)}") %>
+          </div>
+        </div>
+        <% if current_user.customer? && @order.status == 'accepted_by_owner' %>
+          <div class="flex flex-row gap-x-8 mx-auto mt-2">
+            <%= button_to 'Aceitar proposta', order_accept_path(@order), method: :post, :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline" %>
+            <%= button_to 'Recusar proposta', order_refuse_path(@order), method: :post, :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline" %>
+          </div>
+        <% end %>
+      <% else %>
+      <p class="text-sm leading-normal font-bold mt-4">Ainda não há uma proposta para esse pedido.</p>
       <% end %>
-      <p>Descrição: <%= @order.proposal.description %></p>
-      <p>Forma de pagamento: <%= @order.proposal.payment_method %></p>
-      <p>Data limite para essa proposta: <%= l(@order.proposal.expire_date) %></p>
-      <% if current_user.customer? && @order.status == 'accepted_by_owner' %>
-        <%= button_to 'Aceitar proposta', order_accept_path(@order), method: :post %>
-        <%= button_to 'Recusar proposta', order_refuse_path(@order), method: :post %>
+    </div>
+    <div id="order_chat_box" class="w-1/2">
+      <p class="text-sm leading-normal font-bold uppercase flex justify-end my-2">Chat do pedido</p>
+      <%= form_with(model: ChatMessage.new, url: order_chat_messages_path(@order), method: :post) do |f| %>
+        <%= render('shared/chat/chat_box', messages: @chat_messages, f: f) %>
       <% end %>
-    <% end %>
-  </div>
-
-  <div class="w-1/2">
-  <%= form_with(model: ChatMessage.new, url: order_chat_messages_path(@order), method: :post) do |f| %>
-    <%= render('shared/chat/chat_box', messages: @chat_messages, f: f) %>
-  <% end %>
+    </div>
   </div>
 </div>

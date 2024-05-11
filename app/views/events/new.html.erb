@@ -1,21 +1,24 @@
-<h1>Novo evento</h1>
-
 <%= form_with(model: @event) do |f| %>
-  <%= render 'shared/form/text_field', form: f, required: true, attribute: :name, placeholder: 'Nome do evento' %>
-  <%= render 'shared/form/text_field', form: f, required: true, attribute: :description, placeholder: 'Descrição do evento' %>
-  <%= render 'shared/form/number_field', form: f, required: true, attribute: :minimum_participants, placeholder: 'Mínimo de participantes' %>
-  <%= render 'shared/form/number_field', form: f, required: true, attribute: :maximum_participants, placeholder: 'Máximo de participantes' %>
-  <%= render 'shared/form/number_field', form: f, required: true, attribute: :default_duration, placeholder: 'Duração padrão' %>
-  <%= render 'shared/form/text_area', form: f, required: true, attribute: :menu, placeholder: 'Cardápio' %>
-  <%= render 'shared/form/check_box', form: f, attribute: :alcoholic_drinks %>
-  <%= render 'shared/form/check_box', form: f, attribute: :decorations %>
-  <%= render 'shared/form/check_box', form: f, attribute: :valet_service %>
-  <%= render 'shared/form/check_box', form: f, attribute: :can_change_location %>
-  <div>
-    <%= f.label :event_logo %>
-    <%= f.file_field :event_logo %>
-  </div>
-  <div>
-    <%= f.submit 'Salvar' %>
+  <div class="bg-white rounded-xl p-4 w-1/3 mx-auto mt-8">
+    <h1 class="text-sm leading-normal font-bold uppercase mb-2">Criando novo evento</h1>
+    <div class="p-3 flex flex-col gap-y-1">
+      <%= render 'shared/form/text_field', form: f, required: true, attribute: :name, placeholder: 'Nome do evento' %>
+      <%= render 'shared/form/text_field', form: f, required: true, attribute: :description, placeholder: 'Descrição do evento' %>
+      <%= render 'shared/form/number_field', form: f, required: true, attribute: :minimum_participants, placeholder: 'Mínimo de participantes' %>
+      <%= render 'shared/form/number_field', form: f, required: true, attribute: :maximum_participants, placeholder: 'Máximo de participantes' %>
+      <%= render 'shared/form/number_field', form: f, required: true, attribute: :default_duration, placeholder: 'Duração padrão' %>
+      <%= render 'shared/form/text_area', form: f, required: true, attribute: :menu, placeholder: 'Cardápio' %>
+      <div class="flex flex-wrap mx-8 gap-x-4">
+        <%= render 'shared/form/check_box', form: f, attribute: :alcoholic_drinks %>
+        <%= render 'shared/form/check_box', form: f, attribute: :decorations %>
+        <%= render 'shared/form/check_box', form: f, attribute: :valet_service %>
+        <%= render 'shared/form/check_box', form: f, attribute: :can_change_location %>
+      </div>
+      <div>
+        <%= f.label :event_logo %>
+        <%= f.file_field :event_logo %>
+      </div>
+      <%= render 'shared/form/submit', form: f, button_text: 'Salvar' %>
+    </div>
   </div>
 <% end %>

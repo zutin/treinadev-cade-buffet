@@ -1,56 +1,13 @@
-<div id="event_<%=event.id%>">
-<% if event.event_logo.attached? %>
-  <%= image_tag(event.event_logo) %>
-<% else %>
-  <%= image_tag("default-event.jpg") %>
-<% end %>
-
-<h1><%= event.name %></h1>
-
-<% if !event.event_price.present? %>
-<p>ATENÇÃO - Esse evento não possui preços definidos, portanto não pode ser contratado!</p>
-<% end %>
-
-<p>Descrição do evento: <%= event.description %></p>
-<p>Mínimo de participantes: <%= event.minimum_participants %></p>
-<p>Máximo de participantes: <%= event.maximum_participants %></p>
-<p>Duração padrão: <%= event.default_duration %> minutos</p>
-<p>Cardápio: <%= event.menu %></p>
-
-<div id="event_options">
-  <% if event.alcoholic_drinks %>
-    <p>Esse evento possui bebidas alcoólicas.</p>
-  <% else %>
-    <p>Esse evento não possui bebidas alcoólicas.</p>
-  <% end %>
-
-  <% if event.decorations %>
-    <p>Esse evento inclui decorações artísticas.</p>
-  <% else %>
-    <p>Esse evento não inclui decorações artísticas.</p>
-  <% end %>
-
-  <% if event.valet_service %>
-    <p>Esse evento inclui serviço de estacionamento.</p>
-  <% else %>
-    <p>Esse evento não inclui serviço de estacionamento.</p>
-  <% end %>
-
-  <% if event.can_change_location %>
-    <p>Esse evento pode ser realizado em outra localização.</p>
-  <% else %>
-    <p>Esse evento só pode ser realizado nos espaços do buffet.</p>
-  <% end %>
+<div id="event_<%=event.id%>_info" class="flex flex-col w-full">
+  <p class="text-sm leading-normal font-bold uppercase mt-2">Informações do evento</p>
+  <div class="flex flex-col mt-4 bg-white w-full">
+    <%= render('shared/profile/information_box', title: 'Mínimo de participantes', attribute: "#{event.minimum_participants} pessoas") %>
+    <%= render('shared/profile/information_box', title: 'Máximo de participantes', attribute: "#{event.maximum_participants} pessoas") %>
+    <%= render('shared/profile/information_box', title: 'Duração padrão', attribute: "#{event.default_duration} minutos") %>
+    <%= render('shared/profile/information_box', title: 'Cardápio', attribute: event.menu) %>
+    <%= render('shared/profile/information_box', title: 'Serve bebidas alcoólicas?', attribute: event.alcoholic_drinks ? 'Sim' : 'Não') %>
+    <%= render('shared/profile/information_box', title: 'Inclui decorações artísticas?', attribute: event.decorations ? 'Sim' : 'Não') %>
+    <%= render('shared/profile/information_box', title: 'Inclui serviço de estacionamento?', attribute: event.valet_service ? 'Sim' : 'Não') %>
+    <%= render('shared/profile/information_box', title: 'É possível mudar local do evento?', attribute: event.can_change_location ? 'Sim' : 'Não') %>
+  </div>
 </div>
-<div id="event_prices">
-  <% if event.event_price.present? %>
-  <p>Preço base: <%= event.event_price.base_price %></p>
-  <p>Preço de hora adicional: <%= event.event_price.additional_hour_price %></p>
-  <p>Preço de pessoa adicional: <%= event.event_price.additional_person_price %></p>
-  <p>Preço fim de semana: <%= event.event_price.weekend_base_price %></p>
-  <p>Preço de pessoa adicional: <%= event.event_price.weekend_additional_hour_price %></p>
-  <p>Preço fim de semana: <%= event.event_price.weekend_additional_person_price %></p>
-  <% else %>
-  <p>O dono desse buffet não definiu preços.</p>
-  <% end %>
-</div> 

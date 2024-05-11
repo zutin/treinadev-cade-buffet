@@ -6,82 +6,100 @@ RSpec.describe Buffet, type: :model do
       it 'false when trading name is missing' do
         user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
 
-        buffet = Buffet.new(trading_name: '', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
+        buffet = Buffet.new(company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:trading_name]).to include("não pode ficar em branco")
       end
 
       it 'false when company name is missing' do
         user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
 
-        buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: '', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
+        buffet = Buffet.new(trading_name: 'Nome fantasia', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:company_name]).to include("não pode ficar em branco")
       end
 
       it 'false when registration number is missing' do
         user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
 
-        buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: '', contact_number: '(11) 99876-5432',
+        buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:registration_number]).to include("não pode ficar em branco")
       end
 
       it 'false when contact number is missing' do
         user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
 
-        buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '',
+        buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate,
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:contact_number]).to include("não pode ficar em branco")
       end
 
       it 'false when email is missing' do
         user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
 
         buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
-                            email: '', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
+                            address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:email]).to include("não pode ficar em branco")
       end
 
       it 'false when address is missing' do
         user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
 
         buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
-                            email: 'buffet@contato.com', address: '', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
+                            email: 'buffet@contato.com', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:address]).to include("não pode ficar em branco")
       end
 
       it 'false when district is missing' do
         user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
 
         buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
-                            email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: '', city: 'São Paulo', state: 'SP',
+                            email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:district]).to include("não pode ficar em branco")
       end
 
       it 'false when city is missing' do
         user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
 
         buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
-                            email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: '', state: 'SP',
+                            email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:city]).to include("não pode ficar em branco")
       end
 
       it 'false when state is missing' do
         user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
 
         buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
-                            email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: '',
+                            email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:state]).to include("não pode ficar em branco")
       end
 
       it 'false when zip code is missing' do
@@ -89,8 +107,10 @@ RSpec.describe Buffet, type: :model do
 
         buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
-                            zipcode: '', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+                            description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:zipcode]).to include("não pode ficar em branco")
       end
 
       it 'false when description is missing' do
@@ -98,8 +118,10 @@ RSpec.describe Buffet, type: :model do
 
         buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
-                            zipcode: '09280080', description: '', payment_methods: 'Pix', user: user)
+                            zipcode: '09280080', payment_methods: 'Pix', user: user)
+
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:description]).to include("não pode ficar em branco")
       end
 
       it 'false when payment method is missing' do
@@ -107,15 +129,19 @@ RSpec.describe Buffet, type: :model do
 
         buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
-                            zipcode: '09280080', description: 'Buffet para testes', payment_methods: '', user: user)
+                            zipcode: '09280080', description: 'Buffet para testes', user: user)
+
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:payment_methods]).to include("não pode ficar em branco")
       end
 
       it 'false when user association is missing' do
         buffet = Buffet.new(trading_name: 'Nome fantasia', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix')
+
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:user]).to include("é obrigatório(a)")
       end
     end
 
@@ -132,6 +158,75 @@ RSpec.describe Buffet, type: :model do
                             zipcode: '11622091', description: 'Buffet pra festas e atrações', payment_methods: 'Pix', user: user)
 
         expect(buffet.valid?).to eq false
+        expect(buffet.errors[:registration_number]).to include("já está em uso")
+      end
+    end
+
+    context 'length' do
+      it 'false when trading name is shorter than 3 characters' do
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
+
+        buffet = Buffet.new(trading_name: 'No', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
+                            email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
+                            zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
+        expect(buffet.valid?).to eq false
+        expect(buffet.errors[:trading_name]).to include("é muito curto (mínimo: 3 caracteres)")
+      end
+
+      it 'false when trading name is longer than 30 characters' do
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
+
+        buffet = Buffet.new(trading_name: 'NomeeNomeeNomeeNomeeNomeeNomeee', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
+                            email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
+                            zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
+        expect(buffet.valid?).to eq false
+        expect(buffet.errors[:trading_name]).to include("é muito longo (máximo: 30 caracteres)")
+      end
+
+      it 'false when company name is shorter than 3 characters' do
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
+
+        buffet = Buffet.new(trading_name: 'Nome teste', company_name: 'Ra', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
+                            email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
+                            zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
+        expect(buffet.valid?).to eq false
+        expect(buffet.errors[:company_name]).to include("é muito curto (mínimo: 3 caracteres)")
+      end
+
+      it 'false when company name is longer than 30 characters' do
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
+
+        buffet = Buffet.new(trading_name: 'Nome teste', company_name: 'Razão socialRazão socialRazão socialRazão socialRazão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
+                            email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
+                            zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
+        expect(buffet.valid?).to eq false
+        expect(buffet.errors[:company_name]).to include("é muito longo (máximo: 30 caracteres)")
+      end
+
+      it 'false when contact number is shorter than 10 characters' do
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
+
+        buffet = Buffet.new(trading_name: 'Nome teste', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '118765432',
+                            email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
+                            zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
+        expect(buffet.valid?).to eq false
+        expect(buffet.errors[:contact_number]).to include("é muito curto (mínimo: 10 caracteres)")
+      end
+
+      it 'false when contact number is longer than 15 characters' do
+        user = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')
+
+        buffet = Buffet.new(trading_name: 'Nome teste', company_name: 'Razão social', registration_number: CNPJ.generate, contact_number: '(11) 99876-54321',
+                            email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
+                            zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
+
+        expect(buffet.valid?).to eq false
+        expect(buffet.errors[:contact_number]).to include("é muito longo (máximo: 15 caracteres)")
       end
     end
 

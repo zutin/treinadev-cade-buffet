@@ -13,8 +13,8 @@ describe 'User approves an order' do
                           can_change_location: true, valet_service: true, buffet: buffet)
     EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
     weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-    order = Order.create!(desired_date: '2024-07-08', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer, status: 'canceled')
-    Proposal.create!(total_value: 60, expire_date: '2024-05-16', discount: 50, tax: 10, description: 'Oferta', payment_method: 'Crédito', order: order)
+    order = Order.create!(desired_date: '2024-12-30', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer, status: 'canceled')
+    Proposal.create!(total_value: 60, expire_date: '2024-12-16', discount: 50, tax: 10, description: 'Oferta', payment_method: 'Crédito', order: order)
 
     #Act
     login_as(owner)
@@ -42,7 +42,7 @@ describe 'User approves an order' do
                             can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
       weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      order = Order.create!(desired_date: '2024-07-08', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 11, buffet: buffet, event: event, user: customer)
+      order = Order.create!(desired_date: '2024-12-30', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 11, buffet: buffet, event: event, user: customer)
 
       #Act
       login_as(owner)
@@ -65,20 +65,20 @@ describe 'User approves an order' do
                             can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
       weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      order = Order.create!(desired_date: '2024-07-08', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer, status: 'accepted_by_owner')
-      Proposal.create!(total_value: 60, expire_date: '2024-05-16', discount: 50, tax: 10, description: 'Oferta', payment_method: 'Crédito', order: order)
+      order = Order.create!(desired_date: '2024-12-30', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer, status: 'accepted_by_owner')
+      Proposal.create!(total_value: 60, expire_date: '2024-12-16', discount: 50, tax: 10, description: 'Oferta', payment_method: 'Crédito', order: order)
 
       #Act
       login_as(customer)
       visit order_path(order)
 
       #Assert
-      expect(page).to have_content('Proposta enviada pelo buffet')
-      expect(page).to have_content('Valor final proposto: 60')
-      expect(page).to have_content('Desconto oferecido: 50')
-      expect(page).to have_content('Taxa extra: 10')
-      expect(page).to have_content('Descrição: Oferta')
-      expect(page).to have_content('Forma de pagamento: Crédito')
+      expect(page).to have_content('Proposta do buffet')
+      expect(page).to have_content('R$ 60')
+      expect(page).to have_content('R$ 50')
+      expect(page).to have_content('R$ 10')
+      expect(page).to have_content('Oferta')
+      expect(page).to have_content('Crédito')
       expect(page).to have_button('Aceitar proposta')
       expect(page).to have_button('Recusar proposta')
     end
@@ -95,8 +95,8 @@ describe 'User approves an order' do
                             can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
       weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      order = Order.create!(desired_date: '2024-07-08', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer, status: 'accepted_by_owner')
-      Proposal.create!(total_value: 60, expire_date: '2024-05-16', discount: 50, tax: 10, description: 'Oferta', payment_method: 'Crédito', order: order)
+      order = Order.create!(desired_date: '2024-12-30', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer, status: 'accepted_by_owner')
+      Proposal.create!(total_value: 60, expire_date: '2024-12-16', discount: 50, tax: 10, description: 'Oferta', payment_method: 'Crédito', order: order)
 
       #Act
       login_as(customer)
@@ -128,7 +128,7 @@ describe 'User approves an order' do
                             can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
       weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      order = Order.create!(desired_date: '2024-07-07', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer)
+      order = Order.create!(desired_date: '2024-12-07', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer)
 
       #Act
       login_as(customer)
@@ -153,7 +153,7 @@ describe 'User approves an order' do
                             can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
       weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      order = Order.create!(desired_date: '2024-07-08', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 11, buffet: buffet, event: event, user: customer)
+      order = Order.create!(desired_date: '2024-12-30', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 11, buffet: buffet, event: event, user: customer)
 
       #Act
       login_as(owner)
@@ -176,7 +176,7 @@ describe 'User approves an order' do
                             can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
       weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      order = Order.create!(desired_date: '2024-07-07', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer)
+      order = Order.create!(desired_date: '2024-12-07', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer)
 
       #Act
       login_as(owner)
@@ -199,14 +199,14 @@ describe 'User approves an order' do
                             can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
       weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      order = Order.create!(desired_date: '2024-07-08', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer)
+      order = Order.create!(desired_date: '2024-12-30', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer)
 
       #Act
       login_as(owner)
       visit new_order_proposal_path(order)
 
       #Assert
-      expect(page).to have_content('Valor total (baseado no número de convidados informado): 100')
+      expect(page).to have_content('Valor calculado para 20 convidados: R$ 100')
       expect(page).to have_field('Data de validade')
       expect(page).to have_field('Desconto')
       expect(page).to have_field('Taxa extra')
@@ -225,24 +225,26 @@ describe 'User approves an order' do
                             can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
       weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      order = Order.create!(desired_date: '2024-07-08', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer)
+      order = Order.create!(desired_date: '2024-12-30', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer)
 
       #Act
       login_as(owner)
       visit new_order_proposal_path(order)
-      fill_in 'Data de validade', with: '2024-05-16'
-      fill_in 'Desconto', with: '50'
+      fill_in 'Data de validade', with: '2024-12-16'
+      fill_in 'Desconto', with: '40'
       fill_in 'Descrição', with: 'Oferta numero 1'
       fill_in 'Método de pagamento', with: 'Pix'
       click_on 'Salvar'
 
       #Assert
       expect(page).to have_content('Você aprovou o pedido e enviou uma proposta para o usuário.')
-      expect(page).to have_content('Valor final proposto: 50')
-      expect(page).to have_content('Desconto oferecido: 50')
-      expect(page).not_to have_content('Taxa extra:')
-      expect(page).to have_content('Descrição: Oferta numero 1')
-      expect(page).to have_content('Forma de pagamento: Pix')
+      expect(page).to have_content('Valor final proposto')
+      expect(page).to have_content('R$ 60')
+      expect(page).to have_content('Desconto oferecido')
+      expect(page).to have_content('R$ 40')
+      expect(page).not_to have_content('Taxa extra')
+      expect(page).to have_content('Oferta numero 1')
+      expect(page).to have_content('Pix')
       expect(Order.first.status).to eq 'accepted_by_owner'
     end
 
@@ -262,7 +264,7 @@ describe 'User approves an order' do
                             can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
       weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      order = Order.create!(desired_date: '2024-07-08', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer)
+      order = Order.create!(desired_date: '2024-12-30', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: customer)
 
       #Act
       login_as(owner)

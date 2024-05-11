@@ -1,9 +1,9 @@
-<div class="flex flex-row justify-between gap-8 mt-8">
-  <%= render 'buffet_about', buffet: @buffet %>
-  <%= render 'shared/buffet/info', buffet: @buffet %>
-</div>
-<div class="flex flex-row gap-x-8 w-1/2 mt-2">
+<div class="flex flex-row gap-x-8 w-1/2 mt-4">
   <%= link_to 'Editar informações', edit_buffet_path(current_user.buffet), :class => "bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white w-auto hover:underline flex mx-auto" %>
   <%= link_to 'Eventos do buffet', events_path, :class => "bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white w-auto hover:underline flex mx-auto" %>
   <%= link_to 'Criar novo evento', new_event_path, :class => "bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white w-auto hover:underline flex mx-auto" %>
+</div>
+<div class="flex flex-row justify-between gap-8 mt-2">
+  <%= render 'buffet_about', buffet: @buffet %>
+  <%= render 'shared/buffet/info', buffet: @buffet %>
 </div>

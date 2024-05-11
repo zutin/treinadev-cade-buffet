@@ -77,8 +77,8 @@ describe 'User views their orders' do
                             can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
                           weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      order1 = Order.create!(desired_date: '2024-05-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 15, buffet: buffet, event: event, user: user2)
-      order2 = Order.create!(desired_date: '2024-07-08', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 11, buffet: buffet, event: event, user: user2)
+      order1 = Order.create!(desired_date: '2024-12-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 15, buffet: buffet, event: event, user: user2)
+      order2 = Order.create!(desired_date: '2024-12-30', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 11, buffet: buffet, event: event, user: user2)
 
       #Act
       login_as(user1)
@@ -86,10 +86,10 @@ describe 'User views their orders' do
 
       #Assert
       expect(page).to have_link(order1.code, href: order_path(order1))
-      expect(page).to have_content('2024-05-16')
+      expect(page).to have_content('16/12/2024')
       expect(page).to have_content('Aguardando avaliação do buffet')
       expect(page).to have_link(order2.code, href: order_path(order2))
-      expect(page).to have_content('2024-07-08')
+      expect(page).to have_content('30/12/2024')
       expect(page).to have_content('Aguardando avaliação do buffet')
     end
 
@@ -105,8 +105,8 @@ describe 'User views their orders' do
                             can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
       weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      Order.create!(desired_date: '2024-05-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 15, buffet: buffet, event: event, user: user2)
-      order = Order.create!(desired_date: '2024-07-08', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 11, buffet: buffet, event: event, user: user2)
+      Order.create!(desired_date: '2024-12-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 15, buffet: buffet, event: event, user: user2)
+      order = Order.create!(desired_date: '2024-12-30', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 11, buffet: buffet, event: event, user: user2)
 
       #Act
       login_as(user1)
@@ -116,12 +116,12 @@ describe 'User views their orders' do
       #Assert
       expect(current_path).to eq order_path(order)
       expect(page).to have_content(order.code)
-      expect(page).to have_content('2024-07-08')
+      expect(page).to have_content('30/12/2024')
       expect(page).to have_content('Rua dos Bobos, 0')
-      expect(page).to have_content('Estimativa de convidados: 11')
+      expect(page).to have_content('11 pessoas')
       expect(page).to have_content('Nome fantasia')
       expect(page).to have_content('Festa de 21 anos')
-      expect(page).to have_content('Pedido efetuado por: Customer User')
+      expect(page).to have_content('Customer User')
       expect(page).not_to have_content('ATENÇÃO: Existem outros pedidos para esse mesmo dia!')
     end
 
@@ -139,8 +139,8 @@ describe 'User views their orders' do
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
                           weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, 
                           event: event)
-      Order.create!(desired_date: '2024-05-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 15, buffet: buffet, event: event, user: first_customer)
-      order = Order.create!(desired_date: '2024-05-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: second_customer)
+      Order.create!(desired_date: '2024-12-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 15, buffet: buffet, event: event, user: first_customer)
+      order = Order.create!(desired_date: '2024-12-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 20, buffet: buffet, event: event, user: second_customer)
 
       #Act
       login_as(owner)
@@ -210,8 +210,8 @@ describe 'User views their orders' do
                             can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
                           weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      order1 = Order.create!(desired_date: '2024-05-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 15, buffet: buffet, event: event, user: user2)
-      order2 = Order.create!(desired_date: '2024-07-08', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 11, buffet: buffet, event: event, user: user2)
+      order1 = Order.create!(desired_date: '2024-12-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 15, buffet: buffet, event: event, user: user2)
+      order2 = Order.create!(desired_date: '2024-12-30', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 11, buffet: buffet, event: event, user: user2)
   
       #Act
       login_as(user2)
@@ -219,10 +219,10 @@ describe 'User views their orders' do
 
       #Assert
       expect(page).to have_link(order1.code, href: order_path(order1))
-      expect(page).to have_content('2024-05-16')
+      expect(page).to have_content('16/12/2024')
       expect(page).to have_content('Aguardando avaliação do buffet')
       expect(page).to have_link(order2.code, href: order_path(order2))
-      expect(page).to have_content('2024-07-08')
+      expect(page).to have_content('30/12/2024')
       expect(page).to have_content('Aguardando avaliação do buffet')
     end
 
@@ -238,7 +238,7 @@ describe 'User views their orders' do
                             can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
                           weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      order = Order.create!(desired_date: '2024-05-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 15, buffet: buffet, event: event, user: user2)
+      order = Order.create!(desired_date: '2024-12-16', desired_address: 'Rua dos Bobos, 0', estimated_invitees: 15, buffet: buffet, event: event, user: user2)
   
       #Act
       login_as(user2)
@@ -248,9 +248,9 @@ describe 'User views their orders' do
       #Assert
       expect(current_path).to eq order_path(order)
       expect(page).to have_content(order.code)
-      expect(page).to have_content('2024-05-16')
+      expect(page).to have_content('16/12/2024')
       expect(page).to have_content('Rua dos Bobos, 0')
-      expect(page).to have_content('Estimativa de convidados: 15')
+      expect(page).to have_content('15 pessoas')
       expect(page).to have_content('Nome fantasia')
       expect(page).to have_content('Festa de 21 anos')
     end

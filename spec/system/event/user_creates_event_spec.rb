@@ -72,7 +72,7 @@ describe 'User creates a new event for their buffet' do
       #Assert
       expect(page).to have_content('Evento cadastrado com sucesso!')
       expect(page).to have_content('Festa de 21 anos')
-      expect(page).to have_content('Descrição do evento: Esse evento cobre som, iluminação e bebidas')
+      expect(page).to have_content('Esse evento cobre som, iluminação e bebidas')
     end
 
     it 'shouldnt be able to create an event with missing information' do

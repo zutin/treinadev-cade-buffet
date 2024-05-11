@@ -40,7 +40,7 @@ describe 'User orders an event' do
       visit root_path
 
       click_on 'Alegria para o mundo'
-      within("div#event_#{event.id}") do
+      within("div#event_#{event.id}_card") do
         click_on 'Contratar evento'
       end
 
@@ -48,7 +48,8 @@ describe 'User orders an event' do
       expect(current_path).to eq new_event_order_path(event)
       expect(page).to have_content('Estimativa de convidados')
       expect(page).to have_content('Data desejada')
-      expect(page).to have_content('Endereço do evento')
+      expect(page).not_to have_content('Endereço do evento')
+      expect(page).to have_content('O endereço será o mesmo do buffet contratado.')
     end
 
     it 'can make an event order successfully' do
@@ -60,7 +61,7 @@ describe 'User orders an event' do
                               zipcode: '11644010', description: 'Buffet muito divertido e simpático', payment_methods: 'Dinheiro', user: owner)
       event = Event.create!(name: 'Festa de 21 anos', description: 'Esse evento cobre som, iluminação e bebidas', minimum_participants: 10, maximum_participants: 20,
                             default_duration: 120, menu: 'Arroz, feijão, batata', alcoholic_drinks: false, decorations: true,
-                            can_change_location: false, valet_service: true, buffet: buffet)
+                            can_change_location: true, valet_service: true, buffet: buffet)
       EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
                           weekend_base_price: 200, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, 
                           event: event)
@@ -70,7 +71,7 @@ describe 'User orders an event' do
       visit new_event_order_path(event)
 
       fill_in 'Estimativa de convidados', with: 10
-      fill_in 'Data desejada', with: '2024-05-16'
+      fill_in 'Data desejada', with: '2024-12-16'
       fill_in 'Endereço do evento', with: 'Rua das Flores, 0'
 
       click_on 'Salvar'
@@ -78,8 +79,8 @@ describe 'User orders an event' do
       #Assert
       expect(page).to have_content('Pedido efetuado com sucesso, o buffet te responderá em breve')
       within("div#order_#{Order.first.id}") do
-        expect(page).to have_content(Order.first.code)
-        expect(page).to have_content('2024-05-16')
+        expect(page).to have_content("Pedido ##{Order.first.code}")
+        expect(page).to have_content('16/12/2024')
         expect(page).to have_content('Aguardando avaliação do buffet')
       end
     end

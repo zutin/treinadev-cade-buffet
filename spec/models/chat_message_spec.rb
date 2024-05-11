@@ -12,14 +12,14 @@ RSpec.describe ChatMessage, type: :model do
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
         event = Event.create!(name: 'Drift na praça', description: 'Super evento', minimum_participants: 10, maximum_participants: 20,
-                          default_duration: 120, menu: 'Arroz, feijão, batata', alcoholic_drinks: false, decorations: true,
-                          can_change_location: true, valet_service: true, buffet: buffet)
-        order = Order.create!(desired_date: '2024-05-16', estimated_invitees: 15, observation: '',
-                          desired_address: 'Rua dos Bobos, 0', buffet: buffet, event: event, user: user2)
-
+                            default_duration: 120, menu: 'Arroz, feijão, batata', alcoholic_drinks: false, decorations: true,
+                            can_change_location: true, valet_service: true, buffet: buffet)
+        order = Order.create!(desired_date: '2024-12-16', estimated_invitees: 15, observation: '',
+                            desired_address: 'Rua dos Bobos, 0', buffet: buffet, event: event, user: user2)
         chat_message = ChatMessage.new(order: order, sender: user2)
 
         expect(chat_message.valid?).to eq false
+        expect(chat_message.errors[:text]).to include("não pode ficar em branco")
       end
     end
 
@@ -33,14 +33,14 @@ RSpec.describe ChatMessage, type: :model do
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
         event = Event.create!(name: 'Drift na praça', description: 'Super evento', minimum_participants: 10, maximum_participants: 20,
-                          default_duration: 120, menu: 'Arroz, feijão, batata', alcoholic_drinks: false, decorations: true,
-                          can_change_location: true, valet_service: true, buffet: buffet)
-        order = Order.create!(desired_date: '2024-05-16', estimated_invitees: 15, observation: '',
-                          desired_address: 'Rua dos Bobos, 0', buffet: buffet, event: event, user: user2)
-
+                            default_duration: 120, menu: 'Arroz, feijão, batata', alcoholic_drinks: false, decorations: true,
+                            can_change_location: true, valet_service: true, buffet: buffet)
+        order = Order.create!(desired_date: '2024-12-16', estimated_invitees: 15, observation: '',
+                            desired_address: 'Rua dos Bobos, 0', buffet: buffet, event: event, user: user2)
         chat_message = ChatMessage.new(text: '', order: order, sender: user2)
 
         expect(chat_message.valid?).to eq false
+        expect(chat_message.errors[:text]).to include("não pode ficar em branco")
       end
 
       it 'false when message text is longer than 200 character' do
@@ -52,15 +52,15 @@ RSpec.describe ChatMessage, type: :model do
                             email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                             zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
         event = Event.create!(name: 'Drift na praça', description: 'Super evento', minimum_participants: 10, maximum_participants: 20,
-                          default_duration: 120, menu: 'Arroz, feijão, batata', alcoholic_drinks: false, decorations: true,
-                          can_change_location: true, valet_service: true, buffet: buffet)
-        order = Order.create!(desired_date: '2024-05-16', estimated_invitees: 15, observation: '',
-                          desired_address: 'Rua dos Bobos, 0', buffet: buffet, event: event, user: user2)
-
+                            default_duration: 120, menu: 'Arroz, feijão, batata', alcoholic_drinks: false, decorations: true,
+                            can_change_location: true, valet_service: true, buffet: buffet)
+        order = Order.create!(desired_date: '2024-12-16', estimated_invitees: 15, observation: '',
+                            desired_address: 'Rua dos Bobos, 0', buffet: buffet, event: event, user: user2)
         chat_message = ChatMessage.new(text: 'cincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocincocinco1',
                                       order: order, sender: user2)
 
         expect(chat_message.valid?).to eq false
+        expect(chat_message.errors[:text]).to include("é muito longo (máximo: 200 caracteres)")
       end
     end
   end

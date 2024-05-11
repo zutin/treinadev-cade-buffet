@@ -1,0 +1,51 @@
+<div id="event_<%=event.id%>_card" class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
+  <% if event.event_logo.attached? %>
+    <%= image_tag(event.event_logo, :class => 'h-[256px] w-[384px]') %>
+  <% else %>
+    <%= image_tag("default-event.jpg", :class => 'h-[256px] w-[384px]') %>
+  <% end %>
+  <div class="px-6 py-4">
+    <%= link_to("#{event.name}", event_path(event), :class => "font-bold text-xl mb-2 hover:underline") %>
+    <p class="text-gray-700 text-base"><%= event.description.truncate(150) %></p>
+  </div>
+  <div class="px-6 pb-2 flex flex-col">
+    <% if event.event_price.present? %>
+    <div class="flex flex-row">
+      <div id="event_<%=event.id%>_prices" class="flex flex-col">
+        <p class="text-black font-semibold text-base">Preços convencionais</p>
+        <div class="flex flex-wrap">
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            Preço base: R$ <%= event.event_price.base_price %>
+          </span>
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            Pessoa adicional: R$ <%= event.event_price.additional_person_price %>
+          </span>
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            Hora adicional: R$ <%= event.event_price.additional_hour_price %>
+          </span>
+        </div>
+      </div>
+      <div id="event_<%=event.id%>_weekend_prices" class="flex flex-col">
+        <p class="text-black font-semibold text-base">Preços de finais de semana</p>
+        <div class="flex flex-wrap">
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            Preço base: R$ <%= event.event_price.weekend_base_price %>
+          </span>
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            Pessoa adicional: R$ <%= event.event_price.weekend_additional_person_price %>
+          </span>
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            Hora adicional: R$ <%= event.event_price.weekend_additional_hour_price %>
+          </span>
+        </div>
+      </div>
+    </div>
+    <% if user_signed_in? && current_user.customer? %>
+      <%= link_to 'Contratar evento', new_event_order_path(event), :class => "flex my-3 cursor-pointer bg-blue-400 mx-auto rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline active:bg-blue-500" %>
+    <% end %>
+    <% else %>
+    <p class="text-black font-semibold text-base">Evento não possui preços definidos, portanto não pode ser contratado.</p>
+    <% end %>
+  </div>
+
+</div>

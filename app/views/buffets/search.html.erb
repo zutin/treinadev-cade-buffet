@@ -1,10 +1,12 @@
-<h1>Resultados da busca '<%= @search %>'</h1>
+<h1 class="text-sm leading-normal font-bold uppercase mb-2 mt-8">Resultados da busca '<%= @search %>'</h1>
 
 <% if @buffets.present? %>
-  <p><%= @buffets.count %> <%= Buffet.model_name.human(count: @buffets.count).downcase %> <%= t(:found, count: @buffets.count) %></p>
-  <% @buffets.each do |b| %>
-    <%= render 'shared/buffet/card', buffet: b %>
-  <% end %>
+  <p class="text-sm leading-normal font-bold uppercase mb-2 text-gray-500"><%= @buffets.count %> <%= Buffet.model_name.human(count: @buffets.count).downcase %> <%= t(:found, count: @buffets.count) %></p>
+  <div class="flex flex-wrap gap-x-16 gap-y-16">
+    <% @buffets.each do |b| %>
+      <%= render 'shared/buffet/card', buffet: b %>
+    <% end %>
+  </div>
 <% else %>
   <p>Nenhum resultado encontrado</p>
 <% end %>

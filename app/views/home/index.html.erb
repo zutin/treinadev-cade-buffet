@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<div id="buffet_list" class="flex flex-wrap gap-x-16 p-8 my-4 mx-auto">
+<div id="buffet_list" class="flex flex-wrap gap-x-16 p-8 my-4 mx-auto gap-y-16">
   <% @buffets.each do |buffet| %>
     <%= render 'shared/buffet/card', buffet: buffet %>
   <% end %>

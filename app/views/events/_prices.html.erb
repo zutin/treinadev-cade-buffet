@@ -1,0 +1,15 @@
+<div id="event_<%=event.id%>_prices" class="flex flex-col">
+  <p class="text-sm leading-normal font-bold uppercase mt-2">Preços do evento</p>
+  <div class="flex flex-col mt-4 bg-white w-full">
+    <% if event.event_price.present? %>
+      <%= render('shared/profile/information_box', title: 'Preço base', attribute: "R$ #{event.event_price.base_price}") %>
+      <%= render('shared/profile/information_box', title: 'Custo de pessoa adicional', attribute: "R$ #{event.event_price.additional_person_price}") %>
+      <%= render('shared/profile/information_box', title: 'Custo de hora adicional', attribute: "R$ #{event.event_price.additional_hour_price}") %>
+      <%= render('shared/profile/information_box', title: 'Preço base (Finais de Semana)', attribute: "R$ #{event.event_price.weekend_base_price}") %>
+      <%= render('shared/profile/information_box', title: 'Custo de pessoa adicional (Finais de Semana)', attribute: "R$ #{event.event_price.weekend_additional_person_price}") %>
+      <%= render('shared/profile/information_box', title: 'Custo de hora adicional (Finais de Semana)', attribute: "R$ #{event.event_price.weekend_additional_hour_price}") %>
+    <% else %>
+      <%= render('shared/profile/information_box', title: 'O dono do buffet ainda não definiu preços', attribute: '') %>
+    <% end %>
+  </div>
+</div>

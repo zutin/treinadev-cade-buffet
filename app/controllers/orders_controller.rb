@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
     order_params = params.require(:order).permit(:desired_address, :desired_date, :estimated_invitees)
     @order = Order.new(order_params)
 
+    @order.desired_address = @event.buffet.address if !@event.can_change_location
     @order.buffet = @event.buffet
     @order.event = @event
     @order.user = current_user

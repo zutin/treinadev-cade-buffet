@@ -1,15 +1,20 @@
-<div class="flex flex-row justify-between gap-8 mt-8">
-  <%= render 'buffet_about', buffet: @buffet %>
-  <%= render 'shared/buffet/info', buffet: @buffet %>
-</div>
+<div class="flex flex-col">
+  <div class="flex flex-row justify-between gap-8 mt-8">
+    <%= render 'buffet_about', buffet: @buffet %>
+    <%= render 'shared/buffet/info', buffet: @buffet %>
+  </div>
 
-<% if @buffet.events.present? %>
-  <% @buffet.events.each do |event| %>
-    <%= render 'shared/event/info', event: event %>
-    <% if user_signed_in? && current_user.customer? %>
-      <%= link_to 'Contratar evento', new_event_order_path(event) %>
-    <% end %>
+  <% if @buffet.events.present? %>
+    <p class="text-sm leading-normal font-bold uppercase my-8 text-center">Eventos do buffet</p>
+    <div class="flex flex-col">
+      <% @buffet.events.each do |event| %>
+        <div class="flex flex-row gap-x-8 mb-12 justify-center">
+          <%= render 'shared/event/card', event: event %>
+          <div class="w-1/2">
+            <%= render 'shared/event/info', event: event %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   <% end %>
-<% else %>
-  <p>Esse buffet não tem eventos registrados.</p>
-<% end %>
+</div>

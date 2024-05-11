@@ -1,22 +1,19 @@
-  <%= render 'shared/form/text_field', form: f, required: true, attribute: :trading_name, placeholder: 'Nome fantasia' %>
-  <%= render 'shared/form/text_field', form: f, required: true, attribute: :company_name, placeholder: 'Razão social' %>
-  <%= render 'shared/form/text_field', form: f, required: true, attribute: :registration_number, placeholder: 'CNPJ' %>
-  <%= render 'shared/form/text_field', form: f, required: true, attribute: :contact_number, placeholder: 'Telefone para contato' %>
-  <div>
-    <%= f.label :email %>
-    <%= f.email_field :email %>
-  </div>
-  <%= render 'shared/form/text_field', form: f, required: true, attribute: :address, placeholder: 'Endereço da empresa' %>
-  <%= render 'shared/form/text_field', form: f, required: true, attribute: :district, placeholder: 'Bairro' %>
-  <%= render 'shared/form/text_field', form: f, required: true, attribute: :city, placeholder: 'Cidade' %>
-  <%= render 'shared/form/text_field', form: f, required: true, attribute: :state, placeholder: 'Estado' %>
-  <%= render 'shared/form/text_field', form: f, required: true, attribute: :zipcode, placeholder: 'CEP' %>
-  <%= render 'shared/form/text_field', form: f, required: true, attribute: :payment_methods, placeholder: 'Métodos de pagamento' %>
-  <%= render 'shared/form/text_area', form: f, required: true, attribute: :description, placeholder: 'Descrição' %>
-  <div>
-    <%= f.label :buffet_logo %>
-    <%= f.file_field :buffet_logo %>
-  </div>
-  <div>
-    <%= f.submit 'Salvar' %>
+  <div class="gap-y-1 flex flex-col">
+    <%= render 'shared/form/text_field', form: f, required: true, attribute: :trading_name, placeholder: 'Nome fantasia' %>
+    <%= render 'shared/form/text_field', form: f, required: true, attribute: :company_name, placeholder: 'Razão social' %>
+    <%= render 'shared/form/text_field', form: f, required: true, attribute: :registration_number, placeholder: 'CNPJ' %>
+    <%= render 'shared/form/text_field', form: f, required: true, attribute: :contact_number, placeholder: 'Telefone para contato' %>
+    <%= render 'shared/form/email_field', form: f, required: true, attribute: :email, placeholder: 'E-mail da empresa' %>
+    <%= render 'shared/form/text_field', form: f, required: true, attribute: :address, placeholder: 'Endereço da empresa' %>
+    <%= render 'shared/form/text_field', form: f, required: true, attribute: :district, placeholder: 'Bairro' %>
+    <%= render 'shared/form/text_field', form: f, required: true, attribute: :city, placeholder: 'Cidade' %>
+    <%= render 'shared/form/text_field', form: f, required: true, attribute: :state, placeholder: 'Estado' %>
+    <%= render 'shared/form/text_field', form: f, required: true, attribute: :zipcode, placeholder: 'CEP' %>
+    <%= render 'shared/form/text_field', form: f, required: true, attribute: :payment_methods, placeholder: 'Métodos de pagamento' %>
+    <%= render 'shared/form/text_area', form: f, required: true, attribute: :description, placeholder: 'Descrição' %>
+    <div>
+      <%= f.label :buffet_logo %>
+      <%= f.file_field :buffet_logo %>
+    </div>
+    <%= render 'shared/form/submit', form: f, button_text: 'Salvar' %>
   </div>

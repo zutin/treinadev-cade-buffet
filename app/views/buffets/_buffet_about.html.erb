@@ -1,8 +1,8 @@
 <div class="flex flex-wrap justify-center bg-white w-1/2 rounded-xl p-6">
   <% if buffet.buffet_logo.attached? %>
-    <%= image_tag(buffet.buffet_logo) %>
+    <%= image_tag(buffet.buffet_logo, :class => "w-[850px] h-[565px]") %>
   <% else %>
-    <%= image_tag("default-buffet.jpg") %>
+    <%= image_tag("default-buffet.jpg", :class => "w-[850px] h-[565px]") %>
   <% end %>
   <div id="buffet_about" class="w-full px-4 text-center">
     <div class="flex justify-center flex-col p-3 text-center">

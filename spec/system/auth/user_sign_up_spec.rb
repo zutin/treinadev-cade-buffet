@@ -34,7 +34,7 @@ describe 'User signs up' do
         click_on 'Conta'
         click_on 'Login'
       end
-      click_on 'Cadastrar-se'
+      click_on 'Cadastre-se'
   
       choose(option: 'owner')
       fill_in 'Usuário', with: 'lucca'
@@ -65,7 +65,7 @@ describe 'User signs up' do
         click_on 'Conta'
         click_on 'Login'
       end
-      click_on 'Cadastrar-se'
+      click_on 'Cadastre-se'
   
       choose(option: 'customer')
       fill_in 'Usuário', with: 'lucca'
