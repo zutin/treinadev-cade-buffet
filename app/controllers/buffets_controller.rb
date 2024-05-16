@@ -49,12 +49,43 @@ class BuffetsController < ApplicationController
 
   def show
     @buffet = Buffet.find(params[:id])
+    redirect_to root_path, notice: 'Esse buffet foi desativado pelo dono.' if !@buffet.is_enabled && user_signed_in? && current_user != @buffet.user
+
+    @events = @buffet.events.where(is_enabled: true)
   end
 
   def search
     @search = params['query']
     redirect_to root_path, notice: 'A busca é inválida ou está vazia' if @search.empty?
-    @buffets = Buffet.where("trading_name LIKE ? OR city LIKE ? OR id IN (SELECT buffet_id FROM events WHERE name LIKE ?)", "%#{@search}%", "%#{@search}%", "%#{@search}%")
+    @buffets = Buffet.where("is_enabled = ? AND (trading_name LIKE ? OR city LIKE ? OR id IN (SELECT buffet_id FROM events WHERE is_enabled = ? AND name LIKE ?))", true, "%#{@search}%", "%#{@search}%", true, "%#{@search}%")
+  end
+  
+  def enable
+    @buffet = Buffet.find(params[:buffet_id])
+    redirect_to buffets_path, notice: 'Você não pode ativar o buffet de outro usuário.' if current_user != @buffet.user
+
+    @buffet.is_enabled = true
+    @buffet.deleted_at = nil
+    if @buffet.save!()
+      redirect_to buffets_path, notice: 'Você ativou seu buffet com sucesso.'
+    else
+      flash.now[:notice] = 'Erro ao ativar seu buffet.'
+      render 'index'
+    end
+  end
+
+  def disable
+    @buffet = Buffet.find(params[:buffet_id])
+    redirect_to buffets_path, notice: 'Você não pode desativar o buffet de outro usuário.' if current_user != @buffet.user
+
+    @buffet.is_enabled = false
+    @buffet.deleted_at = DateTime.current
+    if @buffet.save!()
+      redirect_to buffets_path, notice: 'Você desativou seu buffet com sucesso.'
+    else
+      flash.now[:notice] = 'Erro ao desativar seu buffet.'
+      render 'index'
+    end
   end
 
   private
@@ -65,6 +96,6 @@ class BuffetsController < ApplicationController
 
   def verify_user_editing
     buffet = Buffet.find(params[:id])
-    redirect_to buffets_path, notice: 'Você não pode editar o buffet de outro usuário.' if current_user.id != buffet.user_id
+    redirect_to buffets_path, notice: 'Você não pode editar o buffet de outro usuário.' if current_user != buffet.user
   end
 end

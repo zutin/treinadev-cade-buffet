@@ -16,11 +16,14 @@ class OrdersController < ApplicationController
 
   def new
     @event = Event.find(params[:event_id])
+    redirect_to root_path, notice: 'Esse buffet e/ou evento foi desativado pelo dono.' if !@event.is_enabled || !@event.buffet.is_enabled
+
     @order = Order.new
   end
 
   def create
     @event = Event.find(params[:event_id])
+    redirect_to root_path, notice: 'Esse buffet e/ou evento foi desativado pelo dono.' if !@event.is_enabled || !@event.buffet.is_enabled
 
     order_params = params.require(:order).permit(:desired_address, :desired_date, :estimated_invitees)
     @order = Order.new(order_params)

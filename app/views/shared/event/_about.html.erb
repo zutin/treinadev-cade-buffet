@@ -8,6 +8,9 @@
     <div class="flex justify-center flex-col p-3 text-center">
       <span class="text-xl font-semibold capitalize tracking-wide block mt-2"><%= event.name %></span>
       <span class="text-sm font-semibold text-gray-500"><%= event.description %></span>
+      <% if !event.is_enabled && event.deleted_at.present? %>
+        <p class="text-red-500 text-sm">Desativado em <%= l(event.deleted_at, :format => :long) %></p>
+      <% end %>
       <div class="flex flex-row gap-x-8 justify-center">
         <div>
           <span class="text-xl font-bold block tracking-wide text-blue-400 mt-4"><%= event.minimum_participants %> pessoas</span>
@@ -29,6 +32,11 @@
           <%= link_to 'Adicionar preços', new_event_event_price_path(event), :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline active:bg-blue-500" %>
         <% else %>
           <%= link_to 'Editar preços', root_path, :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline active:bg-blue-500" %>
+        <% end %>
+        <% if event.is_enabled %>
+          <%= button_to 'Desativar evento', event_disable_path(event), method: :post, :class => "bg-red-400 rounded-full px-3 py-2 text-sm font-semibold text-white w-auto hover:underline flex mx-auto" %>
+        <% else %>
+          <%= button_to 'Reativar evento', event_enable_path(event), method: :post, :class => "bg-green-400 rounded-full px-3 py-2 text-sm font-semibold text-white w-auto hover:underline flex mx-auto" %>
         <% end %>
         </div>
       <% end %>

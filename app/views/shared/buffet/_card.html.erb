@@ -13,7 +13,7 @@
       <%= buffet.city %> - <%= buffet.state %>
     </span>
     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-      <%= buffet.events.count %> eventos
+      <%= buffet.events.where(is_enabled: true).count %> eventos
     </span>
   </div>
 </div>

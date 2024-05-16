@@ -7,6 +7,9 @@
   <div class="px-6 py-4">
     <div class="font-bold text-xl mb-2"><%= event.name %></div>
     <p class="text-gray-700 text-base"><%= event.description.truncate(150) %></p>
+    <% if !event.is_enabled && event.deleted_at.present? %>
+    <p class="text-red-500 text-sm">Desativado em <%= l(event.deleted_at, :format => :long) %></p>
+    <% end %>
   </div>
 
   <div class="px-6 pb-2">
@@ -18,12 +21,17 @@
     </span>
   </div>
 
-  <div class="px-6 pb-4 justify-center flex">
+  <div class="px-2 pb-4 justify-center flex">
     <%= link_to('Ver mais', event_path(event), :class => "inline-block bg-blue-400 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 hover:underline active:bg-blue-500") %>
     <% if event.event_price %>
     <%= link_to('Editar preços', edit_event_event_price_path(event, event.event_price), :class => "inline-block bg-green-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 hover:underline") %>
     <% else %>
     <%= link_to('Adicionar preços', new_event_event_price_path(event), :class => "inline-block bg-green-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 hover:underline") %>
+    <% end %>
+    <% if event.is_enabled %>
+      <%= button_to 'Desativar evento', event_disable_path(event), method: :post, :class => "bg-red-400 inline-block rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 hover:underline" %>
+    <% else %>
+      <%= button_to 'Reativar evento', event_enable_path(event), method: :post, :class => "bg-green-400 inline-block rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 hover:underline" %>
     <% end %>
   </div>
 </div>

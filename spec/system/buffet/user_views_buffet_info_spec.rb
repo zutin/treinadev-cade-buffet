@@ -46,10 +46,10 @@ describe 'User views buffet information' do
       #Arrange
       user = User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: CPF.generate, contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
   
-      Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
+      buffet = Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                     email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                     zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
-      Buffet.first.buffet_logo.attach(File.open(Rails.root.join("db/images/buffet-rspec.jpg")))
+      buffet.buffet_logo.attach(File.open(Rails.root.join("db/images/buffet-rspec.jpg")))
   
       #Act
       login_as(user)
@@ -63,7 +63,7 @@ describe 'User views buffet information' do
       expect(page).to have_css('img[src*="buffet-rspec.jpg"]')
       expect(page).to have_content('Fantasias & CIA')
       expect(page).to have_content('Sem razão alguma')
-      expect(page).to have_content(CNPJ.new(Buffet.first.registration_number).formatted)
+      expect(page).to have_content(CNPJ.new(buffet.registration_number).formatted)
     end
   end
 
@@ -71,13 +71,13 @@ describe 'User views buffet information' do
     #Arrange
     User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: CPF.generate, contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
 
-    Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
+    buffet = Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                   email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                   zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: User.first)
     
     event = Event.create!(name: 'Festa de 21 anos', description: 'Super evento', minimum_participants: 10, maximum_participants: 20,
                   default_duration: 120, menu: 'Arroz, feijão, batata', alcoholic_drinks: false, decorations: true,
-                  can_change_location: true, valet_service: true, buffet: Buffet.first)
+                  can_change_location: true, valet_service: true, buffet: buffet)
     event.event_logo.attach(File.open(Rails.root.join("db/images/event-rspec.jpg")))
 
     EventPrice.create!(base_price: 100, additional_person_price: 10, additional_hour_price: 10,
@@ -89,7 +89,7 @@ describe 'User views buffet information' do
     click_on 'Fantasias & CIA'
 
     #Assert
-    expect(current_path).to eq buffet_path(Buffet.first)
+    expect(current_path).to eq buffet_path(buffet)
     expect(page).not_to have_content('Sem razão alguma')
     expect(page).to have_css('img[src*="event-rspec.jpg"]')
     expect(page).to have_content('Fantasias & CIA')

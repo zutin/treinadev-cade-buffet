@@ -4,10 +4,15 @@ Rails.application.routes.draw do
 
   authenticate :user do
     resources :user, only: [:index, :show]
-    resources :buffets, path: 'buffet', only: [:index, :new, :create, :edit, :update]
+    resources :buffets, path: 'buffet', only: [:index, :new, :create, :edit, :update] do
+      post 'enable', to: 'buffets#enable'
+      post 'disable', to: 'buffets#disable'
+    end
     resources :events, only: [:index, :new, :create] do
       resources :event_prices, path: 'prices', only: [:edit, :update, :new, :create]
       resources :orders, path: 'order', only: [:new, :create]
+      post 'enable', to: 'events#enable'
+      post 'disable', to: 'events#disable'
     end
     resources :orders, only: [:index, :show] do
       resources :chat_messages, path: 'message', only: [:create]

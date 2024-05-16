@@ -9,7 +9,7 @@
       <span class="text-xl font-semibold capitalize tracking-wide block mt-2"><%= user.full_name %></span>
       <span class="font-semibold text-gray-500 lowercase tracking-wide block mb-4">@<%= user.username %></span>
       <% if user.owner? %>
-      <span class="text-xl font-bold block uppercase tracking-wide text-blue-400"><%= user.buffet.present? ? user.buffet.events.count : '0' %></span>
+      <span class="text-xl font-bold block uppercase tracking-wide text-blue-400"><%= user.buffet.present? ? user.buffet.events.where(is_enabled: true).count : '0' %></span>
       <span class="text-sm">Eventos</span>
       <% else %>
       <span class="text-xl font-bold block uppercase tracking-wide text-blue-400"><%= user.orders.present? ? user.orders.count : '0' %></span>

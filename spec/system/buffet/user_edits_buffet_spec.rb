@@ -61,7 +61,7 @@ describe 'User edits their buffet' do
       #Arrange
       user = User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: CPF.generate, contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
   
-      Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
+      buffet = Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                     email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                     zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
   
@@ -79,7 +79,7 @@ describe 'User edits their buffet' do
       expect(current_path).to eq edit_buffet_path(user.buffet)
       expect(page).to have_field('Nome fantasia', with: 'Fantasias & CIA')
       expect(page).to have_field('Razão social', with: 'Sem razão alguma')
-      expect(page).to have_field('CNPJ', with: Buffet.first.registration_number)
+      expect(page).to have_field('CNPJ', with: buffet.registration_number)
     end
   
     it 'can edit buffet successfully' do

@@ -7,6 +7,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    redirect_to root_path, notice: 'Esse evento foi desativado pelo dono.' if !@event.is_enabled && user_signed_in? && current_user != @event.buffet.user
   end
 
   def new
@@ -26,6 +27,34 @@ class EventsController < ApplicationController
     else
       flash.now[:notice] = 'Erro ao cadastrar evento.'
       render 'new'
+    end
+  end
+
+  def enable
+    @event = Event.find(params[:event_id])
+    redirect_to events_path, notice: 'Você não pode ativar o evento de outro usuário.' if current_user != @event.buffet.user
+
+    @event.is_enabled = true
+    @event.deleted_at = nil
+    if @event.save!
+      redirect_to events_path, notice: 'Você ativou seu evento com sucesso.'
+    else
+      flash.now[:notice] = 'Erro ao ativar seu evento.'
+      render 'index'
+    end
+  end
+
+  def disable
+    @event = Event.find(params[:event_id])
+    redirect_to events_path, notice: 'Você não pode desativar o evento de outro usuário.' if current_user != @event.buffet.user
+
+    @event.is_enabled = false
+    @event.deleted_at = DateTime.current
+    if @event.save!
+      redirect_to events_path, notice: 'Você desativou seu evento com sucesso.'
+    else
+      flash.now[:notice] = 'Erro ao desativar seu evento.'
+      render 'index'
     end
   end
 end

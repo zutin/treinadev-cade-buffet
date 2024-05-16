@@ -16,7 +16,7 @@ describe 'User access a profile page' do
       #Arrange
       user = User.create!(username: 'lucca', full_name: 'Gian Lucca', social_security_number: CPF.generate, contact_number: '(12) 98686-8686', email: 'gian@lucca.com', password: 'password', role: 'owner')
   
-      Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
+      buffet = Buffet.create!(trading_name: 'Fantasias & CIA', company_name: 'Sem razão alguma', registration_number: CNPJ.generate, contact_number: '(11) 99876-5432',
                     email: 'buffet@contato.com', address: 'Rua dos Bobos, 0', district: 'Bairro da Igrejinha', city: 'São Paulo', state: 'SP',
                     zipcode: '09280080', description: 'Buffet para testes', payment_methods: 'Pix', user: user)
   
@@ -27,7 +27,7 @@ describe 'User access a profile page' do
       #Assert
       expect(page).to have_content('Fantasias & CIA')
       expect(page).to have_content('Sem razão alguma')
-      expect(page).to have_content(CNPJ.new(Buffet.first.registration_number).formatted)
+      expect(page).to have_content(CNPJ.new(buffet.registration_number).formatted)
       expect(page).to have_content('(11) 99876-5432')
       expect(page).to have_content('buffet@contato.com')
     end
