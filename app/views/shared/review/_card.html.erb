@@ -1,0 +1,14 @@
+<div id="review_<%=review.id%>_card" class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
+  <% if review.review_photo.attached? %>
+    <%= image_tag(review.review_photo, :class => 'h-[256px] w-[384px]') %>
+  <% else %>
+    <div class="h-[256px] w-[384px] bg-gray-200 flex">
+      <p class="content-center mx-auto select-none">Avaliação sem foto</p>
+    </div>
+  <% end %>
+  <div class="px-6 py-4">
+    <span class="font-semibold"><%= review.order.event.name %> - <span class="text-blue-500"> Nota <%= review.rating %></span></span>
+    <p class="text-gray-700 text-base"><%= review.comment %></p>
+    <p class="text-gray-400 text-sm mt-1">@<%= review.reviewer.username %> em <%= l(review.created_at, :format => :long) %></p>
+  </div>
+</div>

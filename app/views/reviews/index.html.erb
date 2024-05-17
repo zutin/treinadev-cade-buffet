@@ -1,0 +1,10 @@
+<p class="text-2xl mt-4 mb-6 font-semibold">Avaliações do buffet</p>
+<% if @reviews.empty? %>
+<p>Esse buffet ainda não tem nenhuma avaliação.</p>
+<% else %>
+  <div id="reviews" class="flex flex-wrap gap-x-16">
+    <% @reviews.each do |review| %>
+      <%= render 'shared/review/card', review: review %>
+    <% end %>
+  </div>
+<% end %>

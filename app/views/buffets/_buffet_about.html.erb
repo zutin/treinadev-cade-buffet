@@ -14,6 +14,10 @@
       <% else %>
         <span class="text-base text-blue-400 block font-semibold tracking-wide mt-4">O buffet não possui eventos</span>
       <% end %>
+      <% if buffet.retrieve_reviews.count >= 1 %>
+        <span class="text-xl font-bold block uppercase tracking-wide text-blue-400 mt-4"><%= buffet.average_rating %></span>
+        <span class="text-sm">Nota média</span>
+      <% end %>
     </div>
   </div>
 </div>

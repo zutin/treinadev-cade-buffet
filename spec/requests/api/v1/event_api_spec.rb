@@ -41,11 +41,11 @@ describe 'Event API' do
                             valet_service: true, can_change_location: true, buffet: buffet)
       EventPrice.create!(base_price: 600, additional_person_price: 10, additional_hour_price: 10,
                         weekend_base_price: 20, weekend_additional_person_price: 20, weekend_additional_hour_price: 20, event: event)
-      Order.create!(desired_date: '2024-05-16', estimated_invitees: 20, observation: 'Pedido antigo',
+      Order.create!(desired_date: '2024-12-16', estimated_invitees: 20, observation: 'Pedido antigo',
                         desired_address: 'Rua dos Bobos, 0', buffet: buffet, event: event, user: customer)
       
       #Act
-      get "/api/v1/events/#{event.id}?date=2024-05-16&guests=10"
+      get "/api/v1/events/#{event.id}?date=2024-12-16&guests=10"
 
       #Assert
       expect(response.status).to eq 200

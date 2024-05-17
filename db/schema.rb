@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_16_173820) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_16_185905) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -133,6 +133,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_173820) do
     t.index ["order_id"], name: "index_proposals_on_order_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating", default: 0, null: false
+    t.string "comment"
+    t.integer "order_id", null: false
+    t.integer "reviewer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_reviews_on_order_id"
+    t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -161,4 +172,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_173820) do
   add_foreign_key "orders", "events"
   add_foreign_key "orders", "users"
   add_foreign_key "proposals", "orders"
+  add_foreign_key "reviews", "orders"
+  add_foreign_key "reviews", "users", column: "reviewer_id"
 end

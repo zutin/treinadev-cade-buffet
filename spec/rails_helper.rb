@@ -71,4 +71,7 @@ RSpec.configure do |config|
 
   # Backtrace Capybara
   config.filter_gems_from_backtrace("ruby")
+
+  # Allowing Time Travel
+  config.include ActiveSupport::Testing::TimeHelpers
 end

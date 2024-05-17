@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   belongs_to :event
   belongs_to :user
   has_one :proposal
+  has_one :review
   has_many :chat_messages
   
   validates :desired_date, :desired_address, :estimated_invitees, :status, presence: true

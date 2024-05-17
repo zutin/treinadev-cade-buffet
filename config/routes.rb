@@ -16,13 +16,15 @@ Rails.application.routes.draw do
     end
     resources :orders, only: [:index, :show] do
       resources :chat_messages, path: 'message', only: [:create]
-      resources :proposal, only: [:new, :create] 
+      resources :proposal, only: [:new, :create]
+      resources :reviews, only: [:new, :create]
       post 'refuse', to: 'proposal#refuse'
       post 'accept', to: 'proposal#accept'
     end
   end
 
   resources :buffets, path: 'buffet', only: [:show] do
+    resources :reviews, only: [:index]
     get 'search', on: :collection
   end
   resources :events, path: 'event', only: [:show]

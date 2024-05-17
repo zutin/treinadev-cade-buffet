@@ -6,6 +6,7 @@ class BuffetsController < ApplicationController
 
   def index
     @buffet = current_user.buffet
+    @reviews = @buffet.retrieve_reviews
   end
 
   def new
@@ -52,6 +53,7 @@ class BuffetsController < ApplicationController
     redirect_to root_path, notice: 'Esse buffet foi desativado pelo dono.' if !@buffet.is_enabled && user_signed_in? && current_user != @buffet.user
 
     @events = @buffet.events.where(is_enabled: true)
+    @reviews = @buffet.retrieve_reviews
   end
 
   def search

@@ -1,0 +1,40 @@
+<%= form_with(model: @review, url: order_reviews_path(@order)) do |f| %>
+  <div class="bg-white rounded-xl p-4 w-1/3 mx-auto mt-8">
+    <h1 class="text-sm leading-normal font-bold uppercase mb-2">Avaliando <%= @order.event.name %></h1>
+    <div class="p-3">
+      <h1 class="text-sm leading-normal font-bold mb-2 text-center">Que nota você daria à esse pedido?</h1>
+      <div class="gap-x-4 justify-around flex mx-auto my-4">
+        <div>
+          <%= f.radio_button :rating, "0" %>
+          <%= f.label :rating_0, "0", :class => "text-xs font-semibold" %>
+        </div>
+        <div>
+          <%= f.radio_button :rating, "1" %>
+          <%= f.label :rating_1, "1", :class => "text-xs font-semibold" %>
+        </div>
+        <div>
+          <%= f.radio_button :rating, "2" %>
+          <%= f.label :rating_2, "2", :class => "text-xs font-semibold" %>
+        </div>
+        <div>
+          <%= f.radio_button :rating, "3" %>
+          <%= f.label :rating_3, "3", :class => "text-xs font-semibold" %>
+        </div>
+        <div>
+          <%= f.radio_button :rating, "4" %>
+          <%= f.label :rating_4, "4", :class => "text-xs font-semibold" %>
+        </div>
+        <div>
+          <%= f.radio_button :rating, "5" %>
+          <%= f.label :rating_5, "5", :class => "text-xs font-semibold" %>
+        </div>
+      </div>
+      <%= render 'shared/form/text_field', form: f, required: true, attribute: :comment, placeholder: 'Comentário' %>
+      <div class="my-4">
+        <%= f.label :review_photo %><span class="font-semibold text-sm"> (OPCIONAL)</span>
+        <%= f.file_field :review_photo %>
+      </div>
+      <%= render 'shared/form/submit', form: f, button_text: 'Salvar' %>
+    </div>
+  </div>
+<% end %>

@@ -65,6 +65,11 @@
             <%= button_to 'Recusar proposta', order_refuse_path(@order), method: :post, :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline" %>
           </div>
         <% end %>
+        <% if current_user.customer? && @order.status == 'confirmed' %>
+          <div class="flex flex-row gap-x-8 mx-auto mt-2">
+            <%= link_to 'Avaliar pedido', new_order_review_path(@order), :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline" %>
+          </div>
+        <% end %>
       <% else %>
       <p class="text-sm leading-normal font-bold mt-4">Ainda não há uma proposta para esse pedido.</p>
       <% end %>

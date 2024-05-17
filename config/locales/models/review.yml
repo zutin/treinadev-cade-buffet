@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      review:
+        one: 'Avaliação'
+        other: 'Avaliações'
+    attributes:
+      review:
+        rating: 'Nota'
+        comment: 'Comentário'
+        review_photo: 'Foto do evento para avaliação'
