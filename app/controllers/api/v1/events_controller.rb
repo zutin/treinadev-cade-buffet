@@ -2,7 +2,7 @@ class Api::V1::EventsController < ActionController::API
   def index
     begin
       buffet = Buffet.find(params[:buffet_id])
-      render status: 200, json: buffet.events.where(is_enabled: true).as_json(except: [:created_at, :updated_at]) 
+      render status: 200, json: buffet.events.where(is_enabled: true).as_json(except: [:created_at, :updated_at, :is_enabled, :deleted_at, :buffet_id]) 
     rescue
       return render status: 404
     end

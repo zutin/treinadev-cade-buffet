@@ -164,9 +164,11 @@ describe 'User adds prices to their event' do
       within('div#prices') do
         fill_in 'Preço base', with: 2000
       end
+
+      click_on 'Salvar'
   
       #Assert
-      expect{click_on 'Salvar'}.to raise_error(ActiveRecord::RecordInvalid)
+      expect(page).to have_content("Não foi possível salvar preços do evento")
     end
   end
 end

@@ -27,11 +27,8 @@
       </div>
       <% if user_signed_in? && event.buffet.user == current_user %>
         <div class="flex flex-row mx-auto mt-4 gap-x-8">
-        <%= link_to 'Editar evento', root_path, :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline active:bg-blue-500" %>
         <% if !event.event_price.present? %>
           <%= link_to 'Adicionar preços', new_event_event_price_path(event), :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline active:bg-blue-500" %>
-        <% else %>
-          <%= link_to 'Editar preços', root_path, :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline active:bg-blue-500" %>
         <% end %>
         <% if event.is_enabled %>
           <%= button_to 'Desativar evento', event_disable_path(event), method: :post, :class => "bg-red-400 rounded-full px-3 py-2 text-sm font-semibold text-white w-auto hover:underline flex mx-auto" %>

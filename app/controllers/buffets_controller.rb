@@ -20,10 +20,10 @@ class BuffetsController < ApplicationController
     @buffet = Buffet.new(b_params)
     @buffet.user = current_user
 
-    if @buffet.save!()
+    if @buffet.save()
       redirect_to buffets_path, notice: 'Buffet registrado com sucesso.'
     else
-      flash.now[:notice] = 'Erro ao cadastrar buffet.'
+      flash.now[:buffet_errors] = @buffet.errors.full_messages
       render 'new'
     end
   end
@@ -40,10 +40,10 @@ class BuffetsController < ApplicationController
 
     @buffet.user = current_user
 
-    if @buffet.update!(b_params)
+    if @buffet.update(b_params)
       redirect_to buffets_path, notice: 'Você editou seu buffet com sucesso.'
     else
-      flash.now[:notice] = 'Erro ao editar seu buffet.'
+      flash.now[:buffet_errors] = @buffet.errors.full_messages
       render 'edit'
     end
   end

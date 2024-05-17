@@ -1,4 +1,5 @@
 <div class="flex flex-col mt-8">
+  <%= render('shared/form/go_back', path: orders_path) %>
   <% if @order.has_multiple_orders_for_desired_date? && current_user.owner? %>
     <div id="alert-event-date" class="w-full text-center px-8 mb-8">
       <div class="p-2 bg-red-500 items-center text-white leading-none rounded-full inline-flex">
@@ -23,7 +24,6 @@
       </div>
     </div>
   <% end %>
-
   <div class="flex flex-row justify-between gap-x-8">
     <div class="flex flex-col w-1/2">
       <div id="order_<%=@order.id%>_info" class="flex flex-col mt-2">
@@ -65,7 +65,7 @@
             <%= button_to 'Recusar proposta', order_refuse_path(@order), method: :post, :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline" %>
           </div>
         <% end %>
-        <% if current_user.customer? && @order.status == 'confirmed' %>
+        <% if current_user.customer? && @order.status == 'confirmed' && !@order.review.present? %>
           <div class="flex flex-row gap-x-8 mx-auto mt-2">
             <%= link_to 'Avaliar pedido', new_order_review_path(@order), :class => "ml-1 cursor-pointer bg-blue-400 rounded-full px-3 py-2 text-sm font-semibold text-white hover:underline" %>
           </div>

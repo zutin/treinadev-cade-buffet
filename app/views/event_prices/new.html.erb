@@ -1,6 +1,10 @@
 <%= form_with(model: @event_price, url: event_event_prices_path(@event)) do |f| %>
+  <% if flash[:event_price_errors] %>
+    <%= render "shared/registration/error_messages", resource: @event_price %>
+  <% end %>
   <div class="bg-white rounded-xl p-4 w-1/3 mx-auto mt-8">
-    <h1 class="text-sm leading-normal font-bold uppercase mb-2">Adicionando preços à <%= @event.name %></h1>
+    <%= render('shared/form/go_back', path: events_path) %>
+    <h1 class="text-sm leading-normal font-bold uppercase mb-2 text-center">Adicionando preços à <%= @event.name %></h1>
     <div class="p-3">
       <div id="prices">
       <h3 class="text-sm leading-normal font-bold uppercase my-2">Preços convencionais</h3>

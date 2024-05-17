@@ -16,6 +16,8 @@
 </div>
 <% end %>
 
+<%= render('shared/form/go_back', path: buffet_path(@event.buffet)) %>
+
 <div class="flex flex-row gap-x-8 mt-8">
   <div class="w-1/2">
     <%= render('shared/event/about', event: @event) %>

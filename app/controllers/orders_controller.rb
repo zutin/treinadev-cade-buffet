@@ -33,10 +33,10 @@ class OrdersController < ApplicationController
     @order.event = @event
     @order.user = current_user
     
-    if @order.save!()
+    if @order.save()
       redirect_to orders_path, notice: 'Pedido efetuado com sucesso, o buffet te responderá em breve.'
     else
-      flash.now[:notice] = 'Erro ao efetuar pedido'
+      flash.now[:order_errors] = @order.errors.full_messages
       render 'new'
     end
   end

@@ -22,10 +22,10 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.buffet = current_user.buffet
 
-    if @event.save!()
+    if @event.save()
       redirect_to event_path(@event), notice: 'Evento cadastrado com sucesso!'
     else
-      flash.now[:notice] = 'Erro ao cadastrar evento.'
+      flash.now[:event_errors] = @event.errors.full_messages
       render 'new'
     end
   end

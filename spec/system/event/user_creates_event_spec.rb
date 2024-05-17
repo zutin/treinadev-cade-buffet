@@ -88,9 +88,10 @@ describe 'User creates a new event for their buffet' do
   
       fill_in 'Nome do evento', with: 'Festa de 21 anos'
       fill_in 'Descrição do evento', with: ''
+      click_on 'Salvar'
   
       #Assert
-      expect{click_on 'Salvar'}.to raise_error(ActiveRecord::RecordInvalid)
+      expect(page).to have_content("Não foi possível salvar evento")
     end
   end
 end

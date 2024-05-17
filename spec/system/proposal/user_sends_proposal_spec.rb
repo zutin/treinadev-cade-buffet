@@ -109,10 +109,6 @@ describe 'User sends an order proposal' do
       expect(Order.first.status).to eq 'accepted_by_owner'
     end
 
-    it 'can refuse an order successfully' do
-      puts '#todo'
-    end
-
     it 'shouldnt be able to send a proposal with missing information' do
       #Arrange
       owner = User.create!(username: 'usertest', full_name: 'Test User', social_security_number: CPF.generate, contact_number: '(11) 99876-5432', email: 'user@test.com', password: 'password', role: 'owner')

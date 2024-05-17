@@ -8,7 +8,7 @@ describe 'User views the home page' do
 
     #Assert
     within('div#carousel') do
-      expect(page).to have_content('Cadê Buffet')
+      expect(page).to have_content('Cadê Buffet?')
     end
     
     within('div#user_dropdown') do

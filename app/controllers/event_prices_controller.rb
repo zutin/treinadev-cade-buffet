@@ -15,10 +15,10 @@ class EventPricesController < ApplicationController
     @event_price = EventPrice.new(prices_params)
     @event_price.event = @event
 
-    if @event_price.save!
+    if @event_price.save
       redirect_to events_path, notice: 'Preços foram salvos com sucesso!'
     else
-      flash.now[:notice] = 'Erro ao salvar preços.'
+      flash.now[:event_price_errors] = @event_price.errors.full_messages
       render 'new'
     end
   end

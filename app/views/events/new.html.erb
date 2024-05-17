@@ -1,6 +1,10 @@
 <%= form_with(model: @event) do |f| %>
+  <% if flash[:event_errors] %>
+    <%= render "shared/registration/error_messages", resource: @event %>
+  <% end %>
   <div class="bg-white rounded-xl p-4 w-1/3 mx-auto mt-8">
-    <h1 class="text-sm leading-normal font-bold uppercase mb-2">Criando novo evento</h1>
+    <%= render('shared/form/go_back', path: buffets_path) %>
+    <h1 class="text-sm leading-normal font-bold uppercase mb-2 text-center">Criando novo evento</h1>
     <div class="p-3 flex flex-col gap-y-1">
       <%= render 'shared/form/text_field', form: f, required: true, attribute: :name, placeholder: 'Nome do evento' %>
       <%= render 'shared/form/text_field', form: f, required: true, attribute: :description, placeholder: 'Descrição do evento' %>

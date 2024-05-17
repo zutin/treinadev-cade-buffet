@@ -1,6 +1,10 @@
 <%= form_with(model: @order, url: event_orders_path(@event)) do |f| %>
+  <% if flash[:order_errors] %>
+    <%= render "shared/registration/error_messages", resource: @order %>
+  <% end %>
   <div class="bg-white rounded-xl p-4 w-1/3 mx-auto mt-8">
-    <h1 class="text-sm leading-normal font-bold uppercase mb-2">Novo pedido para <%= @event.name %></h1>
+    <%= render('shared/form/go_back', path: event_path(@event)) %>
+    <h1 class="text-sm leading-normal font-bold uppercase mb-2 text-center">Novo pedido para <%= @event.name %></h1>
     <div class="p-3">
       <%= render 'shared/form/date_field', form: f, required: true, attribute: :desired_date %>
       <%= render 'shared/form/number_field', form: f, required: true, attribute: :estimated_invitees, placeholder: 'Estimativa de convidados' %>

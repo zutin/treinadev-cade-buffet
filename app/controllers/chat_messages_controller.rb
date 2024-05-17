@@ -17,7 +17,7 @@ class ChatMessagesController < ApplicationController
       redirect_to order_path(@order)
     else
       flash.now[:notice] = 'Erro ao enviar mensagem'
-      render order_path(@order)
+      redirect_to order_path(@order)
     end
 
   end

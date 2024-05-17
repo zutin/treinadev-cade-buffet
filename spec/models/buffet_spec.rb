@@ -229,7 +229,5 @@ RSpec.describe Buffet, type: :model do
         expect(buffet.errors[:contact_number]).to include("é muito longo (máximo: 15 caracteres)")
       end
     end
-
-    #Context pra CNPJ não valido
   end
 end

@@ -25,10 +25,10 @@ class ReviewsController < ApplicationController
     @review.order = @order
     @review.reviewer = current_user
 
-    if @review.save!()
+    if @review.save()
       redirect_to order_path(@order), notice: 'Pedido avaliado com sucesso!'
     else
-      flash.now[:notice] = 'Erro ao avaliar pedido.'
+      flash.now[:review_errors] = @review.errors.full_messages
       render 'new'
     end
   end

@@ -140,9 +140,11 @@ describe 'User edits their buffet' do
       fill_in 'Nome fantasia', with: ''
       fill_in 'Razão social', with: 'Socialmente temos razão'
       fill_in 'CNPJ', with: CNPJ.generate
+
+      click_on 'Salvar'
   
       #Assert
-      expect{click_on 'Salvar'}.to raise_error(ActiveRecord::RecordInvalid)
+      expect(page).to have_content("Não foi possível salvar buffet")
     end
   end
 end

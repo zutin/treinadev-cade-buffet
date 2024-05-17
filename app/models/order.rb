@@ -7,7 +7,7 @@ class Order < ApplicationRecord
   has_many :chat_messages
   
   validates :desired_date, :desired_address, :estimated_invitees, :status, presence: true
-  validate :desired_date_cannot_be_in_the_past
+  validate :desired_date_cannot_be_in_the_past, on: [:create]
   
   enum status: { awaiting_evaluation: 0, accepted_by_owner: 10, confirmed: 20, canceled: 30 }
   

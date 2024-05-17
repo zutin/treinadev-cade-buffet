@@ -147,9 +147,10 @@ describe 'User orders an event' do
       visit new_event_order_path(event)
 
       fill_in 'Estimativa de convidados', with: 10
+      click_on 'Salvar'
 
       #Assert
-      expect{click_on 'Salvar'}.to raise_error(ActiveRecord::RecordInvalid)
+      expect(page).to have_content("Não foi possível salvar pedido")
     end
   end
 

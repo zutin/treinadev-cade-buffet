@@ -1,5 +1,5 @@
 class ProposalController < ApplicationController
-  skip_before_action :redirect_customer_from_buffet_management, only: [:accept]
+  skip_before_action :redirect_customer_from_buffet_management, only: [:accept, :refuse]
   before_action :redirect_from_managing_other_user_orders
 
   def new
@@ -29,6 +29,18 @@ class ProposalController < ApplicationController
     else
       @order.canceled!
       redirect_to order_path(@order), notice: 'O tempo limite para aceitar essa proposta expirou.'
+    end
+  end
+
+  def refuse
+    if @order.status == 'accepted_by_owner' && current_user.customer?
+      @order.canceled!
+      redirect_to order_path(@order), notice: 'Você recusou a proposta com sucesso!'
+    elsif @order.status == 'awaiting_evaluation' && current_user.owner?
+      @order.canceled!
+      redirect_to order_path(@order), notice: 'Você recusou o pedido com sucesso!'
+    else
+      redirect_to root_path, notice: 'Ocorreu um erro.'
     end
   end
 
