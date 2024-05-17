@@ -9,37 +9,37 @@
 #   end
 
   3.times do |i|
-    User.create!(username: "user_#{i}", full_name: "User #{i}", contact_number: "(11) 91111-000#{i}",
+    owner = User.create!(username: "user_#{i}", full_name: "User #{i}", contact_number: "(11) 91111-000#{i}",
                 email: "user#{i}@test.com", social_security_number: CPF.generate, password: 'password', role: 'owner')
 
-    Buffet.create!(trading_name: "Buffet Nº #{i}", company_name: "Razão social do buffet #{i}",
+    buffet = Buffet.create!(trading_name: "Buffet Nº #{i}", company_name: "Razão social do buffet #{i}",
                             registration_number: CNPJ.generate, contact_number: "(11) 9#{i}000-0000",
                             email: "buffet#{i}@contato.com", address: "Rua dos Bobos, 0#{i}", district: 'Bairro da Igrejinha',
                             city: 'São Paulo', state: 'SP', zipcode: "0928008#{i}", description: "Buffet ##{i} para testes e amigos",
-                            payment_methods: 'Pix, Cartão de Débito', user: User.last)
+                            payment_methods: 'Pix, Cartão de Débito', user: owner)
 
-    Buffet.last.buffet_logo.attach(File.open(Rails.root.join("db/images/buffet#{i}.jpg")))
+    buffet.buffet_logo.attach(File.open(Rails.root.join("db/images/buffet#{i}.jpg")))
 
-    Event.create!(name: "Festa de 2#{i} anos", description: "Super evento do buffet #{i}",
+    event = Event.create!(name: "Festa de 2#{i} anos", description: "Super evento do buffet #{i}",
                   minimum_participants: (i + 1) * 10, maximum_participants: (i + 1) * 20, default_duration: (i + 1) * 60,
                   menu: 'Arroz, feijão, batata', alcoholic_drinks: true, decorations: false,
-                  can_change_location: false, valet_service: true, buffet: Buffet.last)
+                  can_change_location: false, valet_service: true, buffet: buffet)
 
-    Event.last.event_logo.attach(File.open(Rails.root.join("db/images/event#{i}.jpg")))
+    event.event_logo.attach(File.open(Rails.root.join("db/images/event#{i}.jpg")))
 
     EventPrice.create!(base_price: (i + 1) * 100, additional_hour_price: (i + 1) * 100, additional_person_price: (i + 1) * 100,
                       weekend_base_price: (i + 1) * 200, weekend_additional_hour_price: (i + 1) * 200, weekend_additional_person_price: (i + 1) * 200,
-                      event: Event.find(i+1))
+                      event: event)
   end
 
-  User.create!(username: 'lucca', full_name: 'Gian Lucca', contact_number: '(12) 99205-1022',
-              email: 'gian@lucca.com', social_security_number: CPF.generate, password: 'password', role: 'owner')
+  2.times do |i|
+    customer = User.create!(username: "customer_#{i}", full_name: "Customer #{i}", contact_number: "(21) 92222-000#{i}",
+                email: "customer#{i}@test.com", social_security_number: CPF.generate, password: 'password', role: 'customer')
 
-  Buffet.create!(trading_name: "Fantasias & CIA", company_name: "Fantasy LTDA",
-                registration_number: CNPJ.generate, contact_number: "(11) 99345-6789",
-                email: "buffet@lucca.com", address: "Rua das Palmeiras, 42", district: 'Centro',
-                city: 'São Paulo', state: 'SP', zipcode: "11675012", description: "Nosso buffet com maior área KIDS da cidade! Realizamos sua festa com buffet completo!",
-                payment_methods: 'Pix, Cartão de Débito', user: User.last)
+    order = Order.create!(desired_date: '2024-12-16', estimated_invitees: 15, observation: "Pedido #{i}",
+                  desired_address: "Rua dos Bobos, #{i}", buffet: Buffet.find(i+1), event: Event.find(i+1), user: customer, status: 'confirmed')
 
-  User.create!(username: 'caroline', full_name: 'Caroline', contact_number: '(12) 98683-1041',
-              email: 'caroline@lucca.com', social_security_number: CPF.generate, password: 'password', role: 'customer')
+    Proposal.create!(total_value: 1000, expire_date: '2024-12-30', description: "Proposta #{i}", discount: "#{i*5}", tax: '', payment_method: 'Pix', order: order)
+
+    Review.create!(rating: i+2, comment: "Muito bom, gostei #{i+1} vezes!", order: order, reviewer: customer)
+  end
